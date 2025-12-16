@@ -12,8 +12,8 @@ public class Dentareport {
         SwingUtilities.invokeLater(Dentareport::createAndShowGui);
     }
 
-    private static void createAndShowGui() {
-        JFrame frame = new JFrame("Hello Swing");
+    static JFrame createAndShowGui() {
+        JFrame frame = new JFrame("Hello FlatLaf");
 
         JLabel label = new JLabel("Hello World!", SwingConstants.CENTER);
 
@@ -22,5 +22,7 @@ public class Dentareport {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null); // center on screen
         frame.setVisible(true);
+
+        return frame;
     }
 }
