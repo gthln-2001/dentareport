@@ -1,33 +1,12 @@
 package de.dentareport;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+public interface MainWindow {
 
-public class MainWindow {
+    String getWindowTitle();
 
-    private final JFrame frame;
-    private final JLabel label;
+    String getMessageText();
 
-    public MainWindow() {
-        frame = new JFrame("Hello FlatLaf");
-        label = new JLabel("Hello World!", SwingConstants.CENTER);
+    boolean containsMessage();
 
-        frame.add(label);
-        frame.setSize(300, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-    }
-
-    public void show() {
-        frame.setVisible(true);
-    }
-
-    JFrame getFrame() {
-        return frame;
-    }
-
-    JLabel getLabel() {
-        return label;
-    }
+    boolean isVisible();
 }

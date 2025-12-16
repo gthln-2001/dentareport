@@ -9,7 +9,7 @@ public class Dentareport {
     public static void main(String[] args) {
         FlatLightLaf.setup();
         SwingUtilities.invokeLater(() -> {
-            MainWindow window = new MainWindow();
+            MainWindowImpl window = new MainWindowImpl();
             window.show();
         });
     }
