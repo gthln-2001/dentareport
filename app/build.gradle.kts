@@ -8,6 +8,7 @@ repositories {
 
 dependencies {
     implementation(libs.guava)
+    implementation("com.formdev:flatlaf:3.5")
 
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
