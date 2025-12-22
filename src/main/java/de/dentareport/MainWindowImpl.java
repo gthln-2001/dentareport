@@ -8,17 +8,29 @@ public class MainWindowImpl implements MainWindow {
     private final JFrame frame;
     private final JLabel label;
     private final JButton button;
+    private final JButton resetButton;
 
     public MainWindowImpl() {
         frame = new JFrame("Hello FlatLaf");
-        label = new JLabel("Hello World!", SwingConstants.CENTER);
-        button = new JButton("Click me");
+
+        label = new JLabel();
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+
         MainWindowController controller = new MainWindowController(this);
+
+        button = new JButton("Click me");
         button.addActionListener(e -> controller.onButtonClicked());
+
+        resetButton = new JButton("Reset");
+        resetButton.addActionListener(e -> controller.onResetClicked());
+
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.add(button);
+        buttonPanel.add(resetButton);
 
         frame.setLayout(new BorderLayout());
         frame.add(label, BorderLayout.CENTER);
-        frame.add(button, BorderLayout.SOUTH);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
         frame.setSize(300, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -52,6 +64,12 @@ public class MainWindowImpl implements MainWindow {
     public void clickButton() {
         button.doClick();
     }
+
+    @Override
+    public void clickResetButton() {
+        resetButton.doClick();
+    }
+
 
     void dispose() {
         frame.dispose();

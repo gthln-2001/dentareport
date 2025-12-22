@@ -11,4 +11,6 @@ public interface MainWindow {
     boolean containsMessage();
 
     void clickButton();
+
+    void clickResetButton();
 }

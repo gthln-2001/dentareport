@@ -47,5 +47,10 @@ class MainWindowControllerTest {
         public void clickButton() {
             fail("Controller must not trigger UI events");
         }
+
+        @Override
+        public void clickResetButton() {
+            fail("Controller must not trigger UI events");
+        }
     }
 }
