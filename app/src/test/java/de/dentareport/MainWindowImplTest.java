@@ -27,4 +27,26 @@ class MainWindowImplTest {
 
         window.dispose();
     }
+
+    @Test
+    void clickingButtonChangesMEssageText() throws Exception {
+        MainWindowImpl[] windowHolder = new MainWindowImpl[1];
+
+        SwingUtilities.invokeAndWait(() -> {
+            MainWindowImpl window = new MainWindowImpl();
+            window.show();
+            windowHolder[0] = window;
+        });
+
+        MainWindowImpl window = windowHolder[0];
+        assertNotNull(window, "View must not be null");
+        assertEquals("Hello World!", window.getMessageText());
+
+        SwingUtilities.invokeAndWait(window::clickButton);
+
+        assertEquals("Button clicked", window.getMessageText(), "Clicking the button should update the message"
+        );
+
+        window.dispose();
+    }
 }

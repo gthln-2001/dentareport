@@ -6,7 +6,11 @@ public interface MainWindow {
 
     String getMessageText();
 
+    void setMessageText(String text);
+
     boolean containsMessage();
 
     boolean isVisible();
+
+    void clickButton();
 }
