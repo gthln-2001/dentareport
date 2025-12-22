@@ -7,9 +7,11 @@ repositories {
     mavenCentral()
 }
 
+version = "0.2.0"
+
 dependencies {
     implementation(libs.guava)
-    implementation("com.formdev:flatlaf:3.5")
+    implementation(libs.flatlaf)
 
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -17,32 +19,34 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
 application {
-    mainClass = "de.dentareport.Dentareport"
+    mainClass.set("de.dentareport.Dentareport")
 }
 
 tasks.jar {
+    archiveBaseName.set("dentareport")
+    archiveVersion.set(project.version.toString())
+
     manifest {
-        attributes(
-            "Main-Class" to application.mainClass.get()
-        )
+        attributes("Main-Class" to application.mainClass.get())
     }
+
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    from({
-        configurations.runtimeClasspath.get().map {
-            if (it.isDirectory) it else zipTree(it)
+    from(
+        configurations.runtimeClasspath.map {
+            it.map { file ->
+                if (file.isDirectory) file else zipTree(file)
+            }
         }
-    })
-    archiveBaseName.set("dentareport")
-    archiveVersion.set("0.2.0")
+    )
 }
 
-tasks.named<Test>("test") {
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 
     testLogging {
@@ -52,5 +56,5 @@ tasks.named<Test>("test") {
         showCauses = true
         showStackTraces = true
     }
-
 }
+
