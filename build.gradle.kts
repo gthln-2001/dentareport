@@ -1,4 +1,5 @@
 plugins {
+    java
     application
 }
 
@@ -22,6 +23,23 @@ java {
 
 application {
     mainClass = "de.dentareport.Dentareport"
+}
+
+tasks.jar {
+    manifest {
+        attributes(
+            "Main-Class" to application.mainClass.get()
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from({
+        configurations.runtimeClasspath.get().map {
+            if (it.isDirectory) it else zipTree(it)
+        }
+    })
+    archiveBaseName.set("dentareport")
+    archiveVersion.set("0.2.0")
 }
 
 tasks.named<Test>("test") {
