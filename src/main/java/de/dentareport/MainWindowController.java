@@ -2,6 +2,7 @@ package de.dentareport;
 
 import java.util.Objects;
 
+// TODO: Remove later, this is just an example
 public class MainWindowController {
 
     private final MainWindow view;

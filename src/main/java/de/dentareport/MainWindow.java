@@ -1,5 +1,6 @@
 package de.dentareport;
 
+// TODO: Remove later, this is just an example
 public interface MainWindow {
 
     String getWindowTitle();

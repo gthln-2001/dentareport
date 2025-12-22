@@ -8,6 +8,7 @@ import static de.dentareport.testutil.SwingTestHelper.callOnEdt;
 import static de.dentareport.testutil.SwingTestHelper.runOnEdt;
 import static org.junit.jupiter.api.Assertions.*;
 
+// TODO: Remove later, this is just an example
 class MainWindowImplTest extends SwingTest {
 
     private MainWindowImpl window;

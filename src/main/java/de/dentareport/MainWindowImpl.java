@@ -3,6 +3,7 @@ package de.dentareport;
 import javax.swing.*;
 import java.awt.*;
 
+// TODO: Remove later, this is just an example
 public class MainWindowImpl implements MainWindow {
 
     private final JFrame frame;
