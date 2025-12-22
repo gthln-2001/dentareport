@@ -3,24 +3,27 @@ package de.dentareport;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class MainWindowControllerTest {
 
     @Test
-    void controllerUpdatesMessage() {
-        FakeView view = new FakeView();
+    void it_updates_the_message_text() {
+        MainWindow view = new StubMainWindow();
         MainWindowController controller = new MainWindowController(view);
+        assertEquals("Hello World!", view.getMessageText());
 
         controller.onButtonClicked();
 
-        assertEquals("Button clicked", view.message);
+        assertEquals("Button clicked", view.getMessageText());
     }
 
-    static class FakeView implements MainWindow {
-        String message = "Hello World!";
+    static final class StubMainWindow implements MainWindow {
+        private String message = "Hello World!";
 
         @Override
         public String getWindowTitle() {
+            fail("Controller must not access window title");
             return null;
         }
 
@@ -35,17 +38,14 @@ class MainWindowControllerTest {
         }
 
         @Override
-        public boolean isVisible() {
+        public boolean containsMessage() {
+            fail("Controller must not inspect UI structure");
             return false;
         }
 
         @Override
-        public boolean containsMessage() {
-            return true;
-        }
-
-        @Override
         public void clickButton() {
+            fail("Controller must not trigger UI events");
         }
     }
 }

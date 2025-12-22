@@ -44,11 +44,6 @@ public class MainWindowImpl implements MainWindow {
     }
 
     @Override
-    public boolean isVisible() {
-        return frame.isVisible();
-    }
-
-    @Override
     public boolean containsMessage() {
         return label.getParent() == frame.getContentPane();
     }

@@ -1,52 +1,57 @@
 package de.dentareport;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
-
+import static de.dentareport.testutil.SwingTestHelper.callOnEdt;
+import static de.dentareport.testutil.SwingTestHelper.runOnEdt;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MainWindowImplTest {
+class MainWindowImplTest extends SwingTest {
 
-    @Test
-    void mainWindowHasCorrectLabel() throws Exception {
-        MainWindowImpl[] windowHolder = new MainWindowImpl[1];
+    private MainWindowImpl window;
 
-        SwingUtilities.invokeAndWait(() -> {
-            windowHolder[0] = new MainWindowImpl();
-            windowHolder[0].show();
-        });
+    @BeforeEach
+    void setUp() throws Exception {
+        runOnEdt(() -> window = new MainWindowImpl());
+    }
 
-        MainWindowImpl window = windowHolder[0];
-
-        assertNotNull(window, "MainWindow must exist");
-        assertTrue(window.isVisible(), "Frame should be visible.");
-        assertEquals("Hello FlatLaf", window.getWindowTitle(), "Frame title does not match.");
-        assertTrue(window.containsMessage(), "Frame should have label");
-        assertEquals("Hello World!", window.getMessageText(), "Label text does not match.");
-
-        window.dispose();
+    @AfterEach
+    void tearDown() throws Exception {
+        runOnEdt(window::dispose);
     }
 
     @Test
-    void clickingButtonChangesMEssageText() throws Exception {
-        MainWindowImpl[] windowHolder = new MainWindowImpl[1];
-
-        SwingUtilities.invokeAndWait(() -> {
-            MainWindowImpl window = new MainWindowImpl();
-            window.show();
-            windowHolder[0] = window;
-        });
-
-        MainWindowImpl window = windowHolder[0];
-        assertNotNull(window, "View must not be null");
-        assertEquals("Hello World!", window.getMessageText());
-
-        SwingUtilities.invokeAndWait(window::clickButton);
-
-        assertEquals("Button clicked", window.getMessageText(), "Clicking the button should update the message"
+    void it_has_the_correct_window_title() throws Exception {
+        assertEquals(
+                "Hello FlatLaf",
+                callOnEdt(window::getWindowTitle),
+                "Frame title does not match."
         );
+    }
 
-        window.dispose();
+    @Test
+    void it_has_the_correct_message_text() {
+        assertAll(
+                () -> assertTrue(
+                        callOnEdt(window::containsMessage),
+                        "Frame should have label"),
+                () -> assertEquals(
+                        "Hello World!",
+                        callOnEdt(window::getMessageText),
+                        "Label text does not match.")
+        );
+    }
+
+    @Test
+    void it_changes_the_message_text_when_clicking_the_button() throws Exception {
+        runOnEdt(window::clickButton);
+
+        assertEquals(
+                "Button clicked",
+                callOnEdt(window::getMessageText),
+                "Clicking the button should update the message"
+        );
     }
 }

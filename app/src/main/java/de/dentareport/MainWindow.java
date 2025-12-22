@@ -10,7 +10,5 @@ public interface MainWindow {
 
     boolean containsMessage();
 
-    boolean isVisible();
-
     void clickButton();
 }
