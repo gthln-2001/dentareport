@@ -19,10 +19,14 @@ public class MainWindow implements UiController {
     private final ViewFactory viewFactory;
 
     public MainWindow(ViewFactory viewFactory) {
+        this(viewFactory, new JFrame());
+    }
+
+    public MainWindow(ViewFactory viewFactory, JFrame frame) {
         this.viewFactory = viewFactory;
+        this.frame = frame;
 
         content = new JPanel(new BorderLayout());
-        frame = new JFrame();
         frame.setContentPane(content);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setSize(WIDTH, HEIGHT);

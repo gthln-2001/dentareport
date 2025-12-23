@@ -1,29 +1,44 @@
 package de.dentareport;
 
-import com.formdev.flatlaf.FlatLightLaf;
-import de.dentareport.gui.app.MainWindow;
-import de.dentareport.gui.navigation.ViewFactory;
-import de.dentareport.gui.navigation.ViewId;
+import de.dentareport.gui.app.ApplicationWindow;
+import de.dentareport.gui.app.FlatLafInitializer;
+import de.dentareport.gui.app.LookAndFeelInitializer;
+import de.dentareport.gui.app.MainWindowAdapter;
 import de.dentareport.gui.services.WindowTitleService;
 import de.dentareport.utils.PreStarter;
 
 import javax.swing.*;
 
-// TODO: Test
 public class Dentareport {
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Dentareport().run());
+    private final PreStarter preStarter;
+    private final LookAndFeelInitializer lookAndFeelInitializer;
+    private final ApplicationWindow applicationWindow;
+    private final WindowTitleService windowTitleService;
+
+    public Dentareport(
+            PreStarter preStarter,
+            LookAndFeelInitializer lookAndFeelInitializer,
+            ApplicationWindow applicationWindow,
+            WindowTitleService windowTitleService
+    ) {
+        this.preStarter = preStarter;
+        this.lookAndFeelInitializer = lookAndFeelInitializer;
+        this.applicationWindow = applicationWindow;
+        this.windowTitleService = windowTitleService;
     }
 
-    private void run() {
-        new PreStarter().runPreStartTasks();
-        FlatLightLaf.setup();
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Dentareport(new PreStarter(),
+                new FlatLafInitializer(),
+                new MainWindowAdapter(),
+                new WindowTitleService(new License())).run());
+    }
 
-        MainWindow mainWindow = new MainWindow(new ViewFactory());
-        WindowTitleService windowTitleService = new WindowTitleService(new License());
-
-        mainWindow.setWindowTitle(windowTitleService.title());
-        mainWindow.show();
+    void run() {
+        preStarter.runPreStartTasks();
+        lookAndFeelInitializer.setup();
+        applicationWindow.setWindowTitle(windowTitleService.title());
+        applicationWindow.show();
     }
 }

@@ -3,21 +3,20 @@ package de.dentareport.gui.views.start;
 import de.dentareport.gui.app.UiController;
 import de.dentareport.gui.navigation.ViewId;
 
-// TODO: Test
 public class StartPresenter {
 
-    private final UiController ui;
+    private final UiController uiController;
 
-    public StartPresenter(UiController ui) {
-        this.ui = ui;
+    public StartPresenter(UiController uiController) {
+        this.uiController = uiController;
     }
 
     public void onOpenReport() {
-        ui.showView(ViewId.REPORT);
+        uiController.showView(ViewId.REPORT);
     }
 
     public void onExitRequested() {
-        ui.confirmExit();
+        uiController.confirmExit();
     }
 }
 

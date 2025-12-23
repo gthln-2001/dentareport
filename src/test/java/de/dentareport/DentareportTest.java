@@ -1,32 +1,38 @@
 package de.dentareport;
 
-//import de.dentareport.gui.Gui;
-//import javafx.stage.Stage;
-import org.junit.jupiter.api.BeforeEach;
+import de.dentareport.gui.app.ApplicationWindow;
+import de.dentareport.gui.app.LookAndFeelInitializer;
+import de.dentareport.gui.services.WindowTitleService;
+import de.dentareport.utils.PreStarter;
+import org.junit.jupiter.api.Test;
 
+import static org.mockito.Mockito.*;
 
-public class DentareportTest {
+class DentareportTest {
 
-    private Dentareport_TO_REMOVE dentareport;
+    public static final String TEST_TITLE = "Some title";
 
-    @BeforeEach
-    public void setUp() {
-        this.dentareport = new Dentareport_TO_REMOVE();
+    @Test
+    void it_initializes_and_shows_the_main_window() {
+        PreStarter preStarter = mock(PreStarter.class);
+        LookAndFeelInitializer lookAndFeelInitializer = mock(LookAndFeelInitializer.class);
+        ApplicationWindow applicationWindow = mock(ApplicationWindow.class);
+        WindowTitleService windowTitleService = mock(WindowTitleService.class);
+
+        when(windowTitleService.title()).thenReturn(TEST_TITLE);
+
+        Dentareport dentareport = new Dentareport(
+                preStarter,
+                lookAndFeelInitializer,
+                applicationWindow,
+                windowTitleService
+        );
+
+        dentareport.run();
+
+        verify(preStarter).runPreStartTasks();
+        verify(lookAndFeelInitializer).setup();
+        verify(applicationWindow).setWindowTitle(TEST_TITLE);
+        verify(applicationWindow).show();
     }
-
-//    @Test
-//    public void it_starts_application(@Mocked Stage mockStage,
-//                                      @Mocked PreStarter mockPreStarter,
-//                                      @Mocked Gui mockGui) {
-//        dentareport.start(mockStage);
-//
-//        new Verifications() {{
-//            mockPreStarter.runPreStartTasks();
-//            times = 1;
-//            new Gui(mockStage);
-//            times = 1;
-//            mockGui.start();
-//            times = 1;
-//        }};
-//    }
 }

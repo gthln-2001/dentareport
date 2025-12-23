@@ -6,7 +6,6 @@ import de.dentareport.gui.views.start.StartView;
 
 import javax.swing.*;
 
-// TODO: Test
 public class ViewFactory {
 
     public JComponent create(ViewId viewId, UiController uiController) {
