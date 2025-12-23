@@ -58,7 +58,7 @@ public class MainWindow implements UiController {
         );
 
         if (result == JOptionPane.YES_OPTION) {
-            frame.dispose();
+            closeApplication();
         }
     }
 

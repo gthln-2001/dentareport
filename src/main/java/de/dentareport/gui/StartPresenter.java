@@ -13,7 +13,7 @@ public class StartPresenter {
     }
 
     public void onExitRequested() {
-        ui.closeApplication();
+        ui.confirmExit();
     }
 }
 
