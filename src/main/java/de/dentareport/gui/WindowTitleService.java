@@ -3,6 +3,7 @@ package de.dentareport.gui;
 import de.dentareport.License;
 import de.dentareport.utils.Keys;
 
+// TODO: Test
 public class WindowTitleService {
 
     private final License license;

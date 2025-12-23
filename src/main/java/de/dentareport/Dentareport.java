@@ -8,13 +8,14 @@ import de.dentareport.utils.PreStarter;
 
 import javax.swing.*;
 
+// TODO: Test
 public class Dentareport {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Dentareport().run());
     }
 
-    void run() {
+    private void run() {
         new PreStarter().runPreStartTasks();
         FlatLightLaf.setup();
         MainWindow mainWindow = new MainWindow();

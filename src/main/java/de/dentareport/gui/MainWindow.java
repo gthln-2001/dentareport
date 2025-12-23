@@ -1,29 +1,29 @@
 package de.dentareport.gui;
 
-import de.dentareport.License;
-
 import javax.swing.*;
 import java.awt.*;
 
+import static de.dentareport.utils.Keys.*;
+
+// TODO: Test
 public class MainWindow implements UiController {
 
+    public static final int WIDTH = 1024;
+    public static final int HEIGHT = 768;
     private final JFrame frame;
     private final JPanel content;
-    private final SwingViewFactory viewFactory;
-    private final WindowTitleService titleService;
-
+    private final ViewFactory viewFactory;
 
     public MainWindow() {
         frame = new JFrame();
         content = new JPanel(new BorderLayout());
 
-        titleService = new WindowTitleService(new License());
-        viewFactory = new SwingViewFactory(this);
+        viewFactory = new ViewFactory(this);
 
         frame.setContentPane(content);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        frame.setSize(1024, 768);
+        frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
 
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -35,7 +35,6 @@ public class MainWindow implements UiController {
     }
 
     public void show() {
-        setWindowTitle(titleService.title());
         showView(ViewId.START);
         frame.setVisible(true);
     }
@@ -52,8 +51,8 @@ public class MainWindow implements UiController {
     public void confirmExit() {
         int result = JOptionPane.showConfirmDialog(
                 frame,
-                "Really exit?",
-                "Confirm exit",
+                GUI_TEXT_CONFIRM_EXIT,
+                GUI_TEXT_QUIT,
                 JOptionPane.YES_NO_OPTION
         );
 
@@ -75,7 +74,6 @@ public class MainWindow implements UiController {
 
     @Override
     public void showError(String message) {
-        JOptionPane.showMessageDialog(frame, message, "Error",
-                JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(frame, message, GUI_TEXT_ERROR, JOptionPane.ERROR_MESSAGE);
     }
 }

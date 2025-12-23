@@ -200,6 +200,7 @@ public class Keys {
     public static final String GUI_TEXT_DISPLAY = "anzeigen";
     public static final String GUI_TEXT_DMFT = "DMF-T";
     public static final String GUI_TEXT_DONE = "Fertig.";
+    public static final String GUI_TEXT_ERROR = "Error";
     public static final String GUI_TEXT_ERROR_NO_VALID_EVALUATION_FILLING = "Bitte führen Sie zuerst eine\nvollständige Berechnung für plastische Füllungen aus.";
     public static final String GUI_TEXT_ERROR_NO_VALID_EVALUATION_TELESCOPIC_CROWN = "Bitte führen Sie zuerst eine\nvollständige Berechnung für Teleskopkronen aus.";
     public static final String GUI_TEXT_ERROR_NO_VALID_IMPORT_FOUND = "Bitte führen Sie zuerst einen\nvollständigen Datenimport aus.";

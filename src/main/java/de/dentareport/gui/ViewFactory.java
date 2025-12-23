@@ -2,11 +2,12 @@ package de.dentareport.gui;
 
 import javax.swing.*;
 
-public class SwingViewFactory {
+// TODO: Test
+public class ViewFactory {
 
     private final UiController uiController;
 
-    public SwingViewFactory(UiController uiController) {
+    public ViewFactory(UiController uiController) {
         this.uiController = uiController;
     }
 

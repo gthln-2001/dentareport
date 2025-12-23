@@ -1,5 +1,6 @@
 package de.dentareport.gui;
 
+// TODO: Test
 public class StartPresenter {
 
     private final UiController ui;
