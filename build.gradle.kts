@@ -14,9 +14,16 @@ val appVersion = project.version.toString()
 dependencies {
     implementation(libs.guava)
     implementation(libs.flatlaf)
+    implementation("org.apache.httpcomponents.client5:httpclient5-fluent:5.3.1")
+    implementation("org.apache.poi:poi-ooxml:5.2.5")
+    implementation("org.apache.commons:commons-lang3:3.14.0")
+    implementation("org.xerial:sqlite-jdbc:3.45.3.0")
 
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    testImplementation("org.assertj:assertj-core:3.25.3")
+    testImplementation("org.jmockit:jmockit:1.49")
 }
 
 java {
@@ -65,6 +72,11 @@ tasks.register("release") {
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
+
+    jvmArgs("-javaagent:${configurations.testRuntimeClasspath.get()
+        .files
+        .first { it.name.startsWith("jmockit") }
+        .absolutePath}")
 
     testLogging {
         events("FAILED")
