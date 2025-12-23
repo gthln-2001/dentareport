@@ -3,27 +3,27 @@ plugins {
     application
 }
 
+version = "0.2.0"
+
 repositories {
     mavenCentral()
 }
-
-version = "0.2.0"
 val appName = "dentareport"
 val appVersion = project.version.toString()
 
 dependencies {
     implementation(libs.guava)
     implementation(libs.flatlaf)
-    implementation("org.apache.httpcomponents.client5:httpclient5-fluent:5.3.1")
-    implementation("org.apache.poi:poi-ooxml:5.4.0")
-    implementation("org.apache.commons:commons-lang3:3.18.0")
-    implementation("org.xerial:sqlite-jdbc:3.45.3.0")
+    implementation(libs.httpclient5.fluent)
+    implementation(libs.poi.ooxml)
+    implementation(libs.commons.lang3)
+    implementation(libs.sqlite.jdbc)
 
     testImplementation(libs.junit.jupiter)
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly(libs.junit.platform.launcher)
 
-    testImplementation("org.assertj:assertj-core:3.25.3")
-    testImplementation("org.jmockit:jmockit:1.49")
+    testImplementation(libs.assertj)
+    testImplementation(libs.jmockit)
 }
 
 java {
