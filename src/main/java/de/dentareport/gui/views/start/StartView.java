@@ -1,4 +1,4 @@
-package de.dentareport.gui;
+package de.dentareport.gui.views.start;
 
 import javax.swing.*;
 import java.awt.*;

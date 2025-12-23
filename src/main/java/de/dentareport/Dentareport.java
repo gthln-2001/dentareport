@@ -1,9 +1,9 @@
 package de.dentareport;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import de.dentareport.gui.MainWindow;
-import de.dentareport.gui.ViewId;
-import de.dentareport.gui.WindowTitleService;
+import de.dentareport.gui.app.MainWindow;
+import de.dentareport.gui.navigation.ViewId;
+import de.dentareport.gui.services.WindowTitleService;
 import de.dentareport.utils.PreStarter;
 
 import javax.swing.*;

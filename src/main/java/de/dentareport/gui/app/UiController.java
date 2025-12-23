@@ -1,4 +1,6 @@
-package de.dentareport.gui;
+package de.dentareport.gui.app;
+
+import de.dentareport.gui.navigation.ViewId;
 
 public interface UiController {
 

@@ -1,4 +1,4 @@
-package de.dentareport.gui;
+package de.dentareport.gui.services;
 
 import de.dentareport.License;
 import de.dentareport.utils.Keys;

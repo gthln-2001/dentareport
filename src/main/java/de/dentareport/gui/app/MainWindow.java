@@ -1,4 +1,7 @@
-package de.dentareport.gui;
+package de.dentareport.gui.app;
+
+import de.dentareport.gui.navigation.ViewFactory;
+import de.dentareport.gui.navigation.ViewId;
 
 import javax.swing.*;
 import java.awt.*;

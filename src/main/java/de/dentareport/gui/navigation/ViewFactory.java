@@ -1,4 +1,8 @@
-package de.dentareport.gui;
+package de.dentareport.gui.navigation;
+
+import de.dentareport.gui.views.start.StartPresenter;
+import de.dentareport.gui.views.start.StartView;
+import de.dentareport.gui.app.UiController;
 
 import javax.swing.*;
 

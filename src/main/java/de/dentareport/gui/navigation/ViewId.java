@@ -1,4 +1,4 @@
-package de.dentareport.gui;
+package de.dentareport.gui.navigation;
 
 public enum ViewId {
     START,
