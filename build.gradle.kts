@@ -15,8 +15,8 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.flatlaf)
     implementation("org.apache.httpcomponents.client5:httpclient5-fluent:5.3.1")
-    implementation("org.apache.poi:poi-ooxml:5.2.5")
-    implementation("org.apache.commons:commons-lang3:3.14.0")
+    implementation("org.apache.poi:poi-ooxml:5.4.0")
+    implementation("org.apache.commons:commons-lang3:3.18.0")
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
 
     testImplementation(libs.junit.jupiter)
