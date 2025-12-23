@@ -1,21 +1,17 @@
 package de.dentareport;
 
 //import de.dentareport.gui.Gui;
-import de.dentareport.utils.PreStarter;
 //import javafx.stage.Stage;
-import mockit.Mocked;
-import mockit.Verifications;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 
 public class DentareportTest {
 
-    private Dentareport dentareport;
+    private Dentareport_TO_REMOVE dentareport;
 
     @BeforeEach
     public void setUp() {
-        this.dentareport = new Dentareport();
+        this.dentareport = new Dentareport_TO_REMOVE();
     }
 
 //    @Test
