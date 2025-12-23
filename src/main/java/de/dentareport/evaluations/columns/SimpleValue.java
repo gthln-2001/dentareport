@@ -5,7 +5,6 @@ import de.dentareport.evaluations.Evaluation;
 import de.dentareport.exceptions.DentareportIllegalAccessException;
 import de.dentareport.models.CaseData;
 import de.dentareport.models.RawData;
-import org.apache.commons.lang3.text.WordUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -45,11 +44,16 @@ public abstract class SimpleValue extends EvaluationColumn {
 
     private Method method(CaseData caseData) throws NoSuchMethodException {
         return caseData.event(options.get(OF))
-                       .getClass()
-                       .getMethod(methodname());
+                .getClass()
+                .getMethod(methodname());
     }
 
     private String methodname() {
-        return WordUtils.uncapitalize(this.getClass().getSimpleName());
+        String name = getClass().getSimpleName();
+        if (name.isEmpty()) {
+            return name;
+        }
+        return Character.toLowerCase(name.charAt(0)) + name.substring(1);
     }
+
 }

@@ -1,28 +1,22 @@
 package de.dentareport;
 
-import de.dentareport.gui.FxApplicationGui;
+import de.dentareport.gui.MainWindow;
+import de.dentareport.gui.ViewId;
+import de.dentareport.gui.WindowTitleService;
 import de.dentareport.utils.PreStarter;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-public class Dentareport extends Application {
-
-    // TODO: Find a way to handle exceptions better. For now, e.g. InvalidargumentExceptions seem to disappear...
-
-    private final PreStarter preStarter;
-
-    public Dentareport() {
-        this.preStarter = new PreStarter();
-    }
+public class Dentareport {
 
     public static void main(String[] args) {
-        launch(args);
+        new Dentareport().run();
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        preStarter.runPreStartTasks();
-        FxApplicationGui gui = new FxApplicationGui(primaryStage);
-        gui.start();
+    void run() {
+        new PreStarter().runPreStartTasks();
+
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.setWindowTitle(new WindowTitleService(new License()).title());
+        mainWindow.showView(ViewId.START);
+        mainWindow.show();
     }
 }
