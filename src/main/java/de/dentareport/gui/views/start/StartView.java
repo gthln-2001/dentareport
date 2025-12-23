@@ -7,6 +7,7 @@ import static de.dentareport.utils.Keys.GUI_TEXT_QUIT;
 
 // TODO: Test
 public class StartView extends JPanel {
+
     public StartView(StartPresenter presenter) {
         setLayout(new BorderLayout());
 

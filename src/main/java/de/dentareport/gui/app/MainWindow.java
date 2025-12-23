@@ -2,6 +2,7 @@ package de.dentareport.gui.app;
 
 import de.dentareport.gui.navigation.ViewFactory;
 import de.dentareport.gui.navigation.ViewId;
+import de.dentareport.utils.db.DbConnection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,24 +18,17 @@ public class MainWindow implements UiController {
     private final JPanel content;
     private final ViewFactory viewFactory;
 
-    public MainWindow() {
-        frame = new JFrame();
+    public MainWindow(ViewFactory viewFactory) {
+        this.viewFactory = viewFactory;
+
         content = new JPanel(new BorderLayout());
-
-        viewFactory = new ViewFactory(this);
-
+        frame = new JFrame();
         frame.setContentPane(content);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
         frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
 
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                confirmExit();
-            }
-        });
+        addClosingListener();
     }
 
     public void show() {
@@ -45,7 +39,7 @@ public class MainWindow implements UiController {
     @Override
     public void showView(ViewId viewId) {
         content.removeAll();
-        content.add(viewFactory.create(viewId), BorderLayout.CENTER);
+        content.add(viewFactory.create(viewId, this), BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
     }
@@ -67,6 +61,8 @@ public class MainWindow implements UiController {
     @Override
     public void closeApplication() {
         frame.dispose();
+        // TODO move db.close and System.exit out of this class
+        DbConnection.db().close();
         System.exit(0);
     }
 
@@ -76,7 +72,21 @@ public class MainWindow implements UiController {
     }
 
     @Override
-    public void showError(String message) {
-        JOptionPane.showMessageDialog(frame, message, GUI_TEXT_ERROR, JOptionPane.ERROR_MESSAGE);
+    public void showError(String errorMessage) {
+        JOptionPane.showMessageDialog(
+                frame,
+                errorMessage,
+                GUI_TEXT_ERROR,
+                JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    private void addClosingListener() {
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                confirmExit();
+            }
+        });
     }
 }

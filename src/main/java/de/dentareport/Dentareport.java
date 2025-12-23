@@ -2,6 +2,7 @@ package de.dentareport;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import de.dentareport.gui.app.MainWindow;
+import de.dentareport.gui.navigation.ViewFactory;
 import de.dentareport.gui.navigation.ViewId;
 import de.dentareport.gui.services.WindowTitleService;
 import de.dentareport.utils.PreStarter;
@@ -18,9 +19,11 @@ public class Dentareport {
     private void run() {
         new PreStarter().runPreStartTasks();
         FlatLightLaf.setup();
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.setWindowTitle(new WindowTitleService(new License()).title());
-        mainWindow.showView(ViewId.START);
+
+        MainWindow mainWindow = new MainWindow(new ViewFactory());
+        WindowTitleService windowTitleService = new WindowTitleService(new License());
+
+        mainWindow.setWindowTitle(windowTitleService.title());
         mainWindow.show();
     }
 }
