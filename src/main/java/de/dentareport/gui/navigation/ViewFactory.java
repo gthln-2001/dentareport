@@ -1,6 +1,8 @@
 package de.dentareport.gui.navigation;
 
 import de.dentareport.gui.app.UiController;
+import de.dentareport.gui.views.evaluation.EvaluationPresenter;
+import de.dentareport.gui.views.evaluation.EvaluationView;
 import de.dentareport.gui.views.start.StartPresenter;
 import de.dentareport.gui.views.start.StartView;
 
@@ -12,7 +14,7 @@ public class ViewFactory {
         return switch (viewId) {
             case START -> new StartView(new StartPresenter(uiController));
             case IMPORT_DATA -> new JLabel("Import Data view (TODO)");
-            case EVALUATION -> new JLabel("Evaluation view (TODO)");
+            case EVALUATION -> new EvaluationView(new EvaluationPresenter(uiController));
         };
     }
 }
