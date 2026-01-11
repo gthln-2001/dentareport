@@ -15,11 +15,11 @@ public class StartView extends JPanel {
         this.presenter = presenter;
 
         setLayout(createBorderLayout());
-        addTitle();
         addContent();
         addMenu();
     }
 
+    // TODO: Remove, it's just a placeholder for copy & pasting for the next views.
     void addTitle() {
         add(title(GUI_TEXT_DENTAREPORT), BorderLayout.NORTH);
     }
@@ -28,22 +28,17 @@ public class StartView extends JPanel {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+        contentPanel.add(Box.createVerticalStrut(120));
         contentPanel.add(heading1(GUI_TEXT_DENTAREPORT));
-        contentPanel.add(Box.createVerticalStrut(10));
-
+        contentPanel.add(Box.createVerticalStrut(40));
         contentPanel.add(heading2(GUI_TEXT_HEADING_START_PANE_1));
-        contentPanel.add(Box.createVerticalStrut(10));
-
+        contentPanel.add(Box.createVerticalStrut(40));
         contentPanel.add(image("/teaser.png"));
-        contentPanel.add(Box.createVerticalStrut(10));
-
+        contentPanel.add(Box.createVerticalStrut(40));
         contentPanel.add(heading2(GUI_TEXT_HEADING_START_PANE_2));
-        contentPanel.add(Box.createVerticalStrut(10));
-
+        contentPanel.add(Box.createVerticalStrut(40));
         JButton buttonImportData = button(GUI_TEXT_IMPORT_DATA, "import_data", e -> presenter.onImportData());
         JButton buttonEvaluation = button(GUI_TEXT_EVALUATIONS, "evaluations", e -> presenter.onEvaluations());
-
         JPanel buttonRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         buttonRow.add(buttonImportData);
         buttonRow.add(buttonEvaluation);

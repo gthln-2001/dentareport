@@ -17,6 +17,7 @@ public class SwingUtils {
         button.setName(buttonName);
         button.addActionListener(actionListener);
         button.setFocusable(false);
+        button.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         return button;
     }
@@ -30,10 +31,11 @@ public class SwingUtils {
     }
 
     public static JLabel image(String path) {
-        ImageIcon image = new ImageIcon(Objects.requireNonNull(SwingUtils.class.getResource(path)));
-        JLabel imageLabel = new JLabel(image);
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(SwingUtils.class.getResource(path)));
+        JLabel imageLabel = new JLabel(resizeImage(imageIcon, 1000, 500));
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         return imageLabel;
+
     }
 
     public static JLabel title(String text) {
@@ -55,4 +57,16 @@ public class SwingUtils {
 
         return heading;
     }
+
+    public static ImageIcon resizeImage(ImageIcon icon, int maxWidth, int maxHeight) {
+        Image img = icon.getImage();
+        int width = img.getWidth(null);
+        int height = img.getHeight(null);
+        double scale = Math.min((double)maxWidth/width, (double)maxHeight/height);
+        int newWidth = (int)(width * scale);
+        int newHeight = (int)(height * scale);
+        Image resized = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        return new ImageIcon(resized);
+    }
+
 }
