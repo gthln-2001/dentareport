@@ -19,14 +19,14 @@ class StartViewTest {
     }
 
     @Test
-    void clicking_open_report_calls_presenter() {
+    void clicking_open_report_calls_presenter() throws Exception {
         clickButtonByName(startView, "open_report");
 
         verify(startPresenter).onOpenReport();
     }
 
     @Test
-    void clicking_exit_calls_presenter() {
+    void clicking_exit_calls_presenter() throws Exception {
         clickButtonByName(startView, "exit");
 
         verify(startPresenter).onExitRequested();

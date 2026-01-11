@@ -12,8 +12,8 @@ import static de.dentareport.utils.Keys.*;
 // TODO: Test
 public class MainWindow implements UiController {
 
-    public static final int WIDTH = 1024;
-    public static final int HEIGHT = 768;
+    public static final int WIDTH = 1500;
+    public static final int HEIGHT = 1000;
     private final JFrame frame;
     private final JPanel content;
     private final ViewFactory viewFactory;
@@ -93,4 +93,9 @@ public class MainWindow implements UiController {
             }
         });
     }
+
+    JPanel getContentPanel() {
+        return content;
+    }
+
 }

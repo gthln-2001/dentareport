@@ -23,34 +23,43 @@ public final class SwingTestUtils {
         if (SwingUtilities.isEventDispatchThread()) {
             return task.call();
         }
-
         FutureTask<T> future = new FutureTask<>(task);
         SwingUtilities.invokeAndWait(future);
         return future.get();
     }
 
-    public static JButton findButtonByText(Container root, String text) {
-        return findComponent(root, JButton.class, button ->
-                text.equals(button.getText())
-        ).orElseThrow(() ->
-                new AssertionError("Button not found: " + text)
+    public static JButton findButtonByText(Container root, String text) throws Exception {
+        return callOnEdt(
+                () -> findComponent(root, JButton.class, button -> text.equals(button.getText()))
+                        .orElseThrow(() -> new AssertionError("Button not found with name: " + text))
         );
     }
 
-    public static JButton findButtonByName(Container root, String name) {
-        return findComponent(root, JButton.class, button ->
-                name.equals(button.getName())
-        ).orElseThrow(() ->
-                new AssertionError("Button not found with name: " + name)
+    public static JButton findButtonByName(Container root, String name) throws Exception {
+        return callOnEdt(
+                () -> findComponent(root, JButton.class, button -> name.equals(button.getName()))
+                        .orElseThrow(() -> new AssertionError("Button not found with name: " + name))
         );
     }
 
-    public static void clickButtonByText(Container root, String text) {
-        findButtonByText(root, text).doClick();
+    public static void clickButtonByText(Container root, String text) throws Exception {
+        runOnEdt(() -> {
+            try {
+                findButtonByText(root, text).doClick();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
-    public static void clickButtonByName(Container root, String name) {
-        findButtonByName(root, name).doClick();
+    public static void clickButtonByName(Container root, String name) throws Exception {
+        runOnEdt(() -> {
+            try {
+                findButtonByName(root, name).doClick();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
 

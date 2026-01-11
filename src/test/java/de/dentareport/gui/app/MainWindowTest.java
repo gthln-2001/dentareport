@@ -14,27 +14,30 @@ class MainWindowTest {
 
     private ViewFactory viewFactory;
     private JFrame jFrame;
+    private JPanel jPanel;
 
     @BeforeEach
     public void setUp() throws Exception {
         viewFactory = mock(ViewFactory.class);
-        jFrame = new JFrame();
+        jFrame = mock(JFrame.class);
+        jPanel = new JPanel();
+        when(jFrame.getContentPane()).thenReturn(jPanel);
     }
 
     @Test
-    void showView_replacesContentWithViewFromFactory() throws Exception {
+    void showView_replacesContentWithViewFromFactory() {
         JComponent fakeView = new JLabel("start");
-
         when(viewFactory.create(eq(ViewId.START), any())).thenReturn(fakeView);
 
         MainWindow window = new MainWindow(viewFactory, jFrame);
-
         window.showView(ViewId.START);
 
-        JPanel content = (JPanel) jFrame.getContentPane();
+        JPanel content = window.getContentPanel();
+
         assertThat(content.getComponentCount()).isEqualTo(1);
         assertThat(content.getComponent(0)).isSameAs(fakeView);
     }
+
 
     @Test
     void setWindowTitle_setsFrameTitle() throws Exception {
@@ -42,6 +45,6 @@ class MainWindowTest {
 
         window.setWindowTitle("Dentareport");
 
-        assertThat(jFrame.getTitle()).isEqualTo("Dentareport");
+        verify(jFrame).setTitle("Dentareport");
     }
 }
