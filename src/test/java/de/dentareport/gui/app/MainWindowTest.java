@@ -10,6 +10,7 @@ import javax.swing.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
+// TODO: Check test, this is just a first draft
 class MainWindowTest {
 
     private ViewFactory viewFactory;

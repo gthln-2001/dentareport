@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+// TODO: Check test, this is just a first draft
 class WindowTitleServiceTest {
 
     private License license;

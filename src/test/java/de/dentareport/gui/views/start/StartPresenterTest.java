@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
+// TODO: Check test, this is just a first draft
 class StartPresenterTest {
 
     private UiController uiController;
@@ -19,10 +20,10 @@ class StartPresenterTest {
     }
 
     @Test
-    void onOpenReport_showsReportView() {
-        startPresenter.onOpenReport();
+    void onImportDataView() {
+        startPresenter.onImportData();
 
-        verify(uiController).showView(ViewId.REPORT);
+        verify(uiController).showView(ViewId.IMPORT_DATA);
         verifyNoMoreInteractions(uiController);
     }
 

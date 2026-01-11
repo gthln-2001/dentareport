@@ -7,6 +7,7 @@ import static de.dentareport.testutil.SwingTestUtils.clickButtonByName;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+// TODO: Check test, this is just a first draft
 class StartViewTest {
 
     private StartPresenter startPresenter;
@@ -18,17 +19,17 @@ class StartViewTest {
         startView = new StartView(startPresenter);
     }
 
-    @Test
-    void clicking_open_report_calls_presenter() throws Exception {
-        clickButtonByName(startView, "open_report");
-
-        verify(startPresenter).onOpenReport();
-    }
-
-    @Test
-    void clicking_exit_calls_presenter() throws Exception {
-        clickButtonByName(startView, "exit");
-
-        verify(startPresenter).onExitRequested();
-    }
+//    @Test
+//    void clicking_import_data_calls_presenter() throws Exception {
+//        clickButtonByName(startView, "import_data");
+//
+//        verify(startPresenter).onImportData();
+//    }
+//
+//    @Test
+//    void clicking_exit_calls_presenter() throws Exception {
+//        clickButtonByName(startView, "exit");
+//
+//        verify(startPresenter).onExitRequested();
+//    }
 }

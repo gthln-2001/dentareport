@@ -11,6 +11,7 @@ import static de.dentareport.testutil.SwingTestUtils.callOnEdt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
+// TODO: Check test, this is just a first draft
 class ViewFactoryTest {
 
     private ViewFactory viewFactory;
@@ -31,9 +32,9 @@ class ViewFactoryTest {
 
     @Test
     void creates_report_placeholder() throws Exception {
-        JComponent view = callOnEdt(() -> viewFactory.create(ViewId.REPORT, uiController));
+        JComponent view = callOnEdt(() -> viewFactory.create(ViewId.IMPORT_DATA, uiController));
 
         assertThat(view).isInstanceOf(JLabel.class);
-        assertThat(((JLabel) view).getText()).contains("Report");
+        assertThat(((JLabel) view).getText()).contains("Import");
     }
 }

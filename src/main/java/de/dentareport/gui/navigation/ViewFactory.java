@@ -11,8 +11,8 @@ public class ViewFactory {
     public JComponent create(ViewId viewId, UiController uiController) {
         return switch (viewId) {
             case START -> new StartView(new StartPresenter(uiController));
-            case REPORT -> new JLabel("Report view (TODO)");
-            case SETTINGS -> new JLabel("Settings view (TODO)");
+            case IMPORT_DATA -> new JLabel("Import Data view (TODO)");
+            case EVALUATION -> new JLabel("Evaluation view (TODO)");
         };
     }
 }
