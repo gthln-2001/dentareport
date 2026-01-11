@@ -71,6 +71,13 @@ tasks.register("release") {
     dependsOn(tasks.named("test"), tasks.named("distJar"))
 }
 
+tasks.register("release_skip_tests") {
+    group = "distribution"
+    description = "Builds the distributable JAR, skips the test run"
+    outputs.upToDateWhen { false }
+    dependsOn(tasks.named("distJar"))
+}
+
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
