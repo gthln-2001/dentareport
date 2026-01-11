@@ -58,15 +58,15 @@ public class SwingUtils {
         return heading;
     }
 
-    public static ImageIcon resizeImage(ImageIcon icon, int maxWidth, int maxHeight) {
-        Image img = icon.getImage();
-        int width = img.getWidth(null);
-        int height = img.getHeight(null);
-        double scale = Math.min((double)maxWidth/width, (double)maxHeight/height);
-        int newWidth = (int)(width * scale);
-        int newHeight = (int)(height * scale);
-        Image resized = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        return new ImageIcon(resized);
-    }
+    private static ImageIcon resizeImage(ImageIcon icon, int maxWidth, int maxHeight) {
+        Image image = icon.getImage();
+        int width = image.getWidth(null);
+        int height = image.getHeight(null);
+        double scale = Math.min((double) maxWidth / width, (double) maxHeight / height);
+        int newWidth = (int) (width * scale);
+        int newHeight = (int) (height * scale);
+        Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
 
+        return new ImageIcon(resizedImage);
+    }
 }
