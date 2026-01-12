@@ -1,4 +1,4 @@
-package de.dentareport.gui.views.evaluation;
+package de.dentareport.gui.views.import_data;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,11 +7,11 @@ import static de.dentareport.gui.util.SwingUtils.*;
 import static de.dentareport.utils.Keys.*;
 
 // TODO: Test?
-public class EvaluationView extends JPanel {
+public class ImportDataView extends JPanel {
 
-    private final EvaluationPresenter presenter;
+    private final ImportDataPresenter presenter;
 
-    public EvaluationView(EvaluationPresenter presenter) {
+    public ImportDataView(ImportDataPresenter presenter) {
         this.presenter = presenter;
 
         setLayout(createBorderLayout());
@@ -21,17 +21,16 @@ public class EvaluationView extends JPanel {
     }
 
     void addTitle() {
-        add(title(GUI_TEXT_EVALUATIONS), BorderLayout.NORTH);
+        add(title(GUI_TEXT_IMPORT_DATA), BorderLayout.NORTH);
     }
 
     void addContent() {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        contentPanel.add(Box.createVerticalStrut(80));
-        contentPanel.add(heading2(GUI_TEXT_CHOOSE_EVALUATION));
-        contentPanel.add(Box.createVerticalStrut(40));
-
+        contentPanel.add(Box.createVerticalStrut(120));
+        contentPanel.add(heading1(GUI_TEXT_IMPORT_DATA));
+//        contentPanel.add(Box.createVerticalStrut(40));
 //        contentPanel.add(heading2(GUI_TEXT_HEADING_START_PANE_1));
 //        contentPanel.add(Box.createVerticalStrut(40));
 //        contentPanel.add(image("/teaser.png"));
