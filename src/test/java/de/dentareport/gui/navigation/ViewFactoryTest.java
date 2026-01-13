@@ -1,6 +1,7 @@
 package de.dentareport.gui.navigation;
 
 import de.dentareport.gui.app.UiController;
+import de.dentareport.gui.views.import_data.ImportDataView;
 import de.dentareport.gui.views.start.StartView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ class ViewFactoryTest {
     void creates_report_placeholder() throws Exception {
         JComponent view = callOnEdt(() -> viewFactory.create(ViewId.IMPORT_DATA, uiController));
 
-        assertThat(view).isInstanceOf(JLabel.class);
-        assertThat(((JLabel) view).getText()).contains("Import");
+        assertThat(view).isInstanceOf(ImportDataView.class);
+//        assertThat(((JLabel) view).getText()).contains("Import");
     }
 }
