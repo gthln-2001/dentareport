@@ -22,6 +22,33 @@ public class SwingUtils {
         return button;
     }
 
+    public static JButton buttonMedium(String buttonText, String buttonName, ActionListener actionListener) {
+        JButton button = button(buttonText, buttonName, actionListener);
+        button.setPreferredSize(new Dimension(320, 35));
+
+        return button;
+    }
+
+    public static JButton buttonMediumMuted(String buttonText, String buttonName, ActionListener actionListener) {
+        JButton button = buttonMedium(buttonText, buttonName, actionListener);
+        button.putClientProperty(
+                "FlatLaf.style",
+                "background: #B1BED9FF;" +
+                        "hoverBackground: #B1BED9FF;" +
+                        "pressedBackground: #B1BED9FF;" +
+                        "foreground: #FFFFFF;"
+        );
+
+        return button;
+    }
+
+    public static JButton buttonLarge(String buttonText, String buttonName, ActionListener actionListener) {
+        JButton button = button(buttonText, buttonName, actionListener);
+        button.setPreferredSize(new Dimension(600, 35));
+
+        return button;
+    }
+
     public static JLabel heading1(String text) {
         return heading(text, Font.BOLD, 48f);
     }

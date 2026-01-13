@@ -80,8 +80,18 @@ public class MainWindow implements UiController {
         JOptionPane.showMessageDialog(
                 frame,
                 errorMessage,
-                GUI_TEXT_ERROR,
+                GUI_TEXT_DENTAREPORT,
                 JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    @Override
+    public void showInfo(String infoMessage) {
+        JOptionPane.showMessageDialog(
+                frame,
+                infoMessage,
+                GUI_TEXT_DENTAREPORT,
+                JOptionPane.INFORMATION_MESSAGE
         );
     }
 

@@ -8,6 +8,8 @@ public interface UiController {
 
     void showError(String message);
 
+    void showInfo(String message);
+
     void confirmExit();
 
     void closeApplication();

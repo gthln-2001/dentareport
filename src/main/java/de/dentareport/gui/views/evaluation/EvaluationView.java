@@ -30,71 +30,47 @@ public class EvaluationView extends JPanel {
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         contentPanel.add(Box.createVerticalStrut(80));
         contentPanel.add(heading2(GUI_TEXT_CHOOSE_EVALUATION));
-        contentPanel.add(Box.createVerticalStrut(40));
+        contentPanel.add(Box.createVerticalStrut(20));
 
-
-        // Hauptpanel mit GridBagLayout
-        JPanel mainPanel = new JPanel(new GridBagLayout());
+        JPanel buttonGrid = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // Abstand zwischen Buttons
-        gbc.fill = GridBagConstraints.NONE; // Buttons behalten ihre Größe
-        gbc.anchor = GridBagConstraints.NORTH; // Oben ausrichten
+        gbc.insets = new Insets(16, 16, 16, 16);
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.NORTH;
 
-        int leftButtons = 6;
-        int rightButtons = 5;
-        int maxRows = Math.max(leftButtons, rightButtons);
-
-        for (int row = 0; row < maxRows; row++) {
-            // Linke Spalte
-            if (row < leftButtons) {
-                JButton btn = new JButton("L" + (row + 1));
-                btn.setPreferredSize(new Dimension(100, 30));
-                gbc.gridx = 0;
-                gbc.gridy = row;
-                mainPanel.add(btn, gbc);
-            }
-
-            // Rechte Spalte
-            if (row < rightButtons) {
-                JButton btn = new JButton("R" + (row + 1));
-                btn.setPreferredSize(new Dimension(100, 30));
-                gbc.gridx = 1;
-                gbc.gridy = row;
-                mainPanel.add(btn, gbc);
-            }
-        }
-
-        // Zentrierter Button unten
-        JButton centerButton = new JButton("Zentrierter Button");
-        centerButton.setPreferredSize(new Dimension(150, 35));
         gbc.gridx = 0;
-        gbc.gridy = maxRows;
-        gbc.gridwidth = 2; // über beide Spalten zentrieren
+        gbc.gridy = 0;
+        buttonGrid.add(buttonMedium(GUI_TEXT_FILLINGS, "button_fillings", e -> presenter.onBack()), gbc);
+        gbc.gridy = 1;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_ENDODONTICS, "button_endodontics", e -> presenter.onNotAvailableInDemo()), gbc);
+        gbc.gridy = 2;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_CROWNS, "button_crowns", e -> presenter.onNotAvailableInDemo()), gbc);
+        gbc.gridy = 3;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_BRIDGES, "button_bridges", e -> presenter.onNotAvailableInDemo()), gbc);
+        gbc.gridy = 4;
+        buttonGrid.add(buttonMedium(GUI_TEXT_TELESCOPIC_CROWNS, "button_telescopic_crowns", e -> presenter.onBack()), gbc);
+        gbc.gridy = 5;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_IMPLANTS, "button_implants", e -> presenter.onNotAvailableInDemo()), gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_SEALINGS, "button_sealings", e -> presenter.onNotAvailableInDemo()), gbc);
+        gbc.gridy = 1;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_WURZELSTIFTE, "button_wurzelstifte", e -> presenter.onNotAvailableInDemo()), gbc);
+        gbc.gridy = 2;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_PREVENTION_MEASURES, "button_prevention_measures", e -> presenter.onNotAvailableInDemo()), gbc);
+        gbc.gridy = 3;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_INLAYS, "button_inlays", e -> presenter.onNotAvailableInDemo()), gbc);
+        gbc.gridy = 4;
+        buttonGrid.add(buttonMediumMuted(GUI_TEXT_SURGERY, "button_surgery", e -> presenter.onNotAvailableInDemo()), gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
-        mainPanel.add(centerButton, gbc);
+        buttonGrid.add(buttonLarge(GUI_TEXT_GENERAL_PATIENT_INFORMATION, "button_general_patient_information", e -> presenter.onBack()), gbc);
 
-
-        contentPanel.add(mainPanel);
-
-
-
-
-
-
-
-//        contentPanel.add(heading2(GUI_TEXT_HEADING_START_PANE_1));
-//        contentPanel.add(Box.createVerticalStrut(40));
-//        contentPanel.add(image("/teaser.png"));
-//        contentPanel.add(Box.createVerticalStrut(40));
-//        contentPanel.add(heading2(GUI_TEXT_HEADING_START_PANE_2));
-//        contentPanel.add(Box.createVerticalStrut(40));
-//        JButton buttonImportData = button(GUI_TEXT_IMPORT_DATA, "import_data", e -> presenter.onImportData());
-//        JButton buttonEvaluation = button(GUI_TEXT_EVALUATIONS, "evaluations", e -> presenter.onEvaluations());
-//        JPanel buttonRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-//        buttonRow.add(buttonImportData);
-//        buttonRow.add(buttonEvaluation);
-//        buttonRow.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        contentPanel.add(buttonRow);
+        contentPanel.add(buttonGrid);
 
         add(contentPanel, BorderLayout.CENTER);
     }
