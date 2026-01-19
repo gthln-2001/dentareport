@@ -40,7 +40,7 @@ public class EvaluationView extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        buttonGrid.add(buttonMedium(GUI_TEXT_FILLINGS, "button_fillings", e -> presenter.onBack()), gbc);
+        buttonGrid.add(buttonMedium(GUI_TEXT_FILLINGS, "button_fillings", e -> presenter.onShowFillings()), gbc);
         gbc.gridy = 1;
         buttonGrid.add(buttonMediumMuted(GUI_TEXT_ENDODONTICS, "button_endodontics", e -> presenter.onNotAvailableInDemo()), gbc);
         gbc.gridy = 2;
@@ -48,7 +48,7 @@ public class EvaluationView extends JPanel {
         gbc.gridy = 3;
         buttonGrid.add(buttonMediumMuted(GUI_TEXT_BRIDGES, "button_bridges", e -> presenter.onNotAvailableInDemo()), gbc);
         gbc.gridy = 4;
-        buttonGrid.add(buttonMedium(GUI_TEXT_TELESCOPIC_CROWNS, "button_telescopic_crowns", e -> presenter.onBack()), gbc);
+        buttonGrid.add(buttonMedium(GUI_TEXT_TELESCOPIC_CROWNS, "button_telescopic_crowns", e -> presenter.onShowTelescopicCrowns()), gbc);
         gbc.gridy = 5;
         buttonGrid.add(buttonMediumMuted(GUI_TEXT_IMPLANTS, "button_implants", e -> presenter.onNotAvailableInDemo()), gbc);
 
@@ -68,7 +68,7 @@ public class EvaluationView extends JPanel {
         gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
-        buttonGrid.add(buttonLarge(GUI_TEXT_GENERAL_PATIENT_INFORMATION, "button_general_patient_information", e -> presenter.onBack()), gbc);
+        buttonGrid.add(buttonLarge(GUI_TEXT_GENERAL_PATIENT_INFORMATION, "button_general_patient_information", e -> presenter.onShowGeneralPatientInformation()), gbc);
 
         contentPanel.add(buttonGrid);
 

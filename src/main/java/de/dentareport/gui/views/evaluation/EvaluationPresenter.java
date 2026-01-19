@@ -26,6 +26,17 @@ public class EvaluationPresenter {
         uiController.confirmExit();
     }
 
+    public void onShowFillings() {
+        uiController.showView(ViewId.FILLINGS);
+    }
 
+    public void onShowTelescopicCrowns() {
+        uiController.showView(ViewId.TELESCOPIC_CROWNS);
+
+    }
+
+    public void onShowGeneralPatientInformation() {
+        uiController.showView(ViewId.GENERAL_PATIENT_INFORMATION);
+    }
 }
 
