@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+import static de.dentareport.utils.Keys.GUI_TEXT_COPY_FILES_EXPLANATION;
+
 // TODO: Test
 public class SwingUtils {
 
@@ -49,6 +51,19 @@ public class SwingUtils {
         return button;
     }
 
+    public static JButton buttonLargeMuted(String buttonText, String buttonName, ActionListener actionListener) {
+        JButton button = buttonLarge(buttonText, buttonName, actionListener);
+        button.putClientProperty(
+                "FlatLaf.style",
+                "background: #B1BED9FF;" +
+                        "hoverBackground: #B1BED9FF;" +
+                        "pressedBackground: #B1BED9FF;" +
+                        "foreground: #FFFFFF;"
+        );
+
+        return button;
+    }
+
     public static JLabel heading1(String text) {
         return heading(text, Font.BOLD, 48f);
     }
@@ -61,8 +76,17 @@ public class SwingUtils {
         ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(SwingUtils.class.getResource(path)));
         JLabel imageLabel = new JLabel(resizeImage(imageIcon, 1000, 500));
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         return imageLabel;
 
+    }
+
+    public static JPanel text(String text) {
+        JPanel textWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        textWrapper.add(new JLabel("<html>" + text.replace("\n", "<br>") + "</html>"));
+        textWrapper.setMaximumSize(textWrapper.getPreferredSize());
+
+        return textWrapper;
     }
 
     public static JLabel title(String text) {

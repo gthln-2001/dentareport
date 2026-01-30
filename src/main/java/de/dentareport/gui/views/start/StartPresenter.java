@@ -12,8 +12,8 @@ public class StartPresenter {
         this.uiController = uiController;
     }
 
-    public void onImportData() {
-        uiController.showView(ViewId.IMPORT_DATA);
+    public void onCopyFiles() {
+        uiController.showView(ViewId.COPY_FILES);
     }
 
     public void onExitRequested() {

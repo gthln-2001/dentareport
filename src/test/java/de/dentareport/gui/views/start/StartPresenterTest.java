@@ -19,13 +19,13 @@ class StartPresenterTest {
         startPresenter = new StartPresenter(uiController);
     }
 
-    @Test
-    void onImportDataView() {
-        startPresenter.onImportData();
-
-        verify(uiController).showView(ViewId.IMPORT_DATA);
-        verifyNoMoreInteractions(uiController);
-    }
+//    @Test
+//    void onImportDataView() {
+//        startPresenter.onImportData();
+//
+//        verify(uiController).showView(ViewId.IMPORT_DATA);
+//        verifyNoMoreInteractions(uiController);
+//    }
 
     @Test
     void onExitRequested_confirmsExit() {

@@ -13,11 +13,15 @@ public class ImportDataPresenter {
     }
 
     public void onBack() {
-        uiController.showView(ViewId.START);
+        uiController.showView(ViewId.COPY_FILES);
     }
 
     public void onExitRequested() {
         uiController.confirmExit();
+    }
+
+    public void onStartDataImport() {
+        uiController.showView(ViewId.START);
     }
 
 

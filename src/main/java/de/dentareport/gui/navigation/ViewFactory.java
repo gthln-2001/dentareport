@@ -1,6 +1,8 @@
 package de.dentareport.gui.navigation;
 
 import de.dentareport.gui.app.UiController;
+import de.dentareport.gui.views.copy_files.CopyFilesPresenter;
+import de.dentareport.gui.views.copy_files.CopyFilesView;
 import de.dentareport.gui.views.evaluation.EvaluationPresenter;
 import de.dentareport.gui.views.evaluation.EvaluationView;
 import de.dentareport.gui.views.fillings.FillingsPresenter;
@@ -20,6 +22,7 @@ public class ViewFactory {
 
     public JComponent create(ViewId viewId, UiController uiController) {
         return switch (viewId) {
+            case COPY_FILES -> new CopyFilesView(new CopyFilesPresenter(uiController));
             case EVALUATION -> new EvaluationView(new EvaluationPresenter(uiController));
             case FILLINGS -> new FillingsView(new FillingsPresenter(uiController));
             case GENERAL_PATIENT_INFORMATION ->

@@ -37,7 +37,7 @@ public class StartView extends JPanel {
         contentPanel.add(Box.createVerticalStrut(40));
         contentPanel.add(heading2(GUI_TEXT_HEADING_START_PANE_2));
         contentPanel.add(Box.createVerticalStrut(40));
-        JButton buttonImportData = button(GUI_TEXT_IMPORT_DATA, "import_data", e -> presenter.onImportData());
+        JButton buttonImportData = button(GUI_TEXT_IMPORT_DATA, "import_data", e -> presenter.onCopyFiles());
         JButton buttonEvaluation = button(GUI_TEXT_EVALUATIONS, "evaluations", e -> presenter.onEvaluations());
         JPanel buttonRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         buttonRow.add(buttonImportData);
