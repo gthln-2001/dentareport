@@ -4,6 +4,7 @@ package de.dentareport.imports.dampsoft;
 import de.dentareport.imports.dampsoft.dampsoft_files.*;
 import de.dentareport.utils.Keys;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

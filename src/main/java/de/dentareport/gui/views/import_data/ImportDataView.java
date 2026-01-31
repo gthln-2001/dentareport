@@ -28,6 +28,7 @@ public class ImportDataView extends JPanel {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        contentPanel.add(Box.createVerticalStrut(80));
 
 
         JPanel buttonPanel = new JPanel();
@@ -44,6 +45,11 @@ public class ImportDataView extends JPanel {
         buttonPanel.setMaximumSize(buttonPanel.getPreferredSize());
 
         contentPanel.add(buttonPanel);
+
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        progressBar.setStringPainted(true);
+
+        contentPanel.add(progressBar);
 
         add(contentPanel, BorderLayout.CENTER);
     }
