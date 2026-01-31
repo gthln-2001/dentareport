@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: TEST?
 public class XlsColors {
 
     private final XSSFWorkbook workbook;

@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static de.dentareport.utils.Keys.*;
 
+// TODO: TEST?
 public class AvailableColumns {
 
     private static final Map<String, List<String>> columns = ImmutableMap.of(

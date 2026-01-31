@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+// TODO: TEST?
 public class PatkuerzDbf implements DampsoftFile {
 
     private static Map<Integer, String> tokens = new HashMap<>();

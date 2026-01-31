@@ -3,6 +3,7 @@ package de.dentareport.evaluations.meta.averages;
 import java.util.List;
 import java.util.Map;
 
+// TODO: TEST?
 public class PerCase extends Calculator {
 
     private Averages averages;

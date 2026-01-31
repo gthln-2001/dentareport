@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 
+// TODO: TEST?
 public class ZnotizDbf implements DampsoftFile {
 
     private final DampsoftImport dampsoftImport;

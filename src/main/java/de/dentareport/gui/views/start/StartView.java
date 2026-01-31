@@ -7,6 +7,7 @@ import static de.dentareport.gui.util.SwingUtils.*;
 import static de.dentareport.utils.Keys.*;
 
 // TODO: Test?
+// TODO: TEST?
 public class StartView extends JPanel {
 
     private final StartPresenter presenter;

@@ -1,5 +1,6 @@
 package de.dentareport.models;
 
+// TODO: TEST?
 public class Point {
 
     private double x;

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import static de.dentareport.utils.Keys.OF;
 import static de.dentareport.utils.Keys.ORIGINAL_NAME;
 
+// TODO: TEST?
 public class Groups {
 
     private final ColumnGroups columnGroups;

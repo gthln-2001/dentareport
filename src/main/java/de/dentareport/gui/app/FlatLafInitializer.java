@@ -9,6 +9,7 @@ import java.awt.*;
  * Thin adapter around FlatLaf.
  * Tested indirectly via application startup wiring.
  */
+// TODO: TEST?
 public class FlatLafInitializer implements LookAndFeelInitializer {
 
     @Override

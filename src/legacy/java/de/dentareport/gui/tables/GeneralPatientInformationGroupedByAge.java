@@ -14,6 +14,7 @@ import java.util.List;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class GeneralPatientInformationGroupedByAge extends Table {
 
     public ObservableList<TableRow> data() {

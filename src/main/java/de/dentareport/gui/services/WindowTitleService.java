@@ -4,6 +4,7 @@ import de.dentareport.License;
 import de.dentareport.utils.Keys;
 
 // TODO: Test
+// TODO: TEST?
 public class WindowTitleService {
 
     private final License license;

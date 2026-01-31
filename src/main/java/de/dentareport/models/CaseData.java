@@ -3,6 +3,7 @@ package de.dentareport.models;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: TEST?
 public class CaseData {
 
     private final Map<String, String> strings = new HashMap<>();

@@ -16,6 +16,7 @@ import static de.dentareport.TestHelper.dbInMemory;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+// TODO: TEST?
 public class PatientsRepositoryTest {
 
     private Db db;

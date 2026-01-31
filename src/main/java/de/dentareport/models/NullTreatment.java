@@ -4,6 +4,7 @@ import de.dentareport.utils.Keys;
 
 import java.util.Set;
 
+// TODO: TEST?
 public class NullTreatment implements TreatmentInterface {
 
     @Override

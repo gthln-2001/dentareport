@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.Keys.*;
 
+// TODO: TEST?
 public class EventOfInterest extends EvaluationColumn {
 
     public EventOfInterest(Evaluation evaluation,

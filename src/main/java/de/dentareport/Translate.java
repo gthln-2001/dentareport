@@ -6,6 +6,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.Keys.*;
 
+// TODO: TEST?
 public class Translate {
 
     private final Map<String, Map<String, String>> translationsPerEvaluationType = ImmutableMap.<String, Map<String, String>>builder()

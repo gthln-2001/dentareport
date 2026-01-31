@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
+// TODO: TEST?
 public class ButtonElement {
 
     private final Button button;

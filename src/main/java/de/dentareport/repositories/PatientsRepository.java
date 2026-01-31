@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class PatientsRepository {
 
     public static Patient patient(String patientIndex) {

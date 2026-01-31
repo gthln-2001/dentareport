@@ -5,6 +5,7 @@ import de.dentareport.exceptions.DentareportSqlException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// TODO: TEST?
 public class PatientFactory {
 
     public static Patient create(ResultSet rs) {

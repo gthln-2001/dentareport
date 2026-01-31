@@ -6,6 +6,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.Keys.OF;
 
+// TODO: TEST?
 public class Ft extends SimpleValue {
 
     public Ft(Evaluation evaluation,

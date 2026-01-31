@@ -5,6 +5,7 @@ import de.dentareport.exceptions.DentareportUnsupportedEncodingException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+// TODO: TEST?
 public class ByteSequence {
 
     private byte[] sequence;

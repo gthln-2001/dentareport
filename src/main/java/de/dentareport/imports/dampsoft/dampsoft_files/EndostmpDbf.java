@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO: TEST?
 public class EndostmpDbf implements DampsoftFile {
 
     private final DampsoftImport dampsoftImport;

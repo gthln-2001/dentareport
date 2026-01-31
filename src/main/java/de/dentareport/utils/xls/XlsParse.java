@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// TODO: TEST?
 public class XlsParse {
 
     private Pattern boldItalic = Pattern.compile(Pattern.quote("°°") + "(.*?)" + Pattern.quote("°°"));

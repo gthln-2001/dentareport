@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class ConfirmBoxElementTest extends BaseFxWindowTest {
 
     @Override

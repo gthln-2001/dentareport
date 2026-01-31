@@ -12,6 +12,7 @@ import java.util.Set;
 
 import static de.dentareport.utils.Keys.*;
 
+// TODO: TEST?
 public class EventsOfInterest extends EvaluationColumn {
 
     public EventsOfInterest(Evaluation evaluation,

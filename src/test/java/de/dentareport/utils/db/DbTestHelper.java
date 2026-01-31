@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+// TODO: TEST?
 public class DbTestHelper {
 
     public static void createTable(Connection connection, String tableName) throws SQLException {

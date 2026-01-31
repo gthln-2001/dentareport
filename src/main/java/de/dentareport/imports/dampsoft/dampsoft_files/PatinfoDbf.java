@@ -16,6 +16,7 @@ import java.util.*;
 
 import static de.dentareport.utils.string.DateStringUtils.isValidDate;
 
+// TODO: TEST?
 public class PatinfoDbf implements DampsoftFile {
 
     private static Map<String, List<Treatment>> hkpTreatments = new HashMap<>();
@@ -158,7 +159,8 @@ public class PatinfoDbf implements DampsoftFile {
         return !Objects.equals(dbRow.value("hkp_index"), "");
     }
 
-    public class Treatment {
+    // TODO: TEST?
+public class Treatment {
 
         private String billingcode;
         private String hkpIndex;

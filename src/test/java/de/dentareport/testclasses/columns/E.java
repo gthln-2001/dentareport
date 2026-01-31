@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+// TODO: TEST?
 public class E extends EvaluationColumn {
 
     public E(Evaluation evaluation, Map<String, String> options) {

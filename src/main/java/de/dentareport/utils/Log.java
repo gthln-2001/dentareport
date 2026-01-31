@@ -1,5 +1,6 @@
 package de.dentareport.utils;
 
+// TODO: TEST?
 public class Log {
 
     private static long startTime;

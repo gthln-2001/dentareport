@@ -7,6 +7,7 @@ import de.dentareport.utils.Keys;
 import java.util.List;
 import java.util.Map;
 
+// TODO: TEST?
 public class AvailableEvents {
 
     private final Events events;

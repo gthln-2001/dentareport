@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: TEST?
 public class TableElement {
 
     private ObservableList<TableRow> data;

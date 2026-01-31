@@ -2,6 +2,7 @@ package de.dentareport;
 
 import java.io.File;
 
+// TODO: TEST?
 public class Config {
 
     public static String defaultDatabaseUrl() {

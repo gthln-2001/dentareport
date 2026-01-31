@@ -3,6 +3,7 @@ package de.dentareport.gui.elements;
 import javafx.scene.control.Label;
 import javafx.scene.text.TextAlignment;
 
+// TODO: TEST?
 public class LabelElement {
 
     private final Label label;

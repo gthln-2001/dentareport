@@ -12,6 +12,7 @@ import static de.dentareport.utils.Keys.AT_LEAST_ONE_SURFACE;
 import static de.dentareport.utils.Keys.IDENTICAL_SURFACES;
 
 // TODO: Test!
+// TODO: TEST?
 public class TreatmentFilters {
 
     public static Predicate<TreatmentInterface> get(String filter, CaseData caseData) {

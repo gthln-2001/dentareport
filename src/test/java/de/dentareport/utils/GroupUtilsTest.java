@@ -14,6 +14,7 @@ import java.sql.Statement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class GroupUtilsTest {
 
     private Connection connection;

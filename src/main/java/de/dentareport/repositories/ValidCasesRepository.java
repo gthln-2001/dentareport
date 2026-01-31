@@ -11,6 +11,7 @@ import java.util.*;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class ValidCasesRepository {
 
     private static List<DbColumn> columns() {

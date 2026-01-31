@@ -15,6 +15,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.Keys.ORIGINAL_NAME;
 
+// TODO: TEST?
 public class Errorcodes extends EvaluationColumn {
 
     public Errorcodes(Evaluation evaluation, Map<String, String> options) {

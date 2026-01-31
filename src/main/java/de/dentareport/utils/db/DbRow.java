@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// TODO: TEST?
 public class DbRow {
 
     private List<DbCell> cells;

@@ -1,5 +1,6 @@
 package de.dentareport.utils.dbf;
 
+// TODO: TEST?
 public class DbfCell {
 
     private String column;

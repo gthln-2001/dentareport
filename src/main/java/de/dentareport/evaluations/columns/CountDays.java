@@ -11,6 +11,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.Keys.*;
 
+// TODO: TEST?
 public class CountDays extends EvaluationColumn {
 
     public CountDays(Evaluation evaluation, Map<String, String> options) {

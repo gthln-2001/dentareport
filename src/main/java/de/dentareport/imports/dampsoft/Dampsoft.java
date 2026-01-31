@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// TODO: TEST?
 public class Dampsoft {
 
     private final List<DampsoftFile> files;

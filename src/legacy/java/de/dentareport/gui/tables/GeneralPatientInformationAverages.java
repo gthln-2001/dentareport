@@ -12,6 +12,7 @@ import java.util.Comparator;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class GeneralPatientInformationAverages extends Table {
 
     public ObservableList<TableRow> data() {

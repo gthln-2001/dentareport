@@ -1,5 +1,6 @@
 package de.dentareport.utils.db;
 
+// TODO: TEST?
 public class DbConnection {
 
     private static Db db;

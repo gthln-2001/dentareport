@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class PatientTest {
     @Test
     public void it_can_be_initialized() {

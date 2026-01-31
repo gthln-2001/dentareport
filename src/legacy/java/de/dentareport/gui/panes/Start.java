@@ -18,6 +18,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.Map;
 
+// TODO: TEST?
 public class Start extends ContentPane {
 
     private Gui gui;

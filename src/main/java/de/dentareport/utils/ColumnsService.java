@@ -7,6 +7,7 @@ import de.dentareport.models.Column;
 import java.util.*;
 import java.util.stream.Collectors;
 
+// TODO: TEST?
 public class ColumnsService {
 
     private final Evaluation evaluation;

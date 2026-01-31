@@ -5,6 +5,7 @@ import de.dentareport.utils.Keys;
 
 import java.util.Map;
 
+// TODO: TEST?
 public class NumericStringUtils {
 
     private static final double MINIMAL_NUMBER_OF_DAYS = 365d / 2d;

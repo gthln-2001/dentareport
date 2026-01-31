@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import static de.dentareport.evaluations.columns.Helper.testCase;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class TreatmentsTest {
 
     private static final String BILLINGPOSITION = "Foo";

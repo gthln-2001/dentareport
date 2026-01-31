@@ -11,6 +11,7 @@ import static de.dentareport.utils.db.DbConnection.db;
 import static de.dentareport.utils.string.DateStringUtils.isAfter;
 import static de.dentareport.utils.string.DateStringUtils.isBefore;
 
+// TODO: TEST?
 public class FirstAndLastVisit implements DampsoftFile {
 
     private static Map<String, Map<String, String>> firstAndLastVisits = new HashMap<>();

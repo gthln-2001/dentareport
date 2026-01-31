@@ -12,6 +12,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class CountAndDistribution extends Table {
 
     private final Map<String, String> options;

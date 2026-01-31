@@ -6,6 +6,7 @@ import de.dentareport.gui.navigation.ViewFactory;
  * Adapter between application core and Swing MainWindow.
  * Behavior tested indirectly via application startup wiring.
  */
+// TODO: TEST?
 public class MainWindowAdapter implements ApplicationWindow {
 
     private final MainWindow window;

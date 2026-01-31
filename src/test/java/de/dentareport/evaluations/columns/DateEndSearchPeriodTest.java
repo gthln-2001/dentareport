@@ -15,6 +15,7 @@ import static de.dentareport.utils.Keys.DATE_END_SEARCH_PERIOD;
 import static de.dentareport.utils.Keys.TOOTH_LOSS;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class DateEndSearchPeriodTest {
 
     @Test

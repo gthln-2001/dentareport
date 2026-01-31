@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class Distributions {
 
     private final Evaluation evaluation;

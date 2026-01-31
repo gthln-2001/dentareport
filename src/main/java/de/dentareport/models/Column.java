@@ -15,6 +15,7 @@ import java.util.*;
 
 import static de.dentareport.utils.Keys.*;
 
+// TODO: TEST?
 public class Column {
 
     private final AvailableColumns availableColumns;

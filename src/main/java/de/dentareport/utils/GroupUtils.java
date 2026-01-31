@@ -9,6 +9,7 @@ import java.util.List;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class GroupUtils {
 
     public static String valuesForColumn(String table,

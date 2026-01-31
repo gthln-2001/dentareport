@@ -8,6 +8,7 @@ import static de.dentareport.utils.Keys.GUI_TEXT_COPY_FILES_MANUALLY_FOR_IMPORT;
 import static de.dentareport.utils.Keys.GUI_TEXT_FUNCTION_NOT_AVAILABLE_IN_DEMO_VERSION;
 
 // TODO: Test?
+// TODO: TEST?
 public class CopyFilesPresenter {
 
     private final UiController uiController;

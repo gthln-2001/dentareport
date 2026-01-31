@@ -17,6 +17,7 @@ import java.util.List;
 import static de.dentareport.TestHelper.dbInMemory;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class AveragesTest {
 
     private Db db;

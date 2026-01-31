@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// TODO: TEST?
 public class LineChartElement {
 
     private List<XYChart.Series<Number, Number>> lines = new ArrayList<>();

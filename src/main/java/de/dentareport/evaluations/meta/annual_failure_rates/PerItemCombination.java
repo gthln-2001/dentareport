@@ -13,6 +13,7 @@ import java.util.*;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class PerItemCombination {
 
     private String sourceTable;

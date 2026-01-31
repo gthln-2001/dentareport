@@ -17,6 +17,7 @@ import java.util.function.Predicate;
 import static de.dentareport.utils.Keys.*;
 
 // TODO: Test!
+// TODO: TEST?
 public class Cofferdam extends EvaluationColumn {
 
     public Cofferdam(Evaluation evaluation, Map<String, String> options) {

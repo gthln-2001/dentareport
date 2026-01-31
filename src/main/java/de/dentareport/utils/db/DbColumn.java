@@ -2,6 +2,7 @@ package de.dentareport.utils.db;
 
 import java.util.Objects;
 
+// TODO: TEST?
 public class DbColumn {
 
     private String name;

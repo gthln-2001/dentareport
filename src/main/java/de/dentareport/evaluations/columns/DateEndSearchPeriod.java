@@ -13,6 +13,7 @@ import static de.dentareport.utils.Keys.DATE_END_SEARCH_PERIOD;
 import static de.dentareport.utils.Keys.TOOTH_LOSS;
 import static de.dentareport.utils.string.StringUtils.isNoData;
 
+// TODO: TEST?
 public class DateEndSearchPeriod extends DateEvaluationColumn {
 
     public DateEndSearchPeriod(Evaluation evaluation, Map<String, String> options) {

@@ -9,6 +9,7 @@ import de.dentareport.utils.PreStarter;
 
 import javax.swing.*;
 
+// TODO: TEST?
 public class Dentareport {
 
     private final PreStarter preStarter;

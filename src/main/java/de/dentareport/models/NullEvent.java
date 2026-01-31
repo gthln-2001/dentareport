@@ -9,6 +9,7 @@ import java.util.Set;
 
 import static de.dentareport.utils.Keys.NO_DATA;
 
+// TODO: TEST?
 public class NullEvent implements EventInterface {
 
     @Override

@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import static java.util.stream.Collectors.toCollection;
 
+// TODO: TEST?
 public class AnnualFailureRate extends Table {
 
     private final AfrRepository afrRepository;

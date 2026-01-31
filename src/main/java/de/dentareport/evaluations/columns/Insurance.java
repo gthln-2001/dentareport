@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+// TODO: TEST?
 public class Insurance extends EvaluationColumn {
 
     public Insurance(Evaluation evaluation,

@@ -1,5 +1,6 @@
 package de.dentareport.evaluations.meta.events;
 
+// TODO: TEST?
 public class Event {
 
     private String name;

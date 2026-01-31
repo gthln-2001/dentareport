@@ -5,6 +5,7 @@ import de.dentareport.utils.Keys;
 
 import java.util.Map;
 
+// TODO: TEST?
 public class Events {
 
     private Map<String, Event> events = ImmutableMap.<String, Event>builder()

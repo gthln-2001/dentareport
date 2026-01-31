@@ -11,6 +11,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class Averages extends Table {
 
     private final Map<String, String> options;

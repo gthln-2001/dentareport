@@ -15,6 +15,7 @@ import java.util.List;
 import static de.dentareport.utils.db.DbConnection.db;
 import static de.dentareport.utils.string.StringUtils.isNumeric;
 
+// TODO: TEST?
 public class ColumnGroups {
 
     private String table;

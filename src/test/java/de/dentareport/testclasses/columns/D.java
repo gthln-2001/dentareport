@@ -9,6 +9,7 @@ import de.dentareport.models.RawData;
 import java.util.List;
 import java.util.Map;
 
+// TODO: TEST?
 public class D extends EvaluationColumn {
 
     public D(Evaluation evaluation, Map<String, String> options) {

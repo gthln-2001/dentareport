@@ -17,6 +17,7 @@ import java.util.Map;
 import static de.dentareport.utils.db.DbTestHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class DbTest {
 
     private Connection connection;

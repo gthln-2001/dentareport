@@ -12,6 +12,7 @@ import java.util.Set;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class TreatmentsRepository {
 
     public static List<TreatmentInterface> treatments(String patientIndex,

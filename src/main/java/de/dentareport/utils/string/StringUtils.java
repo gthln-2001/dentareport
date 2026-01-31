@@ -5,6 +5,7 @@ import de.dentareport.utils.Keys;
 import java.util.Arrays;
 import java.util.Objects;
 
+// TODO: TEST?
 public class StringUtils {
 
     public static String leftPad(String str,

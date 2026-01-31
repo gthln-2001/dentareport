@@ -18,6 +18,7 @@ import de.dentareport.gui.views.telescopic_crowns.TelescopicCrownsView;
 
 import javax.swing.*;
 
+// TODO: TEST?
 public class ViewFactory {
 
     public JComponent create(ViewId viewId, UiController uiController) {

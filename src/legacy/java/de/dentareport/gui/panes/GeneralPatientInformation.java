@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.Map;
 
+// TODO: TEST?
 public class GeneralPatientInformation extends ContentPane {
 
     private Gui gui;

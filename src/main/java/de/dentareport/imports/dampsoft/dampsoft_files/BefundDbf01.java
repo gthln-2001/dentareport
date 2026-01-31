@@ -18,6 +18,7 @@ import java.util.Objects;
 
 import static de.dentareport.utils.string.DateStringUtils.isValidDate;
 
+// TODO: TEST?
 public class BefundDbf01 implements DampsoftFile {
 
     private final DampsoftImport dampsoftImport;

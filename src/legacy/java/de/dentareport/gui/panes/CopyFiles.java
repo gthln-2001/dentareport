@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.Map;
 
+// TODO: TEST?
 public class CopyFiles extends ContentPane {
 
     private Gui gui;

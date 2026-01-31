@@ -7,6 +7,7 @@ import de.dentareport.utils.db.DbRow;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// TODO: TEST?
 public class PatientEvaluation {
 
     private final CaseEvaluation caseEvaluation;

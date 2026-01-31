@@ -6,6 +6,7 @@ import de.dentareport.evaluations.meta.counts.Counts;
 import de.dentareport.evaluations.meta.distributions.Distributions;
 import de.dentareport.evaluations.meta.kaplan_meier.KaplanMeier;
 
+// TODO: TEST?
 public class MetaEvaluation {
 
     private final Averages averages;

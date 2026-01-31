@@ -4,6 +4,7 @@ import de.dentareport.utils.Billingcodes;
 
 import java.util.*;
 
+// TODO: TEST?
 public class Treatment implements TreatmentInterface {
 
     private final List<String> surfaces;

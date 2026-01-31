@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: TEST?
 public class DbfHeader {
 
     private static final int OFFSET_TYPE = 0;

@@ -9,6 +9,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+// TODO: TEST?
 public class InfoBoxElement {
 
     private String title;

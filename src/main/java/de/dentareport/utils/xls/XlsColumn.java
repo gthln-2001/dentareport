@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Set;
 
+// TODO: TEST?
 public class XlsColumn {
 
     private final AvailableColumns availableColumns;

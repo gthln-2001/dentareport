@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// TODO: TEST?
 public class DbfFile {
 
     private static final String CHARSET = "ISO-8859-1";

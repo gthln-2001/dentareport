@@ -13,6 +13,7 @@ import static de.dentareport.utils.Keys.AFTER;
 import static de.dentareport.utils.Keys.POSITION;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class EventOfInterestTest {
 
     @Test

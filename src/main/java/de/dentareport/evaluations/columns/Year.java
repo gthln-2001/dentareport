@@ -8,6 +8,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.Keys.OF;
 
+// TODO: TEST?
 public class Year extends SimpleValue {
 
     public Year(Evaluation evaluation, Map<String, String> options) {

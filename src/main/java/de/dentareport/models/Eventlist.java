@@ -3,6 +3,7 @@ package de.dentareport.models;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: TEST?
 public class Eventlist {
 
     private List<EventInterface> eventlist = new ArrayList<>();

@@ -3,6 +3,7 @@ package de.dentareport.utils;
 import de.dentareport.License;
 import de.dentareport.Metadata;
 
+// TODO: TEST?
 public class PreStarter {
 
     private final License license;

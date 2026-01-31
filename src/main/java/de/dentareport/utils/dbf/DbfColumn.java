@@ -2,6 +2,7 @@ package de.dentareport.utils.dbf;
 
 import de.dentareport.utils.file.ByteSequence;
 
+// TODO: TEST?
 public class DbfColumn {
 
     private static final int COLUMN_LENGTH_TYPE = 1;

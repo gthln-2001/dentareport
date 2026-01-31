@@ -10,6 +10,7 @@ import java.util.*;
 import static de.dentareport.utils.db.DbConnection.db;
 import static de.dentareport.utils.map.MapUtils.toLinkedMap;
 
+// TODO: TEST?
 public class AfrRepository {
 
     private Map<String, String> options;

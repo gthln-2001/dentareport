@@ -9,6 +9,7 @@ import de.dentareport.utils.string.ToothStringUtils;
 import java.util.List;
 import java.util.Map;
 
+// TODO: TEST?
 public class Toothtype extends TranslatableEvaluationColumn {
 
     public Toothtype(Evaluation evaluation,

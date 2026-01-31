@@ -5,6 +5,7 @@ package de.dentareport.gui.views.general_patient_information;
 import de.dentareport.gui.app.UiController;
 import de.dentareport.gui.navigation.ViewId;
 
+// TODO: TEST?
 public class GeneralPatientInformationPresenter {
 
     private final UiController uiController;

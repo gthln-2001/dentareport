@@ -4,6 +4,7 @@ import de.dentareport.models.CaseData;
 import de.dentareport.models.Column;
 import de.dentareport.models.RawData;
 
+// TODO: TEST?
 public class ColumnEvaluation {
 
     public CaseData evaluate(RawData rawData,

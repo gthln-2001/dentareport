@@ -6,6 +6,7 @@ import de.dentareport.models.RawData;
 import de.dentareport.utils.db.DbCell;
 import de.dentareport.utils.db.DbRow;
 
+// TODO: TEST?
 public class CaseEvaluation {
 
     private final ColumnEvaluation columnEvaluation;

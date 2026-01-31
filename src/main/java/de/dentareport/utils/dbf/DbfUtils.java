@@ -2,6 +2,7 @@ package de.dentareport.utils.dbf;
 
 import de.dentareport.utils.string.StringUtils;
 
+// TODO: TEST?
 public class DbfUtils {
 
     private static final int COLUMN_WIDTH_DECIMAL_COUNT = 13;

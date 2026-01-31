@@ -11,6 +11,7 @@ import java.util.Map;
 import static de.dentareport.utils.Keys.OF;
 import static de.dentareport.utils.Keys.ORIGINAL_NAME;
 
+// TODO: TEST?
 public class Endstaendigkeit extends TranslatableEvaluationColumn {
 
     public Endstaendigkeit(Evaluation evaluation,

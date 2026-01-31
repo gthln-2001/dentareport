@@ -17,6 +17,7 @@ import static de.dentareport.evaluations.columns.Helper.testCase;
 import static de.dentareport.utils.Keys.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: TEST?
 public class TreatmentTest {
 
     // TODO: Check if "date_last_vist" is used correctly. Probalby date_end_search_period is better

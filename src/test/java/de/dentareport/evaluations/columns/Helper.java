@@ -6,6 +6,7 @@ import de.dentareport.models.CaseData;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: TEST?
 public class Helper {
 
     public static final String TEST_TOOTH = "some_toothnumber";

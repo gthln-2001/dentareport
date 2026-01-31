@@ -10,6 +10,7 @@ import java.net.SocketException;
 import java.util.Collections;
 import java.util.Objects;
 
+// TODO: TEST?
 public class License {
 
     public void check() {

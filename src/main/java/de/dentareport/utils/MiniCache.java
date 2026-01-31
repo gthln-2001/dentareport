@@ -3,6 +3,7 @@ package de.dentareport.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: TEST?
 public class MiniCache {
 
     private static Map<String, String> cache = new HashMap<>();

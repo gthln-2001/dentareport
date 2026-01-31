@@ -6,6 +6,7 @@ import javafx.scene.control.ToggleGroup;
 
 import java.util.Objects;
 
+// TODO: TEST?
 public class RadioButtonElement {
 
     private final RadioButton radioButton;

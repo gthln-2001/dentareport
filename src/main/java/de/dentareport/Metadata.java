@@ -14,6 +14,7 @@ import java.sql.SQLException;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class Metadata {
 
     public static void init() {

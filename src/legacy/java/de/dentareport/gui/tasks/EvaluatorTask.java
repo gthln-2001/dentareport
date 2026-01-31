@@ -10,6 +10,7 @@ import de.dentareport.utils.string.DateStringUtils;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class EvaluatorTask extends BaseTask {
 
     private final String metadataKey;

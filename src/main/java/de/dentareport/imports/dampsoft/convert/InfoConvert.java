@@ -4,6 +4,7 @@ import de.dentareport.utils.string.ToothStringUtils;
 
 import java.util.*;
 
+// TODO: TEST?
 public class InfoConvert {
 
     public static String convertToBillingCode(String info,

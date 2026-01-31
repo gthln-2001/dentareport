@@ -10,6 +10,7 @@ import java.awt.*;
 import static de.dentareport.utils.Keys.*;
 
 // TODO: Test
+// TODO: TEST?
 public class MainWindow implements UiController {
 
     public static final int WIDTH = 1500;

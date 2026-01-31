@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import static de.dentareport.utils.Keys.*;
 
+// TODO: TEST?
 public class Treatment extends EvaluationColumn {
 
     public Treatment(Evaluation evaluation, Map<String, String> options) {

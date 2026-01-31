@@ -2,6 +2,7 @@ package de.dentareport.utils.date;
 
 import static de.dentareport.utils.string.DateStringUtils.reformatSqlToGerman;
 
+// TODO: TEST?
 public class DateRange {
 
     private final String start;

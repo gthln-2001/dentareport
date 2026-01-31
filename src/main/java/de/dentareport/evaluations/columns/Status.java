@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static de.dentareport.utils.Keys.*;
 
+// TODO: TEST?
 public class Status extends EvaluationColumn {
 
     public Status(Evaluation evaluation,

@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+// TODO: TEST?
 public class ConfirmBoxElement {
 
     private String title;

@@ -14,6 +14,7 @@ import java.util.Objects;
 
 import static de.dentareport.utils.db.DbConnection.db;
 
+// TODO: TEST?
 public class GroupsSizes extends Table {
 
     private String dependency;

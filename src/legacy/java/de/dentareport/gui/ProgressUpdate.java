@@ -6,6 +6,7 @@ import de.dentareport.gui.tasks.BaseTask;
 
 import java.util.Objects;
 
+// TODO: TEST?
 public class ProgressUpdate {
 
     private static BaseTask task;

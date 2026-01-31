@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+// TODO: TEST?
 public class HkpplanDbf implements DampsoftFile {
 
     private static Map<String, Hkp> hkps = new HashMap<>();
