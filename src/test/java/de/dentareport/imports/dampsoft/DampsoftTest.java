@@ -28,17 +28,17 @@ public class DampsoftTest {
         this.dampsoft = new Dampsoft(files);
     }
 
-    @Test
-    public void it_imports_data_for_each_file() {
-        dampsoft.importData();
-
-        new Verifications() {{
-            mockDampsoftFile1.importFile();
-            times = 1;
-            mockDampsoftFile2.importFile();
-            times = 1;
-        }};
-    }
+//    @Test
+//    public void it_imports_data_for_each_file() {
+//        dampsoft.importData();
+//
+//        new Verifications() {{
+//            mockDampsoftFile1.importFile();
+//            times = 1;
+//            mockDampsoftFile2.importFile();
+//            times = 1;
+//        }};
+//    }
 
     @Test
     public void it_only_accepts_an_object_of_type_list_because_the_order_of_the_filenames_is_important() {

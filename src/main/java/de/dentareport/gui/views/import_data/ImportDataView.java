@@ -10,9 +10,11 @@ import static de.dentareport.utils.Keys.*;
 public class ImportDataView extends JPanel {
 
     private final ImportDataPresenter presenter;
+    private JProgressBar progressBar;
 
     public ImportDataView(ImportDataPresenter presenter) {
         this.presenter = presenter;
+        presenter.setView(this);
 
         setLayout(createBorderLayout());
         addTitle();
@@ -46,12 +48,20 @@ public class ImportDataView extends JPanel {
 
         contentPanel.add(buttonPanel);
 
-        JProgressBar progressBar = new JProgressBar(0, 100);
+        progressBar = new JProgressBar(0, 100);
         progressBar.setStringPainted(true);
 
         contentPanel.add(progressBar);
 
         add(contentPanel, BorderLayout.CENTER);
+    }
+
+    public void setProgress(int value) {
+        progressBar.setValue(value);
+    }
+
+    public void setProgressText(String text) {
+        progressBar.setString(text);
     }
 
     void addMenu() {
