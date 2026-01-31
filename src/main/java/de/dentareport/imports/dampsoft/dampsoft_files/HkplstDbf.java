@@ -22,11 +22,10 @@ import static de.dentareport.utils.string.DateStringUtils.isValidDate;
 public class HkplstDbf implements DampsoftFile {
 
     private final DampsoftImport dampsoftImport;
-    private HkpplanDbf hkpplanDbf;
-    private PatinfoDbf patinfoDbf;
+    private final HkpplanDbf hkpplanDbf;
+    private final PatinfoDbf patinfoDbf;
 
-    public HkplstDbf(HkpplanDbf hkpplanDbf,
-                     PatinfoDbf patinfoDbf) {
+    public HkplstDbf(HkpplanDbf hkpplanDbf, PatinfoDbf patinfoDbf) {
         this.hkpplanDbf = hkpplanDbf;
         this.patinfoDbf = patinfoDbf;
         this.dampsoftImport = new DampsoftImport(this);
@@ -38,7 +37,7 @@ public class HkplstDbf implements DampsoftFile {
 
     @Override
     public void importFile(FileProgressListener listener) {
-        dampsoftImport.importFileWithoutRebuildingTable();
+        dampsoftImport.importFileWithoutRebuildingTable(listener);
     }
 
     @Override
@@ -58,15 +57,7 @@ public class HkplstDbf implements DampsoftFile {
 
     @Override
     public List<String> columnsToImport() {
-        return ImmutableList.of(
-                "PATNR",
-                "HKPNR",
-                "GEBNR",
-                "ANZAHL",
-                "ZAHN",
-                "FLAECHE",
-                "BEHANDLER",
-                "SIGN");
+        return ImmutableList.of("PATNR", "HKPNR", "GEBNR", "ANZAHL", "ZAHN", "FLAECHE", "BEHANDLER", "SIGN");
     }
 
     @Override
@@ -119,10 +110,8 @@ public class HkplstDbf implements DampsoftFile {
 
     @Override
     public boolean isValidRow(DbRow dbRow) {
-        return isValidDate(dbRow.value("date"))
-                && hasValidValueForQuantity(dbRow)
-                && hasValidValueForSign(dbRow)
-                && doesNotExistInPatinfoYet(dbRow);
+        return isValidDate(dbRow.value("date")) && hasValidValueForQuantity(dbRow)
+                && hasValidValueForSign(dbRow) && doesNotExistInPatinfoYet(dbRow);
     }
 
     @Override
@@ -140,7 +129,6 @@ public class HkplstDbf implements DampsoftFile {
     }
 
     private boolean hasValidValueForQuantity(DbRow dbRow) {
-        return !Objects.equals(dbRow.value("quantity"), "")
-                && !Objects.equals(dbRow.value("quantity"), "0.00");
+        return !Objects.equals(dbRow.value("quantity"), "") && !Objects.equals(dbRow.value("quantity"), "0.00");
     }
 }

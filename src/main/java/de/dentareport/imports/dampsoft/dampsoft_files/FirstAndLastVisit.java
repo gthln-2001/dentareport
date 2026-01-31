@@ -1,6 +1,5 @@
 package de.dentareport.imports.dampsoft.dampsoft_files;
 
-//import de.dentareport.gui.ProgressUpdate;
 import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.utils.Keys;
 
@@ -15,7 +14,7 @@ import static de.dentareport.utils.string.DateStringUtils.isBefore;
 // TODO: TEST?
 public class FirstAndLastVisit implements DampsoftFile {
 
-    private static Map<String, Map<String, String>> firstAndLastVisits = new HashMap<>();
+    private static final Map<String, Map<String, String>> firstAndLastVisits = new HashMap<>();
 
     public static String conditionsTreatments() {
         return "type IN ('KK', 'AE', 'AF', 'AX', 'BG', 'GK', 'LF', 'LG', 'LK', 'LP', 'PI', 'RB') " +
@@ -34,26 +33,6 @@ public class FirstAndLastVisit implements DampsoftFile {
         return visits(patientIndex).get("last_01");
     }
 
-    @Override
-    public void importFile(FileProgressListener listener) {
-        // TODO: FIX progress
-//        ProgressUpdate.init(2, Keys.GUI_TEXT_IMPORTING_FIRST_AND_LAST_VISIT);
-        updateVisitsAnd01(db().firstAndLastVisits("evidences_01"));
-//        ProgressUpdate.tick();
-        updateVisits(db().firstAndLastVisits("treatments", conditionsTreatments()));
-//        ProgressUpdate.tick();
-    }
-
-    @Override
-    public Boolean isMissing() {
-        return false;
-    }
-
-    @Override
-    public Boolean isRealFile() {
-        return false;
-    }
-
     private static Map<String, String> visits(String patientIndex) {
         return firstAndLastVisits.getOrDefault(patientIndex, defaultVisits());
     }
@@ -64,6 +43,25 @@ public class FirstAndLastVisit implements DampsoftFile {
         ret.put("last_visit", "");
         ret.put("last_01", "");
         return ret;
+    }
+
+    @Override
+    public void importFile(FileProgressListener listener) {
+        listener.onProgress(0, Keys.GUI_TEXT_IMPORTING_FIRST_AND_LAST_VISIT);
+        updateVisitsAnd01(db().firstAndLastVisits("evidences_01"));
+        listener.onProgress(50, Keys.GUI_TEXT_IMPORTING_FIRST_AND_LAST_VISIT);
+        updateVisits(db().firstAndLastVisits("treatments", conditionsTreatments()));
+        listener.onProgress(100, Keys.GUI_TEXT_IMPORTING_FIRST_AND_LAST_VISIT);
+    }
+
+    @Override
+    public Boolean isMissing() {
+        return false;
+    }
+
+    @Override
+    public Boolean isRealFile() {
+        return false;
     }
 
     private void updateVisitsAnd01(Map<String, Map<String, String>> visits) {

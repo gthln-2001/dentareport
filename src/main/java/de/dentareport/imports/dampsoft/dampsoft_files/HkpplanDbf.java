@@ -2,7 +2,6 @@ package de.dentareport.imports.dampsoft.dampsoft_files;
 
 import com.google.common.collect.ImmutableList;
 import de.dentareport.Config;
-//import de.dentareport.gui.ProgressUpdate;
 import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.imports.dampsoft.convert.DateConvert;
 import de.dentareport.utils.Keys;
@@ -17,8 +16,8 @@ import java.util.Objects;
 // TODO: TEST?
 public class HkpplanDbf implements DampsoftFile {
 
-    private static Map<String, Hkp> hkps = new HashMap<>();
-    private Dbf dbf;
+    private static final Map<String, Hkp> hkps = new HashMap<>();
+    private final Dbf dbf;
 
     public HkpplanDbf() {
         this.dbf = new Dbf();
@@ -46,18 +45,22 @@ public class HkpplanDbf implements DampsoftFile {
 
     @Override
     public void importFile(FileProgressListener listener) {
-        // TODO: Fix Progress
         openDbf();
-//        ProgressUpdate.init(dbf.rowCount(), Keys.GUI_TEXT_PREPARE_HKP);
+        Integer rowCount = dbf.rowCount();
+        int count = 0;
+        int percent;
         List<DbfRow> dbfRows;
         do {
             dbfRows = dbf.chunkOfRows();
+            count += dbfRows.size();
             dbfRows.stream()
                     .filter(this::isValidRow)
                     .forEach(dbfRow -> hkps.put(
                             dbfRow.value("HKPNR").trim(),
                             hkp(dbfRow)
                     ));
+            percent = count * 100 / rowCount;
+            listener.onProgress(percent, Keys.GUI_TEXT_PREPARE_HKP);
         } while (dbfHasMoreRows(dbfRows));
         dbf.close();
     }
@@ -85,9 +88,9 @@ public class HkpplanDbf implements DampsoftFile {
         return dbfRows.size() == dbf.chunkSizeToRead();
     }
 
-    private class Hkp {
-        private String date;
-        private String insurance;
+    private static class Hkp {
+        private final String date;
+        private final String insurance;
 
         private Hkp(String date,
                     String insurance) {

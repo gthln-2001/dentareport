@@ -56,13 +56,12 @@ public class Dampsoft {
 
     public void importData(ProgressListener listener, FileProgressListener fileListener) {
         int total = files.size();
-        int count = 1;
+        int count = 0;
         for (DampsoftFile dampsoftFile : files) {
-            int percent = count * 10;
+            int percent = count * 100 / total;
             listener.onProgress(percent, String.format(Keys.GUI_TEXT_STEP_X_OF_Y, count++, total));
             dampsoftFile.importFile(fileListener);
         }
-
     }
 
     public List<String> requiredFiles() {

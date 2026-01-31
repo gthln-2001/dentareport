@@ -2,7 +2,6 @@ package de.dentareport.imports.dampsoft.dampsoft_files;
 
 import com.google.common.collect.ImmutableList;
 import de.dentareport.Config;
-//import de.dentareport.gui.ProgressUpdate;
 import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.utils.Keys;
 import de.dentareport.utils.dbf.Dbf;
@@ -16,9 +15,8 @@ import java.util.Objects;
 // TODO: TEST?
 public class PatkuerzDbf implements DampsoftFile {
 
-    private static Map<Integer, String> tokens = new HashMap<>();
-
-    private Dbf dbf;
+    private static final Map<Integer, String> tokens = new HashMap<>();
+    private final Dbf dbf;
 
     public PatkuerzDbf() {
         this.dbf = new Dbf();
@@ -39,22 +37,29 @@ public class PatkuerzDbf implements DampsoftFile {
 
     @Override
     public void importFile(FileProgressListener listener) {
-        // TODO: Fix Progress
         openDbf();
-//        ProgressUpdate.init(dbf.rowCount(), Keys.GUI_TEXT_IMPORTING_PATKUERZ);
         List<DbfRow> dbfRows;
+        Integer rowCount = dbf.rowCount();
+        int count = 0;
         int i = 0;
+        int percent;
         do {
             dbfRows = dbf.chunkOfRows();
             for (DbfRow dbfRow : dbfRows) {
-//                ProgressUpdate.tick();
+                count++;
                 if (isValidRow(dbfRow)) {
-                    tokens.put(i++,
-                            dbfRow.value("TYPE").trim().toUpperCase());
+                    tokens.put(i++, dbfRow.value("TYPE").trim().toUpperCase());
                 }
             }
+            percent = count * 100 / rowCount;
+            listener.onProgress(percent, progressMessage());
         } while (dbfHasMoreRows(dbfRows));
         dbf.close();
+    }
+
+    @Override
+    public String progressMessage() {
+        return Keys.GUI_TEXT_IMPORTING_PATKUERZ;
     }
 
     private void openDbf() {

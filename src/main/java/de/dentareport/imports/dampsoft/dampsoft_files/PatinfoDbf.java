@@ -20,9 +20,9 @@ import static de.dentareport.utils.string.DateStringUtils.isValidDate;
 // TODO: TEST?
 public class PatinfoDbf implements DampsoftFile {
 
-    private static Map<String, List<Treatment>> hkpTreatments = new HashMap<>();
+    private static final Map<String, List<Treatment>> hkpTreatments = new HashMap<>();
     private final DampsoftImport dampsoftImport;
-    private HkpplanDbf hkpplanDbf;
+    private final HkpplanDbf hkpplanDbf;
 
     public PatinfoDbf(HkpplanDbf hkpplanDbf) {
         this.hkpplanDbf = hkpplanDbf;
@@ -126,8 +126,7 @@ public class PatinfoDbf implements DampsoftFile {
 
     @Override
     public boolean isValidRow(DbRow dbRow) {
-        return !Objects.equals(dbRow.value("patient_index"), "")
-                && isValidDate(dbRow.value("date"));
+        return !Objects.equals(dbRow.value("patient_index"), "") && isValidDate(dbRow.value("date"));
     }
 
     public boolean hkpTreatmentExists(DbRow dbRow) {
@@ -161,11 +160,11 @@ public class PatinfoDbf implements DampsoftFile {
     }
 
     // TODO: TEST?
-public class Treatment {
+    public static class Treatment {
 
-        private String billingcode;
-        private String hkpIndex;
-        private String tooth;
+        private final String billingcode;
+        private final String hkpIndex;
+        private final String tooth;
 
         Treatment(String hkpIndex, String tooth, String billingcode) {
             this.billingcode = billingcode;

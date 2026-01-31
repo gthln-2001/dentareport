@@ -49,12 +49,7 @@ public class PatientDbf implements DampsoftFile {
 
     @Override
     public List<String> columnsToImport() {
-        return ImmutableList.of(
-                "PATNR",
-                "GEBDATP",
-                "GESCHLECHT",
-                "PAT_ANREDE",
-                "KUERZEL");
+        return ImmutableList.of("PATNR", "GEBDATP", "GESCHLECHT", "PAT_ANREDE", "KUERZEL");
     }
 
     @Override
@@ -64,17 +59,14 @@ public class PatientDbf implements DampsoftFile {
         row.addCell(new DbCell("deleted", dbfRow.isDeleted() ? "1" : "0"));
         row.addCell(new DbCell("patient_index", dbfRow.value("PATNR").trim()));
         row.addCell(new DbCell("date_of_birth", DateConvert.convert(dbfRow.value("GEBDATP"))));
-        row.addCell(new DbCell("gender", GenderConvert.convert(
-                dbfRow.value("GESCHLECHT"),
+        row.addCell(new DbCell("gender", GenderConvert.convert(dbfRow.value("GESCHLECHT"),
                 dbfRow.value("PAT_ANREDE"))));
         row.addCell(new DbCell("token", TokensConvert.convert(dbfRow.value("KUERZEL"))));
         row.addCell(new DbCell("first_visit", FirstAndLastVisit.firstVisit(row.value("patient_index"))));
         row.addCell(new DbCell("last_visit", FirstAndLastVisit.lastVisit(row.value("patient_index"))));
-        row.addCell(new DbCell("age_last_01", DateStringUtils.age(
-                row.value("date_of_birth"),
+        row.addCell(new DbCell("age_last_01", DateStringUtils.age(row.value("date_of_birth"),
                 FirstAndLastVisit.last01(row.value("patient_index")))));
-        row.addCell(new DbCell("group_age_last_01",
-                DateStringUtils.groupAgeByDecade(row.value("age_last_01"))));
+        row.addCell(new DbCell("group_age_last_01", DateStringUtils.groupAgeByDecade(row.value("age_last_01"))));
         ret.add(row);
         return ret;
     }

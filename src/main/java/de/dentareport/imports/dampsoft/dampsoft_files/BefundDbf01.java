@@ -50,11 +50,10 @@ public class BefundDbf01 implements DampsoftFile {
 
     @Override
     public List<String> columnsToImport() {
-        return ImmutableList.of("PATNR", "DATUM", "BEFTYP", "GEBNR",
-                "ZA18", "ZA17", "ZA16", "ZA15", "ZA14", "ZA13", "ZA12", "ZA11",
-                "ZA21", "ZA22", "ZA23", "ZA24", "ZA25", "ZA26", "ZA27", "ZA28",
-                "ZA38", "ZA37", "ZA36", "ZA35", "ZA34", "ZA33", "ZA32", "ZA31",
-                "ZA41", "ZA42", "ZA43", "ZA44", "ZA45", "ZA46", "ZA47", "ZA48");
+        return ImmutableList.of("PATNR", "DATUM", "BEFTYP", "GEBNR", "ZA18", "ZA17", "ZA16", "ZA15", "ZA14", "ZA13",
+                "ZA12", "ZA11", "ZA21", "ZA22", "ZA23", "ZA24", "ZA25", "ZA26", "ZA27", "ZA28", "ZA38", "ZA37", "ZA36"
+                , "ZA35", "ZA34", "ZA33", "ZA32", "ZA31", "ZA41", "ZA42", "ZA43", "ZA44", "ZA45", "ZA46", "ZA47",
+                "ZA48");
     }
 
     @Override
@@ -113,7 +112,7 @@ public class BefundDbf01 implements DampsoftFile {
 
     @Override
     public boolean isValidRow(DbRow dbRow) {
-        return dbRow.cells().size() != 0 && isValidDate(dbRow.value("date"));
+        return !dbRow.cells().isEmpty() && isValidDate(dbRow.value("date"));
     }
 
     private boolean is01Evidence(DbfRow dbfRow) {

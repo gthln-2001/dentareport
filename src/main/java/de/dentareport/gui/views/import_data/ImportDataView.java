@@ -13,6 +13,8 @@ public class ImportDataView extends JPanel {
     private final ImportDataPresenter presenter;
     private JProgressBar overallProgressBar;
     private JProgressBar fileProgressBar;
+    private JButton buttonStartDataImport;
+    private JButton buttonEvaluation;
 
     public ImportDataView(ImportDataPresenter presenter) {
         this.presenter = presenter;
@@ -33,25 +35,19 @@ public class ImportDataView extends JPanel {
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         contentPanel.add(Box.createVerticalStrut(80));
+        addTopButtons(contentPanel);
+        addProgressBars(contentPanel);
+        addBottomButtons(contentPanel);
+        add(contentPanel, BorderLayout.CENTER);
+    }
 
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        JButton buttonStartDataImport= buttonLarge(GUI_TEXT_START_DATA_IMPORT, "start_data_import", e -> presenter.onStartDataImport());
-        buttonStartDataImport.setAlignmentX(CENTER_ALIGNMENT);
-        buttonPanel.add(buttonStartDataImport);
-        buttonPanel.add(Box.createVerticalStrut(40));
-
-        JButton buttonCancelDataImport = buttonLargeMuted(GUI_TEXT_CANCEL_DATA_IMPORT, "cancel_data_import", e -> presenter.onBack());
-        buttonCancelDataImport.setAlignmentX(CENTER_ALIGNMENT);
-        buttonPanel.add(buttonCancelDataImport);
-
-        buttonPanel.setMaximumSize(buttonPanel.getPreferredSize());
-
-        contentPanel.add(buttonPanel);
-
+    private void addTopButtons(JPanel contentPanel) {
+        JPanel topButtons = topButtons();
+        contentPanel.add(topButtons);
         contentPanel.add(Box.createVerticalStrut(80));
+    }
 
+    private void addProgressBars(JPanel contentPanel) {
         overallProgressBar = progressBar();
         contentPanel.add(overallProgressBar);
 
@@ -59,8 +55,37 @@ public class ImportDataView extends JPanel {
 
         fileProgressBar = progressBar();
         contentPanel.add(fileProgressBar);
+        contentPanel.add(Box.createVerticalStrut(80));
+    }
 
-        add(contentPanel, BorderLayout.CENTER);
+    private void addBottomButtons(JPanel contentPanel) {
+        JPanel buttonPanelForEvaluation = new JPanel();
+        buttonPanelForEvaluation.setLayout(new BoxLayout(buttonPanelForEvaluation, BoxLayout.Y_AXIS));
+        buttonEvaluation = buttonLarge(GUI_TEXT_EVALUATIONS, "evaluations", e -> presenter.onEvaluations());
+        buttonEvaluation.setEnabled(false);
+        buttonEvaluation.setAlignmentX(CENTER_ALIGNMENT);
+        buttonPanelForEvaluation.add(buttonEvaluation);
+        buttonPanelForEvaluation.setMaximumSize(buttonPanelForEvaluation.getPreferredSize());
+        contentPanel.add(buttonPanelForEvaluation);
+    }
+
+    private JPanel topButtons() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+
+        buttonStartDataImport = buttonLarge(GUI_TEXT_START_DATA_IMPORT, "start_data_import",
+                e -> presenter.onStartDataImport());
+        buttonStartDataImport.setAlignmentX(CENTER_ALIGNMENT);
+        buttonPanel.add(buttonStartDataImport);
+        buttonPanel.add(Box.createVerticalStrut(40));
+
+        // TODO: implement cancel import
+//        JButton buttonCancelDataImport = buttonLargeMuted(GUI_TEXT_CANCEL_DATA_IMPORT, "cancel_data_import",
+//                e -> presenter.onBack());
+//        buttonCancelDataImport.setAlignmentX(CENTER_ALIGNMENT);
+//        buttonPanel.add(buttonCancelDataImport);
+        buttonPanel.setMaximumSize(buttonPanel.getPreferredSize());
+        return buttonPanel;
     }
 
     public void setOverallProgress(int value) {
@@ -94,6 +119,14 @@ public class ImportDataView extends JPanel {
 
 
         add(menuPanel, BorderLayout.SOUTH);
+    }
+
+    public void startImport() {
+        buttonStartDataImport.setEnabled(false);
+    }
+
+    public void importDone() {
+        buttonEvaluation.setEnabled(true);
     }
 }
 

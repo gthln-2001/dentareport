@@ -15,7 +15,6 @@ import de.dentareport.utils.dbf.DbfRow;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static de.dentareport.utils.string.DateStringUtils.isValidDate;
 
@@ -70,7 +69,7 @@ public class BefundDbfPa implements DampsoftFile {
         row.addCell(new DbCell("date", DateConvert.convert(dbfRow.value("DATUM").trim())));
         row.addCell(new DbCell("billingcode", dbfRow.value("GEBNR").trim()));
         row.addCells(EvidencePaConvert.convert(dbfRow));
-        
+
         ret.add(row);
         return ret;
     }
@@ -97,7 +96,7 @@ public class BefundDbfPa implements DampsoftFile {
 
     @Override
     public boolean isValidRow(DbRow dbRow) {
-        return dbRow.cells().size() != 0 && isValidDate(dbRow.value("date"));
+        return !dbRow.cells().isEmpty() && isValidDate(dbRow.value("date"));
     }
 
     private boolean isPaEvidence(DbfRow dbfRow) {

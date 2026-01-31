@@ -15,7 +15,6 @@ import de.dentareport.utils.dbf.DbfRow;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static de.dentareport.utils.string.DateStringUtils.isValidDate;
 
@@ -50,11 +49,10 @@ public class BefundDbfHkp implements DampsoftFile {
 
     @Override
     public List<String> columnsToImport() {
-        return ImmutableList.of("PATNR", "DATUM", "BEFTYP", "GEBNR", "HKPNR",
-                "ZA18", "ZA17", "ZA16", "ZA15", "ZA14", "ZA13", "ZA12", "ZA11",
-                "ZA21", "ZA22", "ZA23", "ZA24", "ZA25", "ZA26", "ZA27", "ZA28",
-                "ZA38", "ZA37", "ZA36", "ZA35", "ZA34", "ZA33", "ZA32", "ZA31",
-                "ZA41", "ZA42", "ZA43", "ZA44", "ZA45", "ZA46", "ZA47", "ZA48");
+        return ImmutableList.of("PATNR", "DATUM", "BEFTYP", "GEBNR", "HKPNR", "ZA18", "ZA17", "ZA16", "ZA15", "ZA14",
+                "ZA13", "ZA12", "ZA11", "ZA21", "ZA22", "ZA23", "ZA24", "ZA25", "ZA26", "ZA27", "ZA28", "ZA38", "ZA37"
+                , "ZA36", "ZA35", "ZA34", "ZA33", "ZA32", "ZA31", "ZA41", "ZA42", "ZA43", "ZA44", "ZA45", "ZA46",
+                "ZA47", "ZA48");
     }
 
     @Override
@@ -83,17 +81,14 @@ public class BefundDbfHkp implements DampsoftFile {
         ret.add(new DbColumn("date", "text"));
         ret.add(new DbColumn("billingcode", "text"));
         ret.add(new DbColumn("hkp_index", "text"));
-        ret.addAll(Toothnumbers.ALL.stream()
-                .map(toothnumber -> new DbColumn(
-                        String.format("status_%s", toothnumber),
-                        "text"))
-                .collect(Collectors.toList()));
+        ret.addAll(Toothnumbers.ALL.stream().map(toothnumber -> new DbColumn(String.format("status_%s", toothnumber),
+                "text")).toList());
         return ret;
     }
 
     @Override
     public boolean isValidRow(DbRow dbRow) {
-        return dbRow.cells().size() != 0 && isValidDate(dbRow.value("date"));
+        return !dbRow.cells().isEmpty() && isValidDate(dbRow.value("date"));
     }
 
     private boolean isHkpEvidence(DbfRow dbfRow) {
