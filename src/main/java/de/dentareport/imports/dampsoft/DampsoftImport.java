@@ -2,6 +2,7 @@ package de.dentareport.imports.dampsoft;
 
 import de.dentareport.Config;
 //import de.dentareport.gui.ProgressUpdate;
+import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.imports.dampsoft.dampsoft_files.DampsoftFile;
 import de.dentareport.utils.db.DbRow;
 import de.dentareport.utils.dbf.Dbf;
@@ -18,6 +19,8 @@ public class DampsoftImport {
 
     private Dbf dbf;
     private DampsoftFile dampsoftFile;
+    private int totalRows;
+    private int processedRows;
 
     public DampsoftImport(DampsoftFile dampsoftFile,
                           Dbf dbf) {
@@ -29,22 +32,23 @@ public class DampsoftImport {
         this(dampsoftFile, new Dbf());
     }
 
-    public void importFile() {
-        executeImport(true);
+    public void importFile(FileProgressListener listener) {
+        executeImport(true, listener);
     }
 
     public void importFileWithoutRebuildingTable() {
-        executeImport(false);
+        // TODO Fix this
+//        executeImport(false);
     }
 
     public void rebuildTable() {
         db().rebuildTable(dampsoftFile.tablename(), dampsoftFile.columnsToWrite());
     }
 
-    public void importData() {
+    public void importData(FileProgressListener listener) {
         int countImportedRows;
         do {
-            countImportedRows = importChunkOfRows();
+            countImportedRows = importChunkOfRows(listener);
         } while (dbfHasMoreRows(countImportedRows));
     }
 
@@ -52,13 +56,15 @@ public class DampsoftImport {
         dbf.close();
     }
 
-    private void executeImport(Boolean rebuildTable) {
+    private void executeImport(Boolean rebuildTable, FileProgressListener listener) {
         openDbf();
+        totalRows = dbf.rowCount();
+        processedRows = 0;
 //        ProgressUpdate.init(dbf.rowCount(), dampsoftFile.progressMessage());
         if (rebuildTable) {
             rebuildTable();
         }
-        importData();
+        importData(listener);
         closeConnections();
     }
 
@@ -66,8 +72,16 @@ public class DampsoftImport {
         dbf.open(Config.importPath() + dampsoftFile.filename(), dampsoftFile.columnsToImport());
     }
 
-    private int importChunkOfRows() {
+    private int importChunkOfRows(FileProgressListener listener) {
         List<DbfRow> dbfRows = dbf.chunkOfRows();
+        processedRows += dbfRows.size();
+
+        int percent = totalRows == 0
+                ? 100
+                : processedRows * 100 / totalRows;
+
+        listener.onProgress(percent,
+                dampsoftFile.progressMessage());
         writeValidRowsToDb(dbfRows);
         return dbfRows.size();
     }

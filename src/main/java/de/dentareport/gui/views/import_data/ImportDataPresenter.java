@@ -58,15 +58,23 @@ public class ImportDataPresenter {
                     @Override
                     protected Void doInBackground() {
                         Dampsoft dampsoft = new Dampsoft();
-                        dampsoft.importData((percent, message) -> publish(new ProgressUpdate(percent, message)));
+                        dampsoft.importData(
+                                (percent, message) -> publish(new ProgressUpdate(percent, message, false)),
+                                (percent, message) -> publish(new ProgressUpdate(percent, message, true))
+                        );
                         return null;
                     }
 
                     @Override
                     protected void process(List<ProgressUpdate> chunks) {
                         ProgressUpdate last = chunks.getLast();
-                        view.setOverallProgress(last.percent());
-                        view.setOverallProgressText(last.message());
+                        if (last.fileProgress()) {
+                            view.setFileProgress(last.percent());
+                            view.setFileProgressText(last.message());
+                        } else {
+                            view.setOverallProgress(last.percent());
+                            view.setOverallProgressText(last.message());
+                        }
                     }
 
                     @Override

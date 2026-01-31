@@ -2,6 +2,7 @@ package de.dentareport.imports.dampsoft;
 
 //import de.dentareport.gui.ProgressUpdate;
 
+import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.gui.util.ProgressListener;
 import de.dentareport.imports.dampsoft.dampsoft_files.*;
 import de.dentareport.utils.Keys;
@@ -53,13 +54,13 @@ public class Dampsoft {
                 .collect(Collectors.toList());
     }
 
-    public void importData(ProgressListener listener) {
+    public void importData(ProgressListener listener, FileProgressListener fileListener) {
         int total = files.size();
         int count = 1;
         for (DampsoftFile dampsoftFile : files) {
             int percent = count * 10;
             listener.onProgress(percent, String.format(Keys.GUI_TEXT_STEP_X_OF_Y, count++, total));
-            dampsoftFile.importFile();
+            dampsoftFile.importFile(fileListener);
         }
 
     }
