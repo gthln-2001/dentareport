@@ -21,6 +21,10 @@ public class FlatLafInitializer implements LookAndFeelInitializer {
         UIManager.put("Button.hoverBackground", new Color(37, 99, 235));
         UIManager.put("Button.pressedBackground", new Color(29, 78, 216));
 
+        UIManager.put("ProgressBar.foreground", new Color(59, 92, 162));
+        UIManager.put("ProgressBar.selectionForeground", Color.WHITE);
+        UIManager.put("ProgressBar.selectionBackground", Color.WHITE);
+
         FlatLightLaf.setup();
     }
 }

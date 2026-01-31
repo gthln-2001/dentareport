@@ -1,12 +1,10 @@
 package de.dentareport.gui.views.import_data;
 
 import de.dentareport.Metadata;
-import de.dentareport.evaluations.office.Office;
 import de.dentareport.gui.app.UiController;
 import de.dentareport.gui.navigation.ViewId;
 import de.dentareport.gui.progress.ProgressUpdate;
 import de.dentareport.imports.dampsoft.Dampsoft;
-import de.dentareport.repositories.ValidCasesRepository;
 import de.dentareport.utils.Keys;
 import de.dentareport.utils.string.DateStringUtils;
 
@@ -35,45 +33,7 @@ public class ImportDataPresenter {
     public void onStartDataImport() {
         Metadata.delete(Keys.METADATA_KEY_VALID_IMPORT);
 
-        SwingWorker<Void, ProgressUpdate> worker =
-                new SwingWorker<>() {
-
-                    @Override
-                    protected Void doInBackground() {
-
-                        Dampsoft dampsoft = new Dampsoft();
-
-                        dampsoft.importData((percent, message) -> {
-                            publish(new ProgressUpdate(percent, message));
-                        });
-
-                        return null;
-                    }
-
-                    @Override
-                    protected void process(List<ProgressUpdate> chunks) {
-
-                        ProgressUpdate last = chunks.get(chunks.size() - 1);
-
-                        view.setProgress(last.percent());
-                        view.setProgressText(last.message());
-                    }
-
-                    @Override
-                    protected void done() {
-                        view.setProgress(100);
-                        view.setProgressText("Done");
-                        Metadata.set(Keys.METADATA_KEY_VALID_IMPORT,
-                                DateStringUtils.now());
-                    }
-                };
-
-        worker.execute();
-
-
-//        ProgressUpdate.setTask(this);
-//        Dampsoft dampsoft = new Dampsoft();
-//        dampsoft.importData();
+        importData();
 
 //        ValidCasesRepository validCasesRepository = new ValidCasesRepository();
 //        validCasesRepository.identifyValidCases();
@@ -83,13 +43,42 @@ public class ImportDataPresenter {
 
 //        updateMessage(Keys.GUI_TEXT_DONE);
 //        ProgressUpdate.finished();
-        Metadata.set(Keys.METADATA_KEY_VALID_IMPORT, DateStringUtils.now());
+
+//        Metadata.set(Keys.METADATA_KEY_VALID_IMPORT, DateStringUtils.now());
     }
 
     public void setView(ImportDataView view) {
         this.view = view;
     }
 
+    private void importData() {
+        SwingWorker<Void, ProgressUpdate> worker =
+                new SwingWorker<>() {
 
+                    @Override
+                    protected Void doInBackground() {
+                        Dampsoft dampsoft = new Dampsoft();
+                        dampsoft.importData((percent, message) -> publish(new ProgressUpdate(percent, message)));
+                        return null;
+                    }
+
+                    @Override
+                    protected void process(List<ProgressUpdate> chunks) {
+                        ProgressUpdate last = chunks.getLast();
+                        view.setOverallProgress(last.percent());
+                        view.setOverallProgressText(last.message());
+                    }
+
+                    @Override
+                    protected void done() {
+                        view.setOverallProgress(100);
+                        view.setOverallProgressText(Keys.GUI_TEXT_DONE);
+                        Metadata.set(Keys.METADATA_KEY_VALID_IMPORT,
+                                DateStringUtils.now());
+                    }
+                };
+
+        worker.execute();
+    }
 }
 

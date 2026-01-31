@@ -1,11 +1,11 @@
 package de.dentareport.imports.dampsoft;
 
 //import de.dentareport.gui.ProgressUpdate;
+
 import de.dentareport.gui.util.ProgressListener;
 import de.dentareport.imports.dampsoft.dampsoft_files.*;
 import de.dentareport.utils.Keys;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,18 +25,18 @@ public class Dampsoft {
 
     private static List<DampsoftFile> filesToImport() {
         List<DampsoftFile> ret = new ArrayList<>();
-//        ret.add(new PatkuerzDbf());
-//        ret.add(new BefundDbf01());
+        ret.add(new PatkuerzDbf());
+        ret.add(new BefundDbf01());
         ret.add(new BefundDbfPa());
-//        ret.add(new HkpplanDbf());
-//        ret.add(new BefundDbfHkp());
-//        ret.add(new PatinfoDbf());
-//        ret.add(new HkplstDbf());
-//        ret.add(new FirstAndLastVisit());
-//        ret.add(new PatientDbf());
-//        ret.add(new ZnotizDbf());
-//        ret.add(new EndostmpDbf());
-        // ret.add(new PatviewDbf()); // We do not need this file right now, maybe later if we want to work with xrays...
+        ret.add(new HkpplanDbf());
+        ret.add(new BefundDbfHkp());
+        ret.add(new PatinfoDbf());
+        ret.add(new HkplstDbf());
+        ret.add(new FirstAndLastVisit());
+        ret.add(new PatientDbf());
+        ret.add(new ZnotizDbf());
+        ret.add(new EndostmpDbf());
+//        ret.add(new PatviewDbf()); // We do not need this file right now, maybe later if we want to work with xrays...
         return ret;
     }
 
@@ -54,22 +54,14 @@ public class Dampsoft {
     }
 
     public void importData(ProgressListener listener) {
-        for (int i = 0; i < 10; i++) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return;
-            }
-            int percent = i * 10;
-            listener.onProgress(percent, "Step " + i + " of 10");
+        int total = files.size();
+        int count = 1;
+        for (DampsoftFile dampsoftFile : files) {
+            int percent = count * 10;
+            listener.onProgress(percent, String.format(Keys.GUI_TEXT_STEP_X_OF_Y, count++, total));
+            dampsoftFile.importFile();
         }
-        System.out.println("Done");
-//        int total = files.size();
-//        int count = 1;
-//        for (DampsoftFile dampsoftFile : files) {
-////            ProgressUpdate.setTextPrefix(String.format(Keys.GUI_TEXT_STEP_X_OF_Y, count++, total));
-//            dampsoftFile.importFile();
-//        }
+
     }
 
     public List<String> requiredFiles() {

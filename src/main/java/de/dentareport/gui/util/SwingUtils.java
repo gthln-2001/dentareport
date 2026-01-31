@@ -82,6 +82,18 @@ public class SwingUtils {
 
     }
 
+    public static JProgressBar progressBar() {
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        Dimension size = new Dimension(400, 28);
+        progressBar.setPreferredSize(size);
+        progressBar.setMaximumSize(size);
+        progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        progressBar.setStringPainted(true);
+
+        return progressBar;
+    }
+
     public static JPanel text(String text) {
         JPanel textWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
         textWrapper.add(new JLabel("<html>" + text.replace("\n", "<br>") + "</html>"));

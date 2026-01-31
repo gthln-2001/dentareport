@@ -11,7 +11,8 @@ import static de.dentareport.utils.Keys.*;
 public class ImportDataView extends JPanel {
 
     private final ImportDataPresenter presenter;
-    private JProgressBar progressBar;
+    private JProgressBar overallProgressBar;
+    private JProgressBar fileProgressBar;
 
     public ImportDataView(ImportDataPresenter presenter) {
         this.presenter = presenter;
@@ -49,20 +50,33 @@ public class ImportDataView extends JPanel {
 
         contentPanel.add(buttonPanel);
 
-        progressBar = new JProgressBar(0, 100);
-        progressBar.setStringPainted(true);
+        contentPanel.add(Box.createVerticalStrut(80));
 
-        contentPanel.add(progressBar);
+        overallProgressBar = progressBar();
+        contentPanel.add(overallProgressBar);
+
+        contentPanel.add(Box.createVerticalStrut(40));
+
+        fileProgressBar = progressBar();
+        contentPanel.add(fileProgressBar);
 
         add(contentPanel, BorderLayout.CENTER);
     }
 
-    public void setProgress(int value) {
-        progressBar.setValue(value);
+    public void setOverallProgress(int value) {
+        overallProgressBar.setValue(value);
     }
 
-    public void setProgressText(String text) {
-        progressBar.setString(text);
+    public void setOverallProgressText(String text) {
+        overallProgressBar.setString(text);
+    }
+
+    public void setFileProgress(int value) {
+        fileProgressBar.setValue(value);
+    }
+
+    public void setFileProgressText(String text) {
+        fileProgressBar.setString(text);
     }
 
     void addMenu() {
