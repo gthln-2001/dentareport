@@ -3,6 +3,7 @@ package de.dentareport.imports.dampsoft.dampsoft_files;
 import com.google.common.collect.ImmutableList;
 import de.dentareport.Config;
 //import de.dentareport.gui.ProgressUpdate;
+import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.imports.dampsoft.convert.DateConvert;
 import de.dentareport.utils.Keys;
 import de.dentareport.utils.dbf.Dbf;
@@ -44,7 +45,8 @@ public class HkpplanDbf implements DampsoftFile {
     }
 
     @Override
-    public void importFile() {
+    public void importFile(FileProgressListener listener) {
+        // TODO: Fix Progress
         openDbf();
 //        ProgressUpdate.init(dbf.rowCount(), Keys.GUI_TEXT_PREPARE_HKP);
         List<DbfRow> dbfRows;

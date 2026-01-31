@@ -1,6 +1,7 @@
 package de.dentareport.imports.dampsoft.dampsoft_files;
 
 import de.dentareport.Config;
+import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.utils.db.DbColumn;
 import de.dentareport.utils.db.DbRow;
 import de.dentareport.utils.dbf.DbfRow;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public interface DampsoftFile {
 
-    void importFile();
+    void importFile(FileProgressListener listener);
 
     default Boolean isMissing() {
         File file = new File(Config.importPath() + filename());

@@ -1,6 +1,7 @@
 package de.dentareport.imports.dampsoft.dampsoft_files;
 
 //import de.dentareport.gui.ProgressUpdate;
+import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.utils.Keys;
 
 import java.util.HashMap;
@@ -34,7 +35,8 @@ public class FirstAndLastVisit implements DampsoftFile {
     }
 
     @Override
-    public void importFile() {
+    public void importFile(FileProgressListener listener) {
+        // TODO: FIX progress
 //        ProgressUpdate.init(2, Keys.GUI_TEXT_IMPORTING_FIRST_AND_LAST_VISIT);
         updateVisitsAnd01(db().firstAndLastVisits("evidences_01"));
 //        ProgressUpdate.tick();

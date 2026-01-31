@@ -3,6 +3,7 @@ package de.dentareport.imports.dampsoft.dampsoft_files;
 import com.google.common.collect.ImmutableList;
 import de.dentareport.Config;
 //import de.dentareport.gui.ProgressUpdate;
+import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.utils.Keys;
 import de.dentareport.utils.dbf.Dbf;
 import de.dentareport.utils.dbf.DbfRow;
@@ -37,7 +38,8 @@ public class PatkuerzDbf implements DampsoftFile {
     }
 
     @Override
-    public void importFile() {
+    public void importFile(FileProgressListener listener) {
+        // TODO: Fix Progress
         openDbf();
 //        ProgressUpdate.init(dbf.rowCount(), Keys.GUI_TEXT_IMPORTING_PATKUERZ);
         List<DbfRow> dbfRows;

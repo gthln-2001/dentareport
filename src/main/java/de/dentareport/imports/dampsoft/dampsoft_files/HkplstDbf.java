@@ -1,6 +1,7 @@
 package de.dentareport.imports.dampsoft.dampsoft_files;
 
 import com.google.common.collect.ImmutableList;
+import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.imports.dampsoft.DampsoftImport;
 import de.dentareport.imports.dampsoft.convert.QuantityConvert;
 import de.dentareport.imports.dampsoft.convert.SurfacesConvert;
@@ -36,7 +37,7 @@ public class HkplstDbf implements DampsoftFile {
     }
 
     @Override
-    public void importFile() {
+    public void importFile(FileProgressListener listener) {
         dampsoftImport.importFileWithoutRebuildingTable();
     }
 

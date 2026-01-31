@@ -1,6 +1,7 @@
 package de.dentareport.imports.dampsoft.dampsoft_files;
 
 import com.google.common.collect.ImmutableList;
+import de.dentareport.gui.util.FileProgressListener;
 import de.dentareport.imports.dampsoft.DampsoftImport;
 import de.dentareport.imports.dampsoft.convert.DateConvert;
 import de.dentareport.imports.dampsoft.convert.GenderConvert;
@@ -27,8 +28,8 @@ public class PatientDbf implements DampsoftFile {
     }
 
     @Override
-    public void importFile() {
-        dampsoftImport.importFile();
+    public void importFile(FileProgressListener listener) {
+        dampsoftImport.importFile(listener);
     }
 
     @Override
