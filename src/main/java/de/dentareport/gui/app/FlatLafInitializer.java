@@ -19,18 +19,22 @@ public class FlatLafInitializer implements LookAndFeelInitializer {
     public static final Color GREY_VERY_LIGHT = new Color(240, 240, 240);
     public static final Color WHITE = new Color(255, 255, 255);
 
-    private static void buttons() {
+    private static void button() {
         UIManager.put("Button.background", BLUE_DARK);
         UIManager.put("Button.foreground", WHITE);
         UIManager.put("Button.hoverBackground", BLUE_LIGHT);
         UIManager.put("Button.pressedBackground", BLUE_MEDIUM);
     }
 
-    private static void panels() {
+    private static void optionPane() {
+        UIManager.put("OptionPane.background", WHITE);
+    }
+
+    private static void panel() {
         UIManager.put("Panel.background", WHITE);
     }
 
-    private static void progressBars() {
+    private static void progressBar() {
         UIManager.put("ProgressBar.foreground", BLUE_DARK);
         UIManager.put("ProgressBar.selectionForeground", Color.WHITE);
         UIManager.put("ProgressBar.selectionBackground", Color.WHITE);
@@ -46,9 +50,10 @@ public class FlatLafInitializer implements LookAndFeelInitializer {
 
     @Override
     public void setup() {
-        buttons();
-        panels();
-        progressBars();
+        button();
+        optionPane();
+        panel();
+        progressBar();
         table();
 
         FlatLightLaf.setup();
