@@ -1,6 +1,7 @@
 package de.dentareport.gui.util;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Objects;
@@ -92,6 +93,14 @@ public class SwingUtils {
         progressBar.setStringPainted(true);
 
         return progressBar;
+    }
+
+    public static JTable table(AbstractTableModel tableModel) {
+        JTable table = new JTable(tableModel);
+        table.setFillsViewportHeight(true);
+        table.setRowHeight(24);
+
+        return table;
     }
 
     public static JPanel text(String text) {

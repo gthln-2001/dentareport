@@ -1,12 +1,12 @@
 package de.dentareport.gui.views.general_patient_information;
 
+import de.dentareport.gui.table_models.GeneralPatientInformationAverages;
+
 import javax.swing.*;
 import java.awt.*;
 
 import static de.dentareport.gui.util.SwingUtils.*;
-import static de.dentareport.gui.util.SwingUtils.button;
 import static de.dentareport.utils.Keys.*;
-import static de.dentareport.utils.Keys.GUI_TEXT_QUIT;
 
 // TODO: Test?
 
@@ -19,15 +19,31 @@ public class GeneralPatientInformationView extends JPanel {
         this.presenter = presenter;
         setLayout(createBorderLayout());
         addTitle();
-
+        addContent();
         addMenu();
     }
 
-    void addTitle() {
+    private void addTitle() {
         add(title(GUI_TEXT_GENERAL_PATIENT_INFORMATION), BorderLayout.NORTH);
     }
 
-    void addMenu() {
+    private void addContent() {
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        contentPanel.add(generalPatientInformationAverages(), BorderLayout.CENTER);
+
+        add(contentPanel, BorderLayout.CENTER);
+    }
+
+    private JScrollPane generalPatientInformationAverages() {
+        GeneralPatientInformationAverages tableModel = presenter.getGeneralPatientInformationAverages();
+
+        return new JScrollPane(table(tableModel));
+    }
+
+    private void addMenu() {
         JPanel menuPanel = new JPanel(new BorderLayout());
 
         JButton buttonBack = button(GUI_TEXT_BACK, "exit", e -> presenter.onBack());

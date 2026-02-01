@@ -215,7 +215,7 @@ public class Keys {
     public static final String GUI_TEXT_GENERAL_INFORMATION = "Allgemeine Informationen";
     public static final String GUI_TEXT_GENERAL_INFORMATION_FILLINGS = "Allgemeine Informationen über die Fälle mit plastischen Füllungen\n(%s - %s)";
     public static final String GUI_TEXT_GENERAL_INFORMATION_TELESCOPIC_CROWNS = "Allgemeine Informationen über die Fälle mit Teleskopkronen\n(%s - %s)";
-    public static final String GUI_TEXT_GENERAL_PATIENT_INFORMATION = "allgemeine Informationen über die Patienten Ihrer Praxis";
+    public static final String GUI_TEXT_GENERAL_PATIENT_INFORMATION = "Allgemeine Informationen über die Patienten Ihrer Praxis";
     public static final String GUI_TEXT_GROUPED_BY = "gruppiert nach";
     public static final String GUI_TEXT_HEADING_START_PANE_1 = "Die praxisindividuelle Ereignisanalyse\nfür Ihr Qualitätsmanagement";
     public static final String GUI_TEXT_HEADING_START_PANE_2 = "Ihre Routinedaten aus den Programmen\nDampsoft und CGM Z1";
