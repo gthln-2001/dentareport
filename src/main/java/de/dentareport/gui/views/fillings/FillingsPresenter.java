@@ -21,4 +21,14 @@ public class FillingsPresenter {
     public void onExitRequested() {
         uiController.confirmExit();
     }
+
+    public void onGeneralInformationFillings() {
+    }
+
+    public void onProbabilitiesFillings() {
+    }
+
+    public void onStartNewEvaluationFillings() {
+
+    }
 }

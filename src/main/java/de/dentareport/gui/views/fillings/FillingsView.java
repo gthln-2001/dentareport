@@ -1,13 +1,10 @@
 package de.dentareport.gui.views.fillings;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 import static de.dentareport.gui.util.SwingUtils.*;
-import static de.dentareport.gui.util.SwingUtils.button;
 import static de.dentareport.utils.Keys.*;
-import static de.dentareport.utils.Keys.GUI_TEXT_QUIT;
 
 // TODO: Test?
 
@@ -15,20 +12,76 @@ import static de.dentareport.utils.Keys.GUI_TEXT_QUIT;
 public class FillingsView extends JPanel {
 
     private final FillingsPresenter presenter;
+    private JButton buttonGeneralInformationFillings;
+    private JButton buttonProbabilitiesFillings;
+    private JButton buttonStartNewEvaluationFillings;
 
     public FillingsView(FillingsPresenter presenter) {
         this.presenter = presenter;
         setLayout(createBorderLayout());
         addTitle();
-
+        addContent();
         addMenu();
     }
 
-    void addTitle() {
+    private void addTitle() {
         add(title(GUI_TEXT_FILLINGS), BorderLayout.NORTH);
     }
 
-    void addMenu() {
+    private void addContent() {
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        contentPanel.add(Box.createVerticalStrut(80));
+        addButtons(contentPanel);
+        addProgressBar(contentPanel);
+        add(contentPanel, BorderLayout.CENTER);
+    }
+
+    private void addProgressBar(JPanel contentPanel) {
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        Dimension size = new Dimension(400, 28);
+        progressBar.setPreferredSize(size);
+        progressBar.setMaximumSize(size);
+        progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        progressBar.setStringPainted(true);
+
+        contentPanel.add(progressBar);
+    }
+
+    private void addButtons(JPanel contentPanel) {
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
+
+        buttonGeneralInformationFillings = buttonLarge(GUI_TEXT_GENERAL_INFORMATION,
+                "general_information_telescopic_crowns", e -> presenter.onGeneralInformationFillings());
+        buttonGeneralInformationFillings.setAlignmentX(CENTER_ALIGNMENT);
+        buttons.add(buttonGeneralInformationFillings);
+        buttons.add(Box.createVerticalStrut(40));
+
+        buttonProbabilitiesFillings = buttonLarge(GUI_TEXT_PROBABILITIES,
+                "general_information_telescopic_crowns", e -> presenter.onProbabilitiesFillings());
+        buttonProbabilitiesFillings.setAlignmentX(CENTER_ALIGNMENT);
+        buttons.add(buttonProbabilitiesFillings);
+        buttons.add(Box.createVerticalStrut(120));
+
+        buttonStartNewEvaluationFillings = buttonLarge(GUI_TEXT_START_NEW_EVALUATION,
+                "start_new_evaluation_telescopic_crowns", e -> presenter.onStartNewEvaluationFillings());
+        buttonStartNewEvaluationFillings.setAlignmentX(CENTER_ALIGNMENT);
+        buttons.add(buttonStartNewEvaluationFillings);
+
+        // TODO: implement cancel evaluation (?)
+//        JButton buttonCancelDataImport = buttonLargeMuted(GUI_TEXT_CANCEL_DATA_IMPORT, "cancel_data_import",
+//                e -> presenter.onBack());
+//        buttonCancelDataImport.setAlignmentX(CENTER_ALIGNMENT);
+//        buttonPanel.add(buttonCancelDataImport);
+
+        buttons.setMaximumSize(buttons.getPreferredSize());
+        contentPanel.add(buttons);
+        contentPanel.add(Box.createVerticalStrut(40));
+    }
+
+    private void addMenu() {
         JPanel menuPanel = new JPanel(new BorderLayout());
 
         JButton buttonBack = button(GUI_TEXT_BACK, "exit", e -> presenter.onBack());

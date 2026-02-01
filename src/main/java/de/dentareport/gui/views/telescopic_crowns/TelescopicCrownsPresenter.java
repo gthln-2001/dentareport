@@ -21,4 +21,14 @@ public class TelescopicCrownsPresenter {
     public void onExitRequested() {
         uiController.confirmExit();
     }
+
+    public void onGeneralInformationTelescopicCrowns() {
+        
+    }
+
+    public void onProbabilitiesTelescopicCrowns() {
+    }
+
+    public void onStartNewEvaluationTelescopicCrowns() {
+    }
 }
