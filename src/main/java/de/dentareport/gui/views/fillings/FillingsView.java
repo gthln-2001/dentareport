@@ -1,5 +1,8 @@
 package de.dentareport.gui.views.fillings;
 
+import de.dentareport.Metadata;
+import de.dentareport.utils.Keys;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -76,9 +79,18 @@ public class FillingsView extends JPanel {
 //        buttonCancelDataImport.setAlignmentX(CENTER_ALIGNMENT);
 //        buttonPanel.add(buttonCancelDataImport);
 
+        if (!validEvaluationExists()) {
+            buttonGeneralInformationFillings.setEnabled(false);
+            buttonProbabilitiesFillings.setEnabled(false);
+        }
+
         buttons.setMaximumSize(buttons.getPreferredSize());
         contentPanel.add(buttons);
         contentPanel.add(Box.createVerticalStrut(40));
+    }
+
+    private boolean validEvaluationExists() {
+        return Metadata.has(Keys.METADATA_KEY_VALID_EVALUATION_FILLING);
     }
 
     private void addMenu() {

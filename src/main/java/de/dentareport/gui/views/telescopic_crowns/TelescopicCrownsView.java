@@ -1,7 +1,6 @@
 package de.dentareport.gui.views.telescopic_crowns;
 
-import de.dentareport.gui.util.SwingUtils;
-import de.dentareport.utils.Keys;
+import de.dentareport.Metadata;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,10 +78,18 @@ public class TelescopicCrownsView extends JPanel {
 //                e -> presenter.onBack());
 //        buttonCancelDataImport.setAlignmentX(CENTER_ALIGNMENT);
 //        buttonPanel.add(buttonCancelDataImport);
+        if (!validEvaluationExists()) {
+            buttonGeneralInformationTelescopicCrowns.setEnabled(false);
+            buttonProbabilitiesTelescopicCrowns.setEnabled(false);
+        }
 
         buttons.setMaximumSize(buttons.getPreferredSize());
         contentPanel.add(buttons);
         contentPanel.add(Box.createVerticalStrut(40));
+    }
+
+    private boolean validEvaluationExists() {
+        return Metadata.has(METADATA_KEY_VALID_EVALUATION_TELESCOPIC_CROWN);
     }
 
     private void addMenu() {
