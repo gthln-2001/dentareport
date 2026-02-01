@@ -1,9 +1,7 @@
 package de.dentareport.gui.util;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
+import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,6 +10,8 @@ import java.util.Objects;
 // TODO: Test
 // TODO: TEST?
 public class SwingUtils {
+
+    public static final int DEFAULT_TABLE_COLUMN_MARGIN = 10;
 
     public static BorderLayout createBorderLayout() {
         return new BorderLayout(0, 40);
@@ -99,17 +99,72 @@ public class SwingUtils {
     public static JTable table(AbstractTableModel tableModel) {
         JTable table = new JTable(tableModel);
         table.setFillsViewportHeight(true);
-        table.setRowHeight(24);
+        table.setShowHorizontalLines(true);
+        table.setShowVerticalLines(false);
+        table.setIntercellSpacing(new Dimension(0, 1));
         sortTable(table);
+        zebraTable(table);
+        resizeColumnWidths(table);
+
         return table;
     }
 
     private static void sortTable(JTable table) {
-        TableRowSorter<TableModel> sorter =  new TableRowSorter<>(table.getModel());
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(sorter);
         sorter.setSortKeys(List.of(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
         sorter.sort();
     }
+
+    private static void zebraTable(JTable table) {
+        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            private final Color evenRow = UIManager.getColor("Table.alternateRowColor");
+            private final Color oddRow = UIManager.getColor("Table.background");
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                                                           boolean hasFocus, int row, int column) {
+                JLabel c = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
+                        column);
+                if (!isSelected) {
+                    c.setBackground(row % 2 == 0 ? evenRow : oddRow);
+                }
+                c.setHorizontalAlignment(column <= 1 ? LEFT : CENTER);
+
+                return c;
+            }
+        });
+    }
+
+    private static void resizeColumnWidths(JTable table) {
+        final TableColumnModel columnModel = table.getColumnModel();
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = getHeaderWidth(table, column);
+            width = getMaxCellWidth(table, column, width);
+            width += DEFAULT_TABLE_COLUMN_MARGIN;
+            columnModel.getColumn(column).setPreferredWidth(width);
+        }
+    }
+
+    private static int getMaxCellWidth(JTable table, int column, int width) {
+        for (int row = 0; row < table.getRowCount(); row++) {
+            TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
+            Component comp = cellRenderer.getTableCellRendererComponent(table, table.getValueAt(row, column), false,
+                    false, row, column);
+            width = Math.max(width, comp.getPreferredSize().width);
+        }
+        return width;
+    }
+
+    private static int getHeaderWidth(JTable table, int column) {
+        int width;
+        TableCellRenderer headerRenderer = table.getTableHeader().getDefaultRenderer();
+        Component headerComp = headerRenderer.getTableCellRendererComponent(table, table.getColumnName(column), false
+                , false, 0, column);
+        width = headerComp.getPreferredSize().width;
+        return width;
+    }
+
 
     public static JPanel text(String text) {
         JPanel textWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));

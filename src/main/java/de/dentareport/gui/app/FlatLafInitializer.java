@@ -12,18 +12,44 @@ import java.awt.*;
 // TODO: TEST?
 public class FlatLafInitializer implements LookAndFeelInitializer {
 
-    @Override
-    public void setup() {
-        UIManager.put("Panel.background", new Color(255, 255, 255));
+    public static final Color BLUE_DARK = new Color(59, 92, 162);
+    public static final Color BLUE_LIGHT = new Color(37, 99, 235);
+    public static final Color BLUE_VERY_LIGHT = new Color(182, 202, 245);
+    public static final Color BLUE_MEDIUM = new Color(29, 78, 216);
+    public static final Color GREY_VERY_LIGHT = new Color(240, 240, 240);
+    public static final Color WHITE = new Color(255, 255, 255);
 
-        UIManager.put("Button.background", new Color(59, 92, 162));
-        UIManager.put("Button.foreground", Color.WHITE);
-        UIManager.put("Button.hoverBackground", new Color(37, 99, 235));
-        UIManager.put("Button.pressedBackground", new Color(29, 78, 216));
+    private static void buttons() {
+        UIManager.put("Button.background", BLUE_DARK);
+        UIManager.put("Button.foreground", WHITE);
+        UIManager.put("Button.hoverBackground", BLUE_LIGHT);
+        UIManager.put("Button.pressedBackground", BLUE_MEDIUM);
+    }
 
-        UIManager.put("ProgressBar.foreground", new Color(59, 92, 162));
+    private static void panels() {
+        UIManager.put("Panel.background", WHITE);
+    }
+
+    private static void progressBars() {
+        UIManager.put("ProgressBar.foreground", BLUE_DARK);
         UIManager.put("ProgressBar.selectionForeground", Color.WHITE);
         UIManager.put("ProgressBar.selectionBackground", Color.WHITE);
+    }
+
+    private static void table() {
+        UIManager.put("TableHeader.height", 32);
+        UIManager.put("Table.rowHeight", 28);
+        UIManager.put("TableHeader.background", BLUE_VERY_LIGHT);
+        UIManager.put("Table.alternateRowColor", GREY_VERY_LIGHT);
+        UIManager.put("Table.background", WHITE);
+    }
+
+    @Override
+    public void setup() {
+        buttons();
+        panels();
+        progressBars();
+        table();
 
         FlatLightLaf.setup();
     }
