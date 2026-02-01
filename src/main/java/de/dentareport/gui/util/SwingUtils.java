@@ -2,11 +2,12 @@ package de.dentareport.gui.util;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Objects;
-
-import static de.dentareport.utils.Keys.GUI_TEXT_COPY_FILES_EXPLANATION;
 
 // TODO: Test
 // TODO: TEST?
@@ -99,8 +100,15 @@ public class SwingUtils {
         JTable table = new JTable(tableModel);
         table.setFillsViewportHeight(true);
         table.setRowHeight(24);
-
+        sortTable(table);
         return table;
+    }
+
+    private static void sortTable(JTable table) {
+        TableRowSorter<TableModel> sorter =  new TableRowSorter<>(table.getModel());
+        table.setRowSorter(sorter);
+        sorter.setSortKeys(List.of(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
+        sorter.sort();
     }
 
     public static JPanel text(String text) {
