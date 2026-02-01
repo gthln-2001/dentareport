@@ -21,6 +21,8 @@ public class TelescopicCrownsView extends JPanel {
 
     public TelescopicCrownsView(TelescopicCrownsPresenter presenter) {
         this.presenter = presenter;
+        presenter.setView(this);
+
         setLayout(createBorderLayout());
         addTitle();
         addContent();
@@ -107,5 +109,26 @@ public class TelescopicCrownsView extends JPanel {
 
 
         add(menuPanel, BorderLayout.SOUTH);
+    }
+
+    public void setEvaluationProgress(int value) {
+        progressBar.setValue(value);
+    }
+
+    public void setEvaluationProgressText(String text) {
+        progressBar.setString(text);
+    }
+
+    public void startEvaluation() {
+        setEvaluationProgressText(GUI_TEXT_PREPARE_EVALUATION);
+        buttonGeneralInformationTelescopicCrowns.setEnabled(false);
+        buttonProbabilitiesTelescopicCrowns.setEnabled(false);
+        buttonStartNewEvaluationTelescopicCrowns.setEnabled(false);
+    }
+
+    public void evaluationDone() {
+        buttonProbabilitiesTelescopicCrowns.setEnabled(true);
+        buttonGeneralInformationTelescopicCrowns.setEnabled(true);
+        progressBar.setEnabled(false);
     }
 }

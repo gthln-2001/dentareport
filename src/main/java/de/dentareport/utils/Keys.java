@@ -244,6 +244,7 @@ public class Keys {
     public static final String GUI_TEXT_NO_DIRECTORY_SELECTED = "Kein Ordner ausgewählt";
     public static final String GUI_TEXT_OK = "OK";
     public static final String GUI_TEXT_PLEASE_WAIT_FILES_ARE_COPIED = "Bitte warten, Dateien werden kopiert";
+    public static final String GUI_TEXT_PREPARE_EVALUATION = "Auswertung wird vorbereitet";
     public static final String GUI_TEXT_PREPARE_HKP = "Vorbereiten HKP: ";
     public static final String GUI_TEXT_PREVENTION_MEASURES = "Präventionsmaßnahmen";
     public static final String GUI_TEXT_PROBABILITIES = "Ereigniswahrscheinlichkeit";

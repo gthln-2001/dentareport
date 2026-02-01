@@ -6,7 +6,7 @@ import de.dentareport.evaluations.meta.dependencies.AvailableDependencies;
 import de.dentareport.evaluations.meta.dependencies.Dependency;
 import de.dentareport.evaluations.meta.events.AvailableEvents;
 import de.dentareport.groups.Groups;
-//import de.dentareport.gui.ProgressUpdate;
+import de.dentareport.gui.util.ProgressListener;
 import de.dentareport.models.CaseData;
 import de.dentareport.models.Column;
 import de.dentareport.models.EventInterface;
@@ -85,12 +85,18 @@ public abstract class Evaluation {
 
     public abstract Set<String> requiredBillingPositionsForEventsOfInterest(Map<String, String> options);
 
-    public void evaluate() {
+    public void evaluate(ProgressListener listener) {
         List<DbRow> dbRows = new ArrayList<>();
-//        ProgressUpdate.init(countValidCases(evaluationType()));
-        validCasesRepository.validCases(evaluationType())
-                            .forEach((patientIndex, teeth) -> dbRows.addAll(evaluatePatient(patientIndex, teeth)));
-//        ProgressUpdate.updateMessage(Keys.GUI_TEXT_FINISHING_EVALUATION);
+        Integer totalValidCases = countValidCases(evaluationType());
+        int count = 0;
+        for (Map.Entry<String, List<String>> entry : validCasesRepository.validCases(evaluationType()).entrySet()) {
+            String patientIndex = entry.getKey();
+            List<String> teeth = entry.getValue();
+            dbRows.addAll(evaluatePatient(patientIndex, teeth, listener, totalValidCases, count));
+            count += teeth.size();
+        }
+
+        listener.onProgress(100, Keys.GUI_TEXT_FINISHING_EVALUATION);
         writeDataToDb(dbRows);
         documentation.document();
         groups.group();
@@ -112,8 +118,8 @@ public abstract class Evaluation {
 
     public List<XlsColumn> xlsColumnsInEvaluation() {
         return xlsColumns().stream()
-                           .filter(XlsColumn::isInEvaluation)
-                           .collect(Collectors.toList());
+                .filter(XlsColumn::isInEvaluation)
+                .collect(Collectors.toList());
     }
 
     public String evaluationType() {
@@ -154,14 +160,14 @@ public abstract class Evaluation {
 
     private Set<String> groupColumnsFromAvailableDependencies() {
         return availableDependencies.dependencies().stream()
-                                    .map(Dependency::groupColumn)
-                                    .collect(Collectors.toSet());
+                .map(Dependency::groupColumn)
+                .collect(Collectors.toSet());
     }
 
     private Set<String> orderColumnsFromAvailableDependencies() {
         return availableDependencies.dependencies().stream()
-                                    .map(Dependency::orderColumn)
-                                    .collect(Collectors.toSet());
+                .map(Dependency::orderColumn)
+                .collect(Collectors.toSet());
     }
 
     private Set<String> columnsFromAvailableEvents() {
@@ -181,8 +187,10 @@ public abstract class Evaluation {
         return ret;
     }
 
-    private List<DbRow> evaluatePatient(String patientIndex, List<String> teeth) {
-        return patientEvaluation.evaluate(this, RawData.instance(this, patientIndex, teeth), teeth);
+    private List<DbRow> evaluatePatient(String patientIndex, List<String> teeth, ProgressListener listener,
+                                        Integer totalValidCases, int count) {
+        return patientEvaluation.evaluate(this, RawData.instance(this, patientIndex, teeth), teeth, listener,
+                totalValidCases, count);
     }
 
     private void writeDataToDb(List<DbRow> dbRows) {

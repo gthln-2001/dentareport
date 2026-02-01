@@ -18,9 +18,12 @@ public class FillingsView extends JPanel {
     private JButton buttonGeneralInformationFillings;
     private JButton buttonProbabilitiesFillings;
     private JButton buttonStartNewEvaluationFillings;
+    private JProgressBar progressBar;
 
     public FillingsView(FillingsPresenter presenter) {
         this.presenter = presenter;
+        presenter.setView(this);
+
         setLayout(createBorderLayout());
         addTitle();
         addContent();
@@ -42,7 +45,7 @@ public class FillingsView extends JPanel {
     }
 
     private void addProgressBar(JPanel contentPanel) {
-        JProgressBar progressBar = new JProgressBar(0, 100);
+        progressBar = new JProgressBar(0, 100);
         Dimension size = new Dimension(400, 28);
         progressBar.setPreferredSize(size);
         progressBar.setMaximumSize(size);
@@ -110,5 +113,25 @@ public class FillingsView extends JPanel {
         add(menuPanel, BorderLayout.SOUTH);
     }
 
+    public void setEvaluationProgress(int value) {
+        progressBar.setValue(value);
+    }
 
+    public void setEvaluationProgressText(String text) {
+        progressBar.setString(text);
+    }
+
+
+    public void startEvaluation() {
+        setEvaluationProgressText(GUI_TEXT_PREPARE_EVALUATION);
+        buttonGeneralInformationFillings.setEnabled(false);
+        buttonProbabilitiesFillings.setEnabled(false);
+        buttonStartNewEvaluationFillings.setEnabled(false);
+    }
+
+    public void evaluationDone() {
+        buttonProbabilitiesFillings.setEnabled(true);
+        buttonGeneralInformationFillings.setEnabled(true);
+        progressBar.setEnabled(false);
+    }
 }

@@ -17,7 +17,9 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.18.0")
     implementation("org.apache.httpcomponents.client5:httpclient5-fluent:5.3.1")
     implementation("org.apache.poi:poi-ooxml:5.4.0")
-    implementation("org.slf4j:slf4j-simple:2.0.13")
+    implementation("org.apache.logging.log4j:log4j-core:2.24.3")
+    implementation("org.apache.logging.log4j:log4j-api:2.24.3")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.24.3")
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
 
     testImplementation("org.assertj:assertj-core:3.25.3")
@@ -82,10 +84,13 @@ tasks.register("release_skip_tests") {
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 
-    jvmArgs("-javaagent:${configurations.testRuntimeClasspath.get()
-        .files
-        .first { it.name.startsWith("jmockit") }
-        .absolutePath}")
+    jvmArgs(
+        "-javaagent:${
+        configurations.testRuntimeClasspath.get()
+            .files
+            .first { it.name.startsWith("jmockit") }
+            .absolutePath
+    }")
 
     testLogging {
         events("FAILED")

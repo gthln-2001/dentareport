@@ -167,8 +167,8 @@ public class EvaluationTest {
             result = mockRawData1;
             RawData.instance(evaluation, "42", new ArrayList<>(Arrays.asList("33", "44")));
             result = mockRawData2;
-            mockPatientEvaluation.evaluate(evaluation, mockRawData1, testValidCases().get("23"));
-            mockPatientEvaluation.evaluate(evaluation, mockRawData2, testValidCases().get("42"));
+            mockPatientEvaluation.evaluate(evaluation, mockRawData1, testValidCases().get("23"), listener, totalValidCases, count);
+            mockPatientEvaluation.evaluate(evaluation, mockRawData2, testValidCases().get("42"), listener, totalValidCases, count);
         }};
 
         evaluation.evaluate();
@@ -215,11 +215,11 @@ public class EvaluationTest {
         new Expectations() {{
             RawData.instance(evaluation, "23", new ArrayList<>(Arrays.asList("11", "22")));
             result = mockRawData1;
-            mockPatientEvaluation.evaluate(evaluation, mockRawData1, testValidCases().get("23"));
+            mockPatientEvaluation.evaluate(evaluation, mockRawData1, testValidCases().get("23"), listener, totalValidCases, count);
             result = resultsPatient23();
             RawData.instance(evaluation, "42", new ArrayList<>(Arrays.asList("33", "44")));
             result = mockRawData2;
-            mockPatientEvaluation.evaluate(evaluation, mockRawData2, testValidCases().get("42"));
+            mockPatientEvaluation.evaluate(evaluation, mockRawData2, testValidCases().get("42"), listener, totalValidCases, count);
             result = resultsPatient42();
         }};
 
