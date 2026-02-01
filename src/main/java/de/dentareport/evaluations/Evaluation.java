@@ -104,6 +104,7 @@ public abstract class Evaluation {
         documentation.document();
         groups.group();
         log.info("Start export");
+        // TODO: Improve export speed
         export.export();
         log.info("finished export");
     }
