@@ -407,7 +407,7 @@ public class EvaluationTest {
 
         Evaluation evaluation = new Evaluation1234();
 
-        assertThat(evaluation.occuringBillingpositions()).isEqualTo(billingpositions);
+        assertThat(evaluation.occurringBillingpositions()).isEqualTo(billingpositions);
     }
 
     private List<DbRow> resultsPatient23() {

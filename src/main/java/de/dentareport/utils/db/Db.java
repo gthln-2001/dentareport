@@ -7,7 +7,6 @@ import de.dentareport.utils.date.DateRange;
 
 import java.sql.*;
 import java.util.*;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 import static de.dentareport.utils.db.DbConnection.db;
@@ -65,12 +64,44 @@ public class Db {
         activateAutoCommit();
     }
 
-    public void writeRows(String table,
-                          List<DbRow> rows) {
-        deactivateAutoCommit();
-        createRowsInDB(table, rows);
-        activateAutoCommit();
+    public void writeRows(String table, List<DbRow> rows) {
+        if (rows.isEmpty()) return;
+
+        try {
+            dbConnection.setAutoCommit(false);
+            DbRow firstRow = rows.getFirst();
+            String sql = insertStatement(table, firstRow);
+            PreparedStatement statement = dbConnection.prepareStatement(sql);
+
+            int batchSize = 500; // adjust as needed
+            int count = 0;
+
+            for (DbRow row : rows) {
+                fillPreparedStatement(statement, row);
+                statement.addBatch();
+                count++;
+
+                if (count % batchSize == 0) {
+                    statement.executeBatch();
+                    statement.clearBatch();
+                }
+            }
+
+            // execute remaining rows
+            statement.executeBatch();
+            dbConnection.commit();
+
+        } catch (SQLException e) {
+            throw new DentareportSqlException(e);
+        } finally {
+            try {
+                dbConnection.setAutoCommit(true);
+            } catch (SQLException e) {
+                throw new DentareportSqlException(e);
+            }
+        }
     }
+
 
     public void updateRows(String table,
                            List<DbRow> rows) {
@@ -103,8 +134,8 @@ public class Db {
                                                                String conditions) {
         String q = String.format(
                 "SELECT patient_index, MIN(date) as first_visit, MAX(date) as last_visit " +
-                "FROM %s %s " +
-                "GROUP BY patient_index ",
+                        "FROM %s %s " +
+                        "GROUP BY patient_index ",
                 table,
                 !Objects.equals(conditions, "") ? String.format("WHERE %s ", conditions) : ""
         );
@@ -116,9 +147,9 @@ public class Db {
                             String value) {
         try {
             ResultSet rs = query(String.format("SELECT %2$s FROM %1$s WHERE %2$s = '%3$s'",
-                                               tablename,
-                                               column,
-                                               value));
+                    tablename,
+                    column,
+                    value));
             return rs.next();
         } catch (SQLException | DentareportSqlException e) {
             return false;
@@ -204,16 +235,16 @@ public class Db {
     private String tableCreationQuery(String name,
                                       List<DbColumn> columns) {
         return String.format("CREATE TABLE %s (%s)",
-                             name,
-                             String.join(", ", concatenateNamesAndTypes(columns)));
+                name,
+                String.join(", ", concatenateNamesAndTypes(columns)));
     }
 
     private List<String> concatenateNamesAndTypes(List<DbColumn> columns) {
         return columns.stream()
-                      .map(column -> String.format("%s %s",
-                                                   column.name(),
-                                                   column.type()))
-                      .collect(Collectors.toList());
+                .map(column -> String.format("%s %s",
+                        column.name(),
+                        column.type()))
+                .collect(Collectors.toList());
     }
 
     private void dropTable(String name) {
@@ -257,7 +288,7 @@ public class Db {
 
     private void createRowsInDB(String table,
                                 List<DbRow> rows) {
-        if (rows.size() > 0) {
+        if (!rows.isEmpty()) {
             PreparedStatement statement = preparedInsertStatement(table, rows);
             for (DbRow dbRow : rows) {
                 executeCreateRowInDb(statement, dbRow);
@@ -277,15 +308,15 @@ public class Db {
 
     private String insertStatement(String table,
                                    List<DbRow> rows) {
-        return insertStatement(table, rows.get(0));
+        return insertStatement(table, rows.getFirst());
     }
 
     private String insertStatement(String table,
                                    DbRow row) {
         return String.format("INSERT INTO %s (%s) VALUES (%s)",
-                             table,
-                             String.join(", ", row.columnnames()),
-                             fillInsertStatementWithQuestionmarks(row));
+                table,
+                String.join(", ", row.columnnames()),
+                fillInsertStatementWithQuestionmarks(row));
     }
 
     private String fillInsertStatementWithQuestionmarks(DbRow row) {
@@ -318,7 +349,7 @@ public class Db {
 
     private void updateRowsInDB(String table,
                                 List<DbRow> rows) {
-        if (rows.size() > 0) {
+        if (!rows.isEmpty()) {
             PreparedStatement statement = preparedUpdateStatement(table, rows);
             for (DbRow dbRow : rows) {
                 executeUpdateRowInDb(statement, dbRow);
@@ -338,20 +369,20 @@ public class Db {
 
     private String updateStatement(String table,
                                    List<DbRow> rows) {
-        return updateStatement(table, rows.get(0));
+        return updateStatement(table, rows.getFirst());
     }
 
     private String updateStatement(String table,
                                    DbRow row) {
         return String.format("UPDATE %s SET %s WHERE id = ?",
-                             table,
-                             concatenateColumnNamesForUpdateStatement(row));
+                table,
+                concatenateColumnNamesForUpdateStatement(row));
     }
 
     private String concatenateColumnNamesForUpdateStatement(DbRow row) {
         return row.columnnames().stream()
-                  .map(columnName -> columnName + "= ?")
-                  .collect(Collectors.joining(", "));
+                .map(columnName -> columnName + "= ?")
+                .collect(Collectors.joining(", "));
     }
 
     private void executeUpdateRowInDb(PreparedStatement statement,

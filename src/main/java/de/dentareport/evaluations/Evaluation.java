@@ -18,6 +18,8 @@ import de.dentareport.utils.Keys;
 import de.dentareport.utils.db.DbRow;
 import de.dentareport.utils.xls.XlsColumn;
 import de.dentareport.utils.xls.XlsColumnComparerByIndex;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,6 +29,7 @@ import static de.dentareport.utils.db.DbConnection.db;
 // TODO: Refactor! Clean up dependencies, this class is a mess...
 public abstract class Evaluation {
 
+    private static final Logger log = LogManager.getLogger(Evaluation.class);
     private final List<Column> columns;
     private final EvaluationsRepository evaluationsRepository;
     private final PatientEvaluation patientEvaluation;
@@ -100,7 +103,9 @@ public abstract class Evaluation {
         writeDataToDb(dbRows);
         documentation.document();
         groups.group();
+        log.info("Start export");
         export.export();
+        log.info("finished export");
     }
 
     public List<Column> columns() {
@@ -146,7 +151,7 @@ public abstract class Evaluation {
         return documentation.longDoc(columnName);
     }
 
-    public Set<String> occuringBillingpositions() {
+    public Set<String> occurringBillingpositions() {
         return documentation.occuringBillingpositions();
     }
 

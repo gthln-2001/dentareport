@@ -140,7 +140,7 @@ public class Export {
 
     private void addGlossaryBillingcodes(Xls xls) {
         Map<String, String> billingcodes = new HashMap<>();
-        for (String billingposition : evaluation.occuringBillingpositions()) {
+        for (String billingposition : evaluation.occurringBillingpositions()) {
             billingcodes.put(
                     translate.translate(billingposition),
                     Billingcodes.forPositionAsString(billingposition));
