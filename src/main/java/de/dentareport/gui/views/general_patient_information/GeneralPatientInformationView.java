@@ -1,6 +1,7 @@
 package de.dentareport.gui.views.general_patient_information;
 
 import de.dentareport.gui.table_models.GeneralPatientInformationAverages;
+import de.dentareport.gui.table_models.GeneralPatientInformationGroupedByAge;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,12 +34,19 @@ public class GeneralPatientInformationView extends JPanel {
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         contentPanel.add(generalPatientInformationAverages(), BorderLayout.CENTER);
+        contentPanel.add(generalPatientInformationGroupedByAge(), BorderLayout.CENTER);
 
         add(contentPanel, BorderLayout.CENTER);
     }
 
     private JScrollPane generalPatientInformationAverages() {
         GeneralPatientInformationAverages tableModel = presenter.getGeneralPatientInformationAverages();
+
+        return new JScrollPane(table(tableModel));
+    }
+
+    private JScrollPane generalPatientInformationGroupedByAge() {
+        GeneralPatientInformationGroupedByAge tableModel = presenter.getGeneralPatientInformationGroupedByAge();
 
         return new JScrollPane(table(tableModel));
     }

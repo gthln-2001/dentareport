@@ -1,4 +1,7 @@
 package de.dentareport.gui.table_models;
+
+import de.dentareport.utils.Keys;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
@@ -7,10 +10,12 @@ public class GeneralPatientInformationAverages extends AbstractTableModel {
     private final List<TableRowGeneralPatientInformationAverages> tableRowGeneralPatientInformationAverages;
 
     private final String[] columns = {
-            "First Name",
-            "Last Name",
-            "Birth Date",
-            "Insurance"
+            Keys.GUI_TEXT_BLANK,
+            Keys.GUI_TEXT_BLANK,
+            Keys.GUI_TEXT_AVERAGE,
+            Keys.GUI_TEXT_MEDIAN,
+            Keys.GUI_TEXT_MINIMUM,
+            Keys.GUI_TEXT_MAXIMUM
     };
 
     public GeneralPatientInformationAverages(List<TableRowGeneralPatientInformationAverages> tableRowGeneralPatientInformationAverages) {
@@ -34,13 +39,15 @@ public class GeneralPatientInformationAverages extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int row, int column) {
-        TableRowGeneralPatientInformationAverages p = tableRowGeneralPatientInformationAverages.get(row);
+        TableRowGeneralPatientInformationAverages tableRow = tableRowGeneralPatientInformationAverages.get(row);
 
         return switch (column) {
-            case 0 -> p.getFirstName();
-            case 1 -> p.getLastName();
-            case 2 -> p.getBirthDate();
-            case 3 -> p.getInsurance();
+            case 0 -> tableRow.getRowDescription();
+            case 1 -> tableRow.getUnit();
+            case 2 -> tableRow.getAverage();
+            case 3 -> tableRow.getMedian();
+            case 4 -> tableRow.getMinimum();
+            case 5 -> tableRow.getMaximum();
             default -> null;
         };
     }
