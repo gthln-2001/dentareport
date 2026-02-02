@@ -86,25 +86,21 @@ public class Export {
     }
 
     private void addDataBody(Xls xls, ProgressListener listener) {
-        try (ResultSet countRs = db().query("SELECT COUNT(*) FROM " + evaluation.dbTable())) {
-            int total = 0;
-            if (countRs.next()) {
-                total = countRs.getInt(1);
-            }
-            if (total == 0) {
-                listener.onProgress(100, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
-                return;
-            }
-
-            try (ResultSet rs = db().query("SELECT * FROM " + evaluation.dbTable())) {
-                int count = 0;
-                while (rs.next()) {
-                    evaluation.xlsColumnsInEvaluation().forEach(column -> xls.addCell(column.value(rs)));
-                    xls.addRow();
-                    count++;
-                    int percent = count * 100 / total;
-                    listener.onProgress(percent, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
+        try (ResultSet rs = db().query("SELECT *, COUNT(*) OVER() AS total_count FROM " + evaluation.dbTable())) {
+            int total = -1;
+            int count = 0;
+            while (rs.next()) {
+                if (total == -1) {
+                    total = rs.getInt("total_count");
+                    if (total == 0) {
+                        listener.onProgress(100, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
+                        return;
+                    }
                 }
+                evaluation.xlsColumnsInEvaluation().forEach(column -> xls.addCell(column.value(rs)));
+                xls.addRow();
+                count++;
+                listener.onProgress(count * 100 / total, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
             }
         } catch (SQLException e) {
             throw new DentareportSqlException(e);

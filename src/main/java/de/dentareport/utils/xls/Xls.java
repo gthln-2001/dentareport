@@ -10,7 +10,6 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.stream.IntStream;
 
 // TODO: TEST?
 public class Xls {
