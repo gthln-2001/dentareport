@@ -7,12 +7,16 @@ import de.dentareport.gui.views.evaluation.EvaluationPresenter;
 import de.dentareport.gui.views.evaluation.EvaluationView;
 import de.dentareport.gui.views.fillings.FillingsPresenter;
 import de.dentareport.gui.views.fillings.FillingsView;
+import de.dentareport.gui.views.fillings.GeneralInformationFillingsPresenter;
+import de.dentareport.gui.views.fillings.GeneralInformationFillingsView;
 import de.dentareport.gui.views.general_patient_information.GeneralPatientInformationPresenter;
 import de.dentareport.gui.views.general_patient_information.GeneralPatientInformationView;
 import de.dentareport.gui.views.import_data.ImportDataPresenter;
 import de.dentareport.gui.views.import_data.ImportDataView;
 import de.dentareport.gui.views.start.StartPresenter;
 import de.dentareport.gui.views.start.StartView;
+import de.dentareport.gui.views.telescopic_crowns.GeneralInformationTelescopicCrownsPresenter;
+import de.dentareport.gui.views.telescopic_crowns.GeneralInformationTelescopicCrownsView;
 import de.dentareport.gui.views.telescopic_crowns.TelescopicCrownsPresenter;
 import de.dentareport.gui.views.telescopic_crowns.TelescopicCrownsView;
 
@@ -26,6 +30,10 @@ public class ViewFactory {
             case COPY_FILES -> new CopyFilesView(new CopyFilesPresenter(uiController));
             case EVALUATION -> new EvaluationView(new EvaluationPresenter(uiController));
             case FILLINGS -> new FillingsView(new FillingsPresenter(uiController));
+            case GENERAL_INFORMATION_FILLINGS ->
+                    new GeneralInformationFillingsView(new GeneralInformationFillingsPresenter(uiController));
+            case GENERAL_INFORMATION_TELESCOPIC_CROWNS ->
+                    new GeneralInformationTelescopicCrownsView(new GeneralInformationTelescopicCrownsPresenter(uiController));
             case GENERAL_PATIENT_INFORMATION ->
                     new GeneralPatientInformationView(new GeneralPatientInformationPresenter(uiController));
             case IMPORT_DATA -> new ImportDataView(new ImportDataPresenter(uiController));

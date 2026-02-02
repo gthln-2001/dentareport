@@ -33,6 +33,7 @@ public class FillingsPresenter {
     }
 
     public void onGeneralInformationFillings() {
+        uiController.showView(ViewId.GENERAL_INFORMATION_FILLINGS);
     }
 
     public void onProbabilitiesFillings() {

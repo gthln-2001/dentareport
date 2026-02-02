@@ -33,7 +33,7 @@ public class TelescopicCrownsPresenter {
     }
 
     public void onGeneralInformationTelescopicCrowns() {
-
+        uiController.showView(ViewId.GENERAL_INFORMATION_TELESCOPIC_CROWNS);
     }
 
     public void onProbabilitiesTelescopicCrowns() {
