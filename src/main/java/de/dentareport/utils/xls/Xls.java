@@ -2,6 +2,7 @@ package de.dentareport.utils.xls;
 
 
 import de.dentareport.exceptions.DentareportIOException;
+import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
@@ -51,7 +52,7 @@ public class Xls {
     }
 
     public void freezeRow() {
-        worksheet.createFreezePane(0, rowPointer());
+        worksheet.createFreezePane(0, rowPointer() + 1);
     }
 
     public int rowPointer() {
@@ -74,18 +75,48 @@ public class Xls {
     }
 
     public void write(String filename) {
-        try (SXSSFWorkbook wb = this.workbook;
-             OutputStream fileOut = new FileOutputStream(filename)) {
-            wb.write(fileOut);
+        IOException writeException = null;
+        try (OutputStream fileOut = new FileOutputStream(filename)) {
+            workbook.write(fileOut);
         } catch (IOException e) {
-            throw new DentareportIOException(e);
+            writeException = e;
+        } finally {
+            try {
+                workbook.close(); // ensure temp files are cleaned
+            } catch (IOException closeEx) {
+                if (writeException != null) {
+                    writeException.addSuppressed(closeEx); // don’t lose the original exception
+                } else {
+                    writeException = closeEx;
+                }
+            }
+        }
+        if (writeException != null) {
+            throw new DentareportIOException(writeException);
         }
     }
 
+
     private void addXlsCell(String value, String background) {
         SXSSFCell cell = row.createCell(columnPointer);
-        cell.setCellValue(xlsParse.parse(value));
+        RichTextString richTextString = sanitizeRichText(xlsParse.parse(value));
+        cell.setCellValue(richTextString);
         cell.setCellStyle(xlsColors.background(background));
         columnPointer++;
     }
+
+    /**
+     * Removes control characters except CR, LF, and TAB
+     */
+    private RichTextString sanitizeRichText(RichTextString richTextString) {
+        String ret;
+        if (richTextString == null) {
+            ret = "";
+        } else {
+            ret = richTextString.getString().replaceAll("[\\p{Cntrl}&&[^\r\n\t]]", "");
+        }
+        return workbook.getCreationHelper().createRichTextString(ret);
+    }
+
+
 }
