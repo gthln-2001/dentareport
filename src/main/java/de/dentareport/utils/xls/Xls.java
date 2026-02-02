@@ -1,32 +1,29 @@
 package de.dentareport.utils.xls;
 
 
-import de.dentareport.exceptions.DentareportIOException;
 import org.apache.poi.ss.usermodel.RichTextString;
-import org.apache.poi.xssf.streaming.SXSSFCell;
-import org.apache.poi.xssf.streaming.SXSSFRow;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 // TODO: TEST?
 public class Xls {
 
-    private final SXSSFWorkbook workbook;
+    private final XSSFWorkbook workbook;
     private final XlsColors xlsColors;
     private final XlsParse xlsParse;
-    private SXSSFSheet worksheet;
-    private SXSSFRow row;
+    private XSSFSheet worksheet;
+    private XSSFRow row;
     private int rowPointer;
     private int columnPointer;
 
 
     public Xls() {
-        this.workbook = new SXSSFWorkbook(500);
-        this.workbook.setCompressTempFiles(true);
+        this.workbook = new XSSFWorkbook();
         this.xlsColors = new XlsColors(this.workbook);
         this.xlsParse = new XlsParse(this.workbook);
     }
@@ -75,30 +72,21 @@ public class Xls {
     }
 
     public void write(String filename) {
-        IOException writeException = null;
-        try (OutputStream fileOut = new FileOutputStream(filename)) {
-            workbook.write(fileOut);
+        try (FileOutputStream out = new FileOutputStream(filename)) {
+            workbook.write(out);
         } catch (IOException e) {
-            writeException = e;
+            throw new RuntimeException(e);
         } finally {
             try {
-                workbook.close(); // ensure temp files are cleaned
-            } catch (IOException closeEx) {
-                if (writeException != null) {
-                    writeException.addSuppressed(closeEx); // don’t lose the original exception
-                } else {
-                    writeException = closeEx;
-                }
+                workbook.close();
+            } catch (IOException ignored) {
             }
-        }
-        if (writeException != null) {
-            throw new DentareportIOException(writeException);
         }
     }
 
 
     private void addXlsCell(String value, String background) {
-        SXSSFCell cell = row.createCell(columnPointer);
+        XSSFCell cell = row.createCell(columnPointer);
         RichTextString richTextString = sanitizeRichText(xlsParse.parse(value));
         cell.setCellValue(richTextString);
         cell.setCellStyle(xlsColors.background(background));

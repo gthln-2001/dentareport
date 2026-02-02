@@ -1,8 +1,8 @@
 package de.dentareport.utils.xls;
 
 import org.apache.poi.ss.usermodel.RichTextString;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class XlsParse {
     private final Pattern boldItalic = Pattern.compile(Pattern.quote("°°") + "(.*?)" + Pattern.quote("°°"));
     private final XlsFonts xlsFonts;
 
-    public XlsParse(SXSSFWorkbook workbook) {
+    public XlsParse(XSSFWorkbook workbook) {
         this.xlsFonts = new XlsFonts(workbook);
     }
 

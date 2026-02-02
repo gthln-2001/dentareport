@@ -3,7 +3,7 @@ package de.dentareport.utils.xls;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +11,10 @@ import java.util.Map;
 // TODO: TEST?
 public class XlsColors {
 
-    private final SXSSFWorkbook workbook;
+    private final XSSFWorkbook workbook;
     private Map<String, CellStyle> backgrounds;
 
-    public XlsColors(SXSSFWorkbook workbook) {
+    public XlsColors(XSSFWorkbook workbook) {
         this.workbook = workbook;
         createBackgroundStyles();
     }

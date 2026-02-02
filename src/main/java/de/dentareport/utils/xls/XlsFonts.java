@@ -1,17 +1,17 @@
 package de.dentareport.utils.xls;
 
 import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.HashMap;
 import java.util.Map;
 
 // TODO: TEST?
 public class XlsFonts {
-    private final SXSSFWorkbook workbook;
+    private final XSSFWorkbook workbook;
     private Map<String, Font> fonts;
 
-    public XlsFonts(SXSSFWorkbook workbook) {
+    public XlsFonts(XSSFWorkbook workbook) {
         this.workbook = workbook;
         createFonts();
     }

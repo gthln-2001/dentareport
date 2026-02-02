@@ -7,8 +7,6 @@ import de.dentareport.utils.Billingcodes;
 import de.dentareport.utils.Keys;
 import de.dentareport.utils.xls.Xls;
 import de.dentareport.utils.xls.XlsColumn;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -25,7 +23,6 @@ import static de.dentareport.utils.map.MapUtils.sortByKey;
 // TODO: TEST?
 public class Export {
 
-    private static final Logger log = LogManager.getLogger(Export.class);
     private final Translate translate;
     private final Glossary glossary;
     private final Evaluation evaluation;
@@ -37,14 +34,12 @@ public class Export {
     }
 
     public void export(ProgressListener listener) {
-        log.info("Start export");
         listener.onProgress(0, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
         Xls xls = new Xls();
         addData(xls, listener);
         addDocumentation(xls);
         addGlossary(xls);
         xls.write(filename());
-        log.info("Finished export");
     }
 
     public String filename() {
