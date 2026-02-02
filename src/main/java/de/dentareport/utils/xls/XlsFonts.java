@@ -1,22 +1,22 @@
 package de.dentareport.utils.xls;
 
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.util.HashMap;
 import java.util.Map;
 
 // TODO: TEST?
 public class XlsFonts {
-    private XSSFWorkbook workbook;
-    private Map<String, XSSFFont> fonts;
+    private final SXSSFWorkbook workbook;
+    private Map<String, Font> fonts;
 
-    public XlsFonts(XSSFWorkbook workbook) {
+    public XlsFonts(SXSSFWorkbook workbook) {
         this.workbook = workbook;
         createFonts();
     }
 
-    public XSSFFont font(String key) {
+    public Font font(String key) {
         if (!fonts.containsKey(key)) {
             throw new IllegalArgumentException(key);
         }
@@ -26,11 +26,10 @@ public class XlsFonts {
     private void createFonts() {
         fonts = new HashMap<>();
 
-        XSSFFont boldItalic = workbook.createFont();
+        Font boldItalic = workbook.createFont();
         boldItalic.setItalic(true);
         boldItalic.setBold(true);
-        boldItalic.setFontHeight(10);
+        boldItalic.setFontHeight((short) 10);
         fonts.put("bold_italic", boldItalic);
-
     }
 }

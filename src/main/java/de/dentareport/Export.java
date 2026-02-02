@@ -6,6 +6,8 @@ import de.dentareport.utils.Billingcodes;
 import de.dentareport.utils.Keys;
 import de.dentareport.utils.xls.Xls;
 import de.dentareport.utils.xls.XlsColumn;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -21,6 +23,7 @@ import static de.dentareport.utils.map.MapUtils.sortByKey;
 // TODO: TEST?
 public class Export {
 
+    private static final Logger log = LogManager.getLogger(Export.class);
     private final Translate translate;
     private final Glossary glossary;
     private final Evaluation evaluation;
@@ -32,11 +35,13 @@ public class Export {
     }
 
     public void export() {
+        log.info("Start export");
         Xls xls = new Xls();
         addData(xls);
         addDocumentation(xls);
         addGlossary(xls);
         xls.write(filename());
+        log.info("finished export");
     }
 
     public String filename() {
@@ -50,8 +55,8 @@ public class Export {
     private void addData(Xls xls) {
         xls.addSheet(Keys.XLS_EVALUATION);
         addDataHeader(xls);
+        xls.autosizeHeaderColumns();
         addDataBody(xls);
-        xls.autosizeAllColumns();
     }
 
     private void addDataHeader(Xls xls) {
@@ -95,8 +100,8 @@ public class Export {
     private void addDocumentation(Xls xls) {
         xls.addSheet(Keys.XLS_DOCUMENTATION);
         addDocumentationHeader(xls);
+        xls.autosizeHeaderColumns();
         addDocumentationBody(xls);
-        xls.autosizeAllColumns();
     }
 
     private void addDocumentationHeader(Xls xls) {
@@ -125,7 +130,7 @@ public class Export {
         addGlossaryStartAndEndObservation(xls);
         addGlossaryBillingcodes(xls);
         addGlossaryGlossary(xls);
-        xls.autosizeAllColumns();
+        xls.autosizeHeaderColumns();
     }
 
     private void addGlossaryStartAndEndObservation(Xls xls) {

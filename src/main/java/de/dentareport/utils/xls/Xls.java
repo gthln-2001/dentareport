@@ -2,55 +2,52 @@ package de.dentareport.utils.xls;
 
 
 import de.dentareport.exceptions.DentareportIOException;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.stream.IntStream;
 
 // TODO: TEST?
 public class Xls {
 
-    private final XSSFWorkbook workbook;
-    private XSSFSheet worksheet;
-    private XSSFRow row;
+    private final SXSSFWorkbook workbook;
     private final XlsColors xlsColors;
     private final XlsParse xlsParse;
-    private Map<String, Integer> pointer;
+    private SXSSFSheet worksheet;
+    private SXSSFRow row;
+    private int rowPointer;
+    private int columnPointer;
+
 
     public Xls() {
-        this.workbook = new XSSFWorkbook();
+        this.workbook = new SXSSFWorkbook(1000);
+        this.workbook.setCompressTempFiles(true);
         this.xlsColors = new XlsColors(this.workbook);
         this.xlsParse = new XlsParse(this.workbook);
     }
 
     public void addSheet(String name) {
         worksheet = workbook.createSheet(name);
-        pointer = new HashMap<>();
+        rowPointer = -1;
         addRow();
     }
 
     public void addRow() {
-        if (pointer.isEmpty()) {
-            initializeRowPointer();
-        } else {
-            increaseRowPointer();
-        }
-        initializeColumnPointer();
-        row = worksheet.createRow(pointer.get("row"));
+        rowPointer++;
+        columnPointer = 0;
+        row = worksheet.createRow(rowPointer);
     }
 
     public void addCell(String value) {
         addCell(value, "none");
     }
 
-    public void addCell(String value,
-                        String background) {
+    public void addCell(String value, String background) {
         addXlsCell(value, background);
     }
 
@@ -59,51 +56,37 @@ public class Xls {
     }
 
     public int rowPointer() {
-        return pointer.get("row");
+        return rowPointer;
     }
 
-    public int columnPointer() {
-        return pointer.get("column");
-    }
-
-    public void autosizeAllColumns() {
-        int columnCount = worksheet.getRow(0).getLastCellNum();
-        for (int columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-            worksheet.autoSizeColumn(columnIndex);
-        }
+    // TODO: Fix?
+    public void autosizeHeaderColumns() {
+//        SXSSFRow header = worksheet.getRow(0);
+//        if (header == null) {
+//            return;
+//        }
+//
+//        short lastCell = header.getLastCellNum();
+//        IntStream.range(0, lastCell).forEach(i -> worksheet.trackColumnForAutoSizing(i));
+//        IntStream.range(0, lastCell).forEach(i -> {
+//            worksheet.autoSizeColumn(i);
+//            worksheet.untrackColumnForAutoSizing(i);
+//        });
     }
 
     public void write(String filename) {
-        try {
-            OutputStream fileOut = new FileOutputStream(filename);
-            workbook.write(fileOut);
-            fileOut.close();
+        try (SXSSFWorkbook wb = this.workbook;
+             OutputStream fileOut = new FileOutputStream(filename)) {
+            wb.write(fileOut);
         } catch (IOException e) {
             throw new DentareportIOException(e);
         }
     }
 
-    private void initializeColumnPointer() {
-        pointer.put("column", 0);
-    }
-
-    private void initializeRowPointer() {
-        pointer.put("row", 0);
-    }
-
-    private void increaseRowPointer() {
-        pointer.put("row", pointer.get("row") + 1);
-    }
-
-    private void addXlsCell(String value,
-                            String background) {
-        XSSFCell cell = row.createCell(pointer.get("column"));
+    private void addXlsCell(String value, String background) {
+        SXSSFCell cell = row.createCell(columnPointer);
         cell.setCellValue(xlsParse.parse(value));
         cell.setCellStyle(xlsColors.background(background));
-        increaseColumnPointer();
-    }
-
-    private void increaseColumnPointer() {
-        pointer.put("column", pointer.get("column") + 1);
+        columnPointer++;
     }
 }

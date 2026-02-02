@@ -1,8 +1,8 @@
 package de.dentareport.utils.xls;
 
 import mockit.Mocked;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.ss.usermodel.Font;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,9 +12,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 // TODO: TEST?
 public class XlsFontsTest {
 
-    private XlsFonts xlsFonts;
     @Mocked
-    XSSFWorkbook mockWorkbook;
+    SXSSFWorkbook mockWorkbook;
+    private XlsFonts xlsFonts;
 
     @BeforeEach
     public void setUp() {
@@ -23,7 +23,7 @@ public class XlsFontsTest {
 
     @Test
     public void it_creates_fonts() {
-        assertThat(xlsFonts.font("bold_italic")).isInstanceOf(XSSFFont.class);
+        assertThat(xlsFonts.font("bold_italic")).isInstanceOf(Font.class);
     }
 
     @Test
