@@ -100,8 +100,7 @@ public abstract class Evaluation {
         writeDataToDb(dbRows);
         documentation.document();
         groups.group();
-        // TODO: Add listener to method and update progress bar for export (write XLS)
-        export.export();
+        export.export(listener);
     }
 
     public List<Column> columns() {

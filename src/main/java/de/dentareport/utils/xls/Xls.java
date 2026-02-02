@@ -25,7 +25,7 @@ public class Xls {
 
 
     public Xls() {
-        this.workbook = new SXSSFWorkbook(1000);
+        this.workbook = new SXSSFWorkbook(500);
         this.workbook.setCompressTempFiles(true);
         this.xlsColors = new XlsColors(this.workbook);
         this.xlsParse = new XlsParse(this.workbook);

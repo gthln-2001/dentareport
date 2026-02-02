@@ -2,6 +2,7 @@ package de.dentareport;
 
 import de.dentareport.evaluations.Evaluation;
 import de.dentareport.exceptions.DentareportSqlException;
+import de.dentareport.gui.util.ProgressListener;
 import de.dentareport.utils.Billingcodes;
 import de.dentareport.utils.Keys;
 import de.dentareport.utils.xls.Xls;
@@ -34,29 +35,30 @@ public class Export {
         this.translate = new Translate();
     }
 
-    public void export() {
+    public void export(ProgressListener listener) {
         log.info("Start export");
+        listener.onProgress(0, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
         Xls xls = new Xls();
-        addData(xls);
+        addData(xls, listener);
         addDocumentation(xls);
         addGlossary(xls);
         xls.write(filename());
-        log.info("finished export");
+        log.info("Finished export");
     }
 
     public String filename() {
         return String.format("%1$s%2$sexport%2$s%3$s_%4$s.xlsx",
-                             System.getProperty("user.dir"),
-                             File.separator,
-                             evaluation.evaluationName(),
-                             new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date()));
+                System.getProperty("user.dir"),
+                File.separator,
+                evaluation.evaluationName(),
+                new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date()));
     }
 
-    private void addData(Xls xls) {
+    private void addData(Xls xls, ProgressListener listener) {
         xls.addSheet(Keys.XLS_EVALUATION);
         addDataHeader(xls);
         xls.autosizeHeaderColumns();
-        addDataBody(xls);
+        addDataBody(xls, listener);
     }
 
     private void addDataHeader(Xls xls) {
@@ -83,19 +85,32 @@ public class Export {
         return value.replace("°°", "");
     }
 
-    private void addDataBody(Xls xls) {
-        try {
-            ResultSet rs = db().query("SELECT * FROM " + evaluation.dbTable());
-            while (rs.next()) {
-                evaluation.xlsColumnsInEvaluation().forEach(
-                        column -> xls.addCell(column.value(rs))
-                );
-                xls.addRow();
+    private void addDataBody(Xls xls, ProgressListener listener) {
+        try (ResultSet countRs = db().query("SELECT COUNT(*) FROM " + evaluation.dbTable())) {
+            int total = 0;
+            if (countRs.next()) {
+                total = countRs.getInt(1);
+            }
+            if (total == 0) {
+                listener.onProgress(100, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
+                return;
+            }
+
+            try (ResultSet rs = db().query("SELECT * FROM " + evaluation.dbTable())) {
+                int count = 0;
+                while (rs.next()) {
+                    evaluation.xlsColumnsInEvaluation().forEach(column -> xls.addCell(column.value(rs)));
+                    xls.addRow();
+                    count++;
+                    int percent = count * 100 / total;
+                    listener.onProgress(percent, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
+                }
             }
         } catch (SQLException e) {
             throw new DentareportSqlException(e);
         }
     }
+
 
     private void addDocumentation(Xls xls) {
         xls.addSheet(Keys.XLS_DOCUMENTATION);
@@ -115,14 +130,14 @@ public class Export {
 
     private void addDocumentationBody(Xls xls) {
         evaluation.xlsColumns().stream()
-                  .filter(XlsColumn::isVisibleInDocumentation)
-                  .forEach(column -> {
-                      xls.addCell(column.index(), column.backgroundColor());
-                      xls.addCell(column.isInEvaluation() ? "x" : "", column.backgroundColor());
-                      xls.addCell(evaluation.shortDocumentation(column.name()), column.backgroundColor());
-                      xls.addCell(evaluation.longDocumentation(column.name()));
-                      xls.addRow();
-                  });
+                .filter(XlsColumn::isVisibleInDocumentation)
+                .forEach(column -> {
+                    xls.addCell(column.index(), column.backgroundColor());
+                    xls.addCell(column.isInEvaluation() ? "x" : "", column.backgroundColor());
+                    xls.addCell(evaluation.shortDocumentation(column.name()), column.backgroundColor());
+                    xls.addCell(evaluation.longDocumentation(column.name()));
+                    xls.addRow();
+                });
     }
 
     private void addGlossary(Xls xls) {

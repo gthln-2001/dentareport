@@ -265,6 +265,7 @@ public class Keys {
     public static final String GUI_TEXT_TOOTHTYPE = "Zahntyp";
     public static final String GUI_TEXT_TOTAL = "Gesamt";
     public static final String GUI_TEXT_UNDER_EVENT = "unter Ereignis";
+    public static final String GUI_TEXT_WRITING_XLS_EVALUATION = "Tabelle wird erstellt";
     public static final String GUI_TEXT_WURZELSTIFT = "Wurzelstift";
     public static final String GUI_TEXT_WURZELSTIFTE = "Wurzelstifte";
     public static final String GUI_TEXT_YEARS = "Jahre";
