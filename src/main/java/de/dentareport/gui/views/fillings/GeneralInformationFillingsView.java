@@ -3,8 +3,6 @@ package de.dentareport.gui.views.fillings;
 import de.dentareport.Metadata;
 import de.dentareport.gui.table_models.GeneralInformationFillingsAverages;
 import de.dentareport.gui.table_models.GeneralInformationFillingsCountAndDistribution;
-import de.dentareport.gui.table_models.GeneralInformationTelescopicCrownsAverages;
-import de.dentareport.gui.table_models.GeneralInformationTelescopicCrownsCountAndDistribution;
 import de.dentareport.utils.date.DateRange;
 
 import javax.swing.*;
@@ -22,7 +20,6 @@ public class GeneralInformationFillingsView extends JPanel {
 
     public GeneralInformationFillingsView(GeneralInformationFillingsPresenter presenter) {
         this.presenter = presenter;
-        presenter.setView(this);
         setLayout(createBorderLayout());
         addTitle();
         addContent();
@@ -44,7 +41,7 @@ public class GeneralInformationFillingsView extends JPanel {
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         contentPanel.add(generalInformationFillingsAverages(), BorderLayout.CENTER);
-//        contentPanel.add(generalInformationFillingsCountAndDistribution(), BorderLayout.CENTER);
+        contentPanel.add(generalInformationFillingsCountAndDistribution(), BorderLayout.CENTER);
 
         add(contentPanel, BorderLayout.CENTER);
     }

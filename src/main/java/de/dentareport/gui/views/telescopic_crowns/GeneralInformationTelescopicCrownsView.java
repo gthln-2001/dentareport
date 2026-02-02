@@ -22,7 +22,6 @@ public class GeneralInformationTelescopicCrownsView extends JPanel {
 
     public GeneralInformationTelescopicCrownsView(GeneralInformationTelescopicCrownsPresenter presenter) {
         this.presenter = presenter;
-        presenter.setView(this);
         setLayout(createBorderLayout());
         addTitle();
         addContent();
@@ -44,7 +43,7 @@ public class GeneralInformationTelescopicCrownsView extends JPanel {
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         contentPanel.add(generalInformationTelescopicCrownsAverages(), BorderLayout.CENTER);
-//        contentPanel.add(generalInformationTelescopicCrownsCountAndDistribution(), BorderLayout.CENTER);
+        contentPanel.add(generalInformationTelescopicCrownsCountAndDistribution(), BorderLayout.CENTER);
 
         add(contentPanel, BorderLayout.CENTER);
     }

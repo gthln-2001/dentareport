@@ -7,19 +7,16 @@ import java.util.List;
 
 public class GeneralInformationFillingsCountAndDistribution extends AbstractTableModel {
 
-    private final List<TableRowGeneralPatientInformationAverages> tableRowGeneralPatientInformationAverages;
+    private final List<TableRowGeneralInformationFillingsCountAndDistribution> tableRowGeneralPatientInformationAverages;
 
     private final String[] columns = {
-            Keys.GUI_TEXT_BLANK,
-            Keys.GUI_TEXT_BLANK,
-            Keys.GUI_TEXT_AVERAGE,
-            Keys.GUI_TEXT_MEDIAN,
-            Keys.GUI_TEXT_MINIMUM,
-            Keys.GUI_TEXT_MAXIMUM
+            Keys.GUI_TEXT_ITEM,
+            Keys.GUI_TEXT_BLANK
     };
 
-    public GeneralInformationFillingsCountAndDistribution(List<TableRowGeneralPatientInformationAverages> tableRowGeneralPatientInformationAverages) {
-        this.tableRowGeneralPatientInformationAverages = tableRowGeneralPatientInformationAverages;
+    public GeneralInformationFillingsCountAndDistribution(List<TableRowGeneralInformationFillingsCountAndDistribution> tableRowGeneralInformationFillingsCountAndDistributions) {
+        this.tableRowGeneralPatientInformationAverages =
+                tableRowGeneralInformationFillingsCountAndDistributions;
     }
 
     @Override
@@ -39,15 +36,12 @@ public class GeneralInformationFillingsCountAndDistribution extends AbstractTabl
 
     @Override
     public Object getValueAt(int row, int column) {
-        TableRowGeneralPatientInformationAverages tableRow = tableRowGeneralPatientInformationAverages.get(row);
+        TableRowGeneralInformationFillingsCountAndDistribution tableRow =
+                tableRowGeneralPatientInformationAverages.get(row);
 
         return switch (column) {
             case 0 -> tableRow.getRowDescription();
-            case 1 -> tableRow.getUnit();
-            case 2 -> tableRow.getAverage();
-            case 3 -> tableRow.getMedian();
-            case 4 -> tableRow.getMinimum();
-            case 5 -> tableRow.getMaximum();
+            case 1 -> tableRow.getValue();
             default -> null;
         };
     }
