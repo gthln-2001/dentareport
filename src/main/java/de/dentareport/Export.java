@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static de.dentareport.utils.db.DbConnection.db;
@@ -89,6 +90,7 @@ public class Export {
         try (ResultSet rs = db().query("SELECT *, COUNT(*) OVER() AS total_count FROM " + evaluation.dbTable())) {
             int total = -1;
             int count = 0;
+            List<XlsColumn> xlsColumns = evaluation.xlsColumnsInEvaluation();
             while (rs.next()) {
                 if (total == -1) {
                     total = rs.getInt("total_count");
@@ -97,7 +99,7 @@ public class Export {
                         return;
                     }
                 }
-                evaluation.xlsColumnsInEvaluation().forEach(column -> xls.addCell(column.value(rs)));
+                xlsColumns.forEach(column -> xls.addCell(column.value(rs)));
                 xls.addRow();
                 count++;
                 listener.onProgress(count * 100 / total, Keys.GUI_TEXT_WRITING_XLS_EVALUATION);
