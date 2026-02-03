@@ -1,14 +1,9 @@
 package de.dentareport.gui.views.telescopic_crowns;
 
-import de.dentareport.evaluations.meta.dependencies.AvailableDependencies;
-import de.dentareport.evaluations.meta.events.AvailableEvents;
-import de.dentareport.gui.table_models.GeneralInformationTelescopicCrownsAverages;
+import de.dentareport.gui.table_models.TableAfr;
 import de.dentareport.gui.table_models.TableGroupSizes;
-import de.dentareport.utils.Keys;
-import de.dentareport.utils.MiniCache;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 import static de.dentareport.gui.util.SwingUtils.*;
@@ -23,7 +18,8 @@ public class ProbabilitiesDisplayTelescopicCrownsView extends JPanel {
     private final String event;
     private final String dependency;
 
-    public ProbabilitiesDisplayTelescopicCrownsView(ProbabilitiesDisplayTelescopicCrownsPresenter presenter, String event, String dependency) {
+    public ProbabilitiesDisplayTelescopicCrownsView(ProbabilitiesDisplayTelescopicCrownsPresenter presenter,
+                                                    String event, String dependency) {
         this.event = event;
         this.dependency = dependency;
         this.presenter = presenter;
@@ -47,12 +43,19 @@ public class ProbabilitiesDisplayTelescopicCrownsView extends JPanel {
         contentPanel.add(Box.createVerticalStrut(40));
 
         contentPanel.add(tableGroupSizes(), BorderLayout.CENTER);
+        contentPanel.add(tableAfr(), BorderLayout.CENTER);
 
         add(contentPanel, BorderLayout.CENTER);
     }
 
     private JScrollPane tableGroupSizes() {
         TableGroupSizes tableModel = presenter.getTableGroupSizes(this.event, this.dependency);
+
+        return new JScrollPane(table(tableModel));
+    }
+
+    private JScrollPane tableAfr() {
+        TableAfr tableModel = presenter.getTableAfr(this.event, this.dependency);
 
         return new JScrollPane(table(tableModel));
     }

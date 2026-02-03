@@ -7,7 +7,9 @@ import de.dentareport.evaluations.meta.dependencies.Dependencies;
 import de.dentareport.exceptions.DentareportSqlException;
 import de.dentareport.gui.app.UiController;
 import de.dentareport.gui.navigation.ViewId;
+import de.dentareport.gui.table_models.TableAfr;
 import de.dentareport.gui.table_models.TableGroupSizes;
+import de.dentareport.gui.table_models.TableRowAfr;
 import de.dentareport.gui.table_models.TableRowGroupSizes;
 import de.dentareport.utils.Keys;
 
@@ -81,5 +83,67 @@ public class ProbabilitiesDisplayFillingsPresenter {
                 translate.translate(rs.getString("item")),
                 rs.getString("item_count")
         );
+    }
+
+    public TableAfr getTableAfr(String event, String dependency) {
+        List<TableRowAfr> tableRows = new ArrayList<>();
+        List<String> afrGroups = afrGroups(event, dependency);
+
+        for (String group : afrGroups) {
+            ResultSet rs = db().query(afrQuery(group, event, dependency));
+            String afr5 = "";
+            String afr10 = "";
+            try {
+                while (rs.next()) {
+                    String interval = rs.getString("interval");
+                    String afr = rs.getString("afr");
+                    if (Objects.equals(interval, "5")) afr5 = String.format("%s%%", afr);
+                    if (Objects.equals(interval, "10")) afr10 = String.format("%s%%", afr);
+                }
+            } catch (SQLException e) {
+                throw new DentareportSqlException(e);
+            }
+            tableRows.add(new TableRowAfr(group, afr5, afr10));
+        }
+
+        return new TableAfr(tableRows);
+    }
+
+    private String groupsQuery(String event, String dependency) {
+        return String.format(
+                "SELECT DISTINCT group_name FROM evaluation_%s%s " +
+                        "WHERE event = '%s' AND dependency = '%s' " +
+                        "ORDER BY group_order",
+                "7",
+                Keys.DB_TABLE_SUFFIX_AFR,
+                event,
+                dependency
+        );
+    }
+
+    private String afrQuery(String group, String event, String dependency) {
+        return String.format(
+                "SELECT interval, afr FROM evaluation_%s%s " +
+                        "WHERE event = '%s' AND dependency = '%s' AND group_name = '%s'" +
+                        "ORDER BY interval",
+                "7",
+                Keys.DB_TABLE_SUFFIX_AFR,
+                event,
+                dependency,
+                group
+        );
+    }
+
+    private List<String> afrGroups(String event, String dependency) {
+        try {
+            List<String> ret = new ArrayList<>();
+            ResultSet rs = db().query(groupsQuery(event, dependency));
+            while (rs.next()) {
+                ret.add(rs.getString("group_name"));
+            }
+            return ret;
+        } catch (SQLException e) {
+            throw new DentareportSqlException(e);
+        }
     }
 }
