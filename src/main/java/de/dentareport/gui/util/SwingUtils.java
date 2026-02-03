@@ -75,6 +75,10 @@ public class SwingUtils {
         return heading(text, Font.PLAIN, 32f);
     }
 
+    public static JLabel heading3(String text) {
+        return heading(text, Font.PLAIN, 28f);
+    }
+
     public static JLabel image(String path) {
         ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(SwingUtils.class.getResource(path)));
         JLabel imageLabel = new JLabel(resizeImage(imageIcon, 1000, 500));

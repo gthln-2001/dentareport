@@ -37,6 +37,7 @@ public class TelescopicCrownsPresenter {
     }
 
     public void onProbabilitiesTelescopicCrowns() {
+        uiController.showView(ViewId.PROBABILITIES_TELESCOPIC_CROWNS);
     }
 
     public void onStartNewEvaluationTelescopicCrowns() {

@@ -5,20 +5,14 @@ import de.dentareport.gui.views.copy_files.CopyFilesPresenter;
 import de.dentareport.gui.views.copy_files.CopyFilesView;
 import de.dentareport.gui.views.evaluation.EvaluationPresenter;
 import de.dentareport.gui.views.evaluation.EvaluationView;
-import de.dentareport.gui.views.fillings.FillingsPresenter;
-import de.dentareport.gui.views.fillings.FillingsView;
-import de.dentareport.gui.views.fillings.GeneralInformationFillingsPresenter;
-import de.dentareport.gui.views.fillings.GeneralInformationFillingsView;
+import de.dentareport.gui.views.fillings.*;
 import de.dentareport.gui.views.general_patient_information.GeneralPatientInformationPresenter;
 import de.dentareport.gui.views.general_patient_information.GeneralPatientInformationView;
 import de.dentareport.gui.views.import_data.ImportDataPresenter;
 import de.dentareport.gui.views.import_data.ImportDataView;
 import de.dentareport.gui.views.start.StartPresenter;
 import de.dentareport.gui.views.start.StartView;
-import de.dentareport.gui.views.telescopic_crowns.GeneralInformationTelescopicCrownsPresenter;
-import de.dentareport.gui.views.telescopic_crowns.GeneralInformationTelescopicCrownsView;
-import de.dentareport.gui.views.telescopic_crowns.TelescopicCrownsPresenter;
-import de.dentareport.gui.views.telescopic_crowns.TelescopicCrownsView;
+import de.dentareport.gui.views.telescopic_crowns.*;
 
 import javax.swing.*;
 
@@ -37,6 +31,10 @@ public class ViewFactory {
             case GENERAL_PATIENT_INFORMATION ->
                     new GeneralPatientInformationView(new GeneralPatientInformationPresenter(uiController));
             case IMPORT_DATA -> new ImportDataView(new ImportDataPresenter(uiController));
+            case PROBABILITIES_FILLINGS ->
+                    new ProbabilitiesFillingsView(new ProbabilitiesFillingsPresenter(uiController));
+            case PROBABILITIES_TELESCOPIC_CROWNS ->
+                    new ProbabilitiesTelescopicCrownsView(new ProbabilitiesTelescopicCrownsPresenter(uiController));
             case START -> new StartView(new StartPresenter(uiController));
             case TELESCOPIC_CROWNS -> new TelescopicCrownsView(new TelescopicCrownsPresenter(uiController));
         };

@@ -37,6 +37,7 @@ public class FillingsPresenter {
     }
 
     public void onProbabilitiesFillings() {
+        uiController.showView(ViewId.PROBABILITIES_FILLINGS);
     }
 
     public void onStartNewEvaluationFillings() {
