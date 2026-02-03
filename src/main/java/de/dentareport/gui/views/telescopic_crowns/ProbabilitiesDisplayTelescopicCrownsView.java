@@ -60,6 +60,7 @@ public class ProbabilitiesDisplayTelescopicCrownsView extends JPanel {
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         contentPanel.add(kaplanMeier(), BorderLayout.CENTER);
+        contentPanel.add(Box.createVerticalStrut(40));
         contentPanel.add(tableGroupSizes(), BorderLayout.CENTER);
         contentPanel.add(tableAfr(), BorderLayout.CENTER);
 
@@ -73,13 +74,20 @@ public class ProbabilitiesDisplayTelescopicCrownsView extends JPanel {
     private JScrollPane tableGroupSizes() {
         TableGroupSizes tableModel = presenter.getTableGroupSizes(this.event, this.dependency);
 
-        return new JScrollPane(table(tableModel));
+        JScrollPane jScrollPane = new JScrollPane(table(tableModel));
+        jScrollPane.setPreferredSize(new Dimension(800, 320));
+        jScrollPane.setMaximumSize(new Dimension(Integer.MAX_VALUE, 360));
+
+        return jScrollPane;
     }
 
     private JScrollPane tableAfr() {
         TableAfr tableModel = presenter.getTableAfr(this.event, this.dependency);
+        JScrollPane jScrollPane = new JScrollPane(table(tableModel));
+        jScrollPane.setPreferredSize(new Dimension(800, 320));
+        jScrollPane.setMaximumSize(new Dimension(Integer.MAX_VALUE, 360));
 
-        return new JScrollPane(table(tableModel));
+        return jScrollPane;
     }
 
     private void addMenu() {

@@ -16,6 +16,7 @@ import de.dentareport.utils.Keys;
 import org.jfree.data.xy.XYSeries;
 
 import javax.swing.*;
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -152,18 +153,19 @@ public class ProbabilitiesDisplayTelescopicCrownsPresenter {
     }
 
     public JPanel kaplanMeier(String event, String dependency) {
-        JComponent chart = new LineChartElement()
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JPanel chartPanel = new LineChartElement()
                 .id("chart-kaplan-meier")
                 .lines(getLines(event, dependency))
                 .translateLegend()
-                .title(chartTitle(event, dependency))
                 .xLabel(GUI_TEXT_YEARS)
                 .yLabel(GUI_TEXT_PROBABILITIES)
                 .autoMinY()
                 .create();
+        panel.add(chartPanel, BorderLayout.CENTER);
 
-        JPanel panel = new JPanel();
-        panel.add(chart);
         return panel;
     }
 

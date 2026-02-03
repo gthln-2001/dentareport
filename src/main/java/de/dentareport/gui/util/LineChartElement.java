@@ -34,7 +34,7 @@ public class LineChartElement {
     /**
      * Creates a Swing component containing the chart.
      */
-    public JComponent create() {
+    public JPanel create() {
 
         XYSeriesCollection dataset = new XYSeriesCollection();
 
@@ -57,7 +57,7 @@ public class LineChartElement {
         configureYAxis(plot);
 
         ChartPanel panel = new ChartPanel(chart);
-        panel.setPreferredSize(new java.awt.Dimension(700, 400));
+        panel.setPreferredSize(new java.awt.Dimension(1200, 480));
 
         if (id != null) {
             panel.putClientProperty("id", id);
