@@ -13,13 +13,9 @@ import java.util.Map;
 public class ProbabilitiesTelescopicCrownsPresenter {
 
     private final UiController uiController;
-    private final Translate translate;
-    private Map<String, TableRowGeneralInformationTelescopicCrownsCountAndDistribution> count;
-    private Map<String, TableRowGeneralInformationTelescopicCrownsCountAndDistribution> distribution;
 
     public ProbabilitiesTelescopicCrownsPresenter(UiController uiController) {
         this.uiController = uiController;
-        this.translate = new Translate();
     }
 
     public void onBack() {
@@ -31,7 +27,6 @@ public class ProbabilitiesTelescopicCrownsPresenter {
     }
 
     public void onDisplay(String event, String dependency) {
-        System.out.println(event);
-        System.out.println(dependency);
+        uiController.showView(ViewId.PROBABILITIES_DISPLAY_TELESCOPIC_CROWNS, event, dependency);
     }
 }

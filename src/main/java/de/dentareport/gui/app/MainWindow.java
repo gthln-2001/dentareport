@@ -50,6 +50,14 @@ public class MainWindow implements UiController {
     }
 
     @Override
+    public void showView(ViewId viewId, String event, String dependency) {
+        content.removeAll();
+        content.add(viewFactory.create(viewId, this, event, dependency), BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }
+
+    @Override
     public void confirmExit() {
         int result = JOptionPane.showConfirmDialog(
                 frame,

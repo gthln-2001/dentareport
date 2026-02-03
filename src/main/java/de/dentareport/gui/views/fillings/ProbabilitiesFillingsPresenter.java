@@ -13,17 +13,13 @@ import java.util.Map;
 public class ProbabilitiesFillingsPresenter {
 
     private final UiController uiController;
-    private final Translate translate;
-    private Map<String, TableRowGeneralInformationFillingsCountAndDistribution> count;
-    private Map<String, TableRowGeneralInformationFillingsCountAndDistribution> distribution;
 
     public ProbabilitiesFillingsPresenter(UiController uiController) {
         this.uiController = uiController;
-        this.translate = new Translate();
     }
 
     public void onBack() {
-        uiController.showView(ViewId.TELESCOPIC_CROWNS);
+        uiController.showView(ViewId.FILLINGS);
     }
 
     public void onExitRequested() {
@@ -31,7 +27,6 @@ public class ProbabilitiesFillingsPresenter {
     }
 
     public void onDisplay(String event, String dependency) {
-        System.out.println(event);
-        System.out.println(dependency);
+        uiController.showView(ViewId.PROBABILITIES_DISPLAY_FILLINGS, event, dependency);
     }
 }

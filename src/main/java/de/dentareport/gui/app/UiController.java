@@ -15,5 +15,6 @@ public interface UiController {
     void closeApplication();
 
     void setWindowTitle(String title);
-}
 
+    void showView(ViewId viewId, String event, String dependency);
+}

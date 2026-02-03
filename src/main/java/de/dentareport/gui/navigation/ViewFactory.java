@@ -37,6 +37,18 @@ public class ViewFactory {
                     new ProbabilitiesTelescopicCrownsView(new ProbabilitiesTelescopicCrownsPresenter(uiController));
             case START -> new StartView(new StartPresenter(uiController));
             case TELESCOPIC_CROWNS -> new TelescopicCrownsView(new TelescopicCrownsPresenter(uiController));
+            default -> throw new IllegalStateException("Unexpected value: " + viewId);
+        };
+    }
+
+    public JComponent create(ViewId viewId, UiController uiController, String event, String dependency) {
+        return switch (viewId) {
+            case PROBABILITIES_DISPLAY_FILLINGS ->
+                    new ProbabilitiesDisplayFillingsView(new ProbabilitiesDisplayFillingsPresenter(uiController),
+                            event, dependency);
+            case PROBABILITIES_DISPLAY_TELESCOPIC_CROWNS ->
+                    new ProbabilitiesDisplayTelescopicCrownsView(new ProbabilitiesDisplayTelescopicCrownsPresenter(uiController), event, dependency);
+            default -> throw new IllegalStateException("Unexpected value: " + viewId);
         };
     }
 }
