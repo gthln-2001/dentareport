@@ -5,6 +5,7 @@ import de.dentareport.gui.table_models.TableGroupSizes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 import static de.dentareport.gui.util.SwingUtils.*;
 import static de.dentareport.utils.Keys.*;
@@ -30,17 +31,34 @@ public class ProbabilitiesDisplayTelescopicCrownsView extends JPanel {
     }
 
     private void addTitle() {
-        add(title(GUI_TEXT_TELESCOPIC_CROWNS), BorderLayout.NORTH);
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.add(Box.createVerticalStrut(20));
+        contentPanel.add(heading2(chartTitle()));
+        add(contentPanel, BorderLayout.NORTH);
+    }
+
+    private String chartTitle() {
+        String title = String.format("%s %s %s",
+                GUI_TEXT_TELESCOPIC_CROWNS,
+                GUI_TEXT_UNDER_EVENT,
+                this.event);
+        if (isGrouped()) {
+            title += String.format("\n%s %s",
+                    GUI_TEXT_GROUPED_BY,
+                    this.dependency);
+        }
+        return title;
+    }
+
+    private boolean isGrouped() {
+        return !Objects.equals(this.dependency, GUI_TEXT_NO_DEPENDENCY);
     }
 
     private void addContent() {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        contentPanel.add(Box.createVerticalStrut(80));
-        contentPanel.add(heading2(GUI_TEXT_PROBABILITIES));
-        contentPanel.add(Box.createVerticalStrut(40));
 
         contentPanel.add(tableGroupSizes(), BorderLayout.CENTER);
         contentPanel.add(tableAfr(), BorderLayout.CENTER);
