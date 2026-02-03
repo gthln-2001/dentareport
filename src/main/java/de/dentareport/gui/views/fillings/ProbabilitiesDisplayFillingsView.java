@@ -59,11 +59,15 @@ public class ProbabilitiesDisplayFillingsView extends JPanel {
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+        contentPanel.add(kaplanMeier(), BorderLayout.CENTER);
         contentPanel.add(tableGroupSizes(), BorderLayout.CENTER);
         contentPanel.add(tableAfr(), BorderLayout.CENTER);
 
         add(contentPanel, BorderLayout.CENTER);
+    }
+
+    private JPanel kaplanMeier() {
+        return presenter.kaplanMeier(this.event, this.dependency);
     }
 
     private JScrollPane tableGroupSizes() {

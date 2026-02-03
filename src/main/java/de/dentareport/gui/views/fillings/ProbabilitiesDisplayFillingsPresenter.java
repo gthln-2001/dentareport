@@ -11,15 +11,19 @@ import de.dentareport.gui.table_models.TableAfr;
 import de.dentareport.gui.table_models.TableGroupSizes;
 import de.dentareport.gui.table_models.TableRowAfr;
 import de.dentareport.gui.table_models.TableRowGroupSizes;
+import de.dentareport.gui.util.LineChartElement;
 import de.dentareport.utils.Keys;
+import org.jfree.data.xy.XYSeries;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-import static de.dentareport.utils.Keys.GUI_TEXT_NO_DEPENDENCY;
+import static de.dentareport.utils.Keys.*;
 import static de.dentareport.utils.db.DbConnection.db;
 
 // TODO: TEST?
@@ -145,5 +149,103 @@ public class ProbabilitiesDisplayFillingsPresenter {
         } catch (SQLException e) {
             throw new DentareportSqlException(e);
         }
+    }
+
+    public JPanel kaplanMeier(String event, String dependency) {
+        JComponent chart = new LineChartElement()
+                .id("chart-kaplan-meier")
+                .lines(getLines(event, dependency))
+                .translateLegend()
+                .title(chartTitle(event, dependency))
+                .xLabel(GUI_TEXT_YEARS)
+                .yLabel(GUI_TEXT_PROBABILITIES)
+                .autoMinY()
+                .create();
+
+        JPanel panel = new JPanel();
+        panel.add(chart);
+        return panel;
+    }
+
+    private String chartTitle(String event, String dependency) {
+        String title = String.format("%s %s %s",
+                GUI_TEXT_FILLINGS,
+                GUI_TEXT_UNDER_EVENT,
+                event);
+        if (isGrouped(dependency)) {
+            title += String.format("\n%s %s",
+                    GUI_TEXT_GROUPED_BY,
+                    dependency);
+        }
+        return title;
+    }
+
+    private boolean isGrouped(String dependency) {
+        return !Objects.equals(dependency, GUI_TEXT_NO_DEPENDENCY);
+    }
+
+    private List<XYSeries> getLines(String event, String dependency) {
+        return groups(event, dependency).stream()
+                .map(group -> kaplanMeierForGroup(group, event, dependency))
+                .collect(Collectors.toList());
+    }
+
+    private List<String> groups(String event, String dependency) {
+        try {
+            List<String> ret = new ArrayList<>();
+            ResultSet rs = db().query(groupsQueryKaplanMeier(event, dependency));
+            while (rs.next()) {
+                ret.add(rs.getString("group_name"));
+            }
+            return ret;
+        } catch (SQLException e) {
+            throw new DentareportSqlException(e);
+        }
+    }
+
+    private String groupsQueryKaplanMeier(String event, String dependency) {
+        return String.format(
+                "SELECT DISTINCT group_name FROM evaluation_%s%s " +
+                        "WHERE event = '%s' AND dependency = '%s' " +
+                        "ORDER BY group_order",
+                "7",
+                Keys.DB_TABLE_SUFFIX_KAPLAN_MEIER,
+                event,
+                dependency
+        );
+    }
+
+
+    private XYSeries kaplanMeierForGroup(String group, String event, String dependency) {
+        try {
+            XYSeries series = new XYSeries(group, false);
+            ResultSet rs = db().query(kaplanMeierQuery(group, event, dependency));
+            double previousY = 1.0;
+            while (rs.next()) {
+                double x = rs.getDouble("x");
+                double y = rs.getDouble("y");
+                double days = x / 365.0;
+                // Step curve like in JavaFX
+                series.add(days, previousY);
+                series.add(days, y);
+                previousY = y;
+            }
+            return series;
+        } catch (SQLException e) {
+            throw new DentareportSqlException(e);
+        }
+    }
+
+    private String kaplanMeierQuery(String group, String event, String dependency) {
+        return String.format(
+                "SELECT x, y FROM evaluation_%s%s " +
+                        "WHERE event = '%s' AND dependency = '%s' AND group_name = '%s'" +
+                        "ORDER BY x + 0",
+                "7",
+                Keys.DB_TABLE_SUFFIX_KAPLAN_MEIER,
+                event,
+                dependency,
+                group
+        );
     }
 }

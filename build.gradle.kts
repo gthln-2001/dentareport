@@ -20,6 +20,7 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-core:2.24.3")
     implementation("org.apache.logging.log4j:log4j-api:2.24.3")
     implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.24.3")
+    implementation("org.jfree:jfreechart:1.5.4")
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
 
     testImplementation("org.assertj:assertj-core:3.25.3")
