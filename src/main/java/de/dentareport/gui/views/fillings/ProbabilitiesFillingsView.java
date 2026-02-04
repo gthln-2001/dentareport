@@ -76,10 +76,17 @@ public class ProbabilitiesFillingsView extends JPanel {
     }
 
     private JPanel createRadioColumns() {
-        JPanel wrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 80, 20));
+        JPanel wrapper = new JPanel();
+        wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.X_AXIS));
         wrapper.setBorder(new EmptyBorder(20, 20, 20, 20));
-        wrapper.add(createEventColumn());
-        wrapper.add(createDependencyColumn());
+        JPanel eventColumn = createEventColumn();
+        JPanel dependencyColumn = createDependencyColumn();
+        eventColumn.setAlignmentY(Component.TOP_ALIGNMENT);
+        dependencyColumn.setAlignmentY(Component.TOP_ALIGNMENT);
+
+        wrapper.add(eventColumn);
+        wrapper.add(Box.createHorizontalStrut(80));
+        wrapper.add(dependencyColumn);
 
         return wrapper;
     }
@@ -88,8 +95,10 @@ public class ProbabilitiesFillingsView extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setAlignmentY(Component.TOP_ALIGNMENT);
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.setMaximumSize(new Dimension(300, Integer.MAX_VALUE));
 
-        JLabel label = heading3(GUI_TEXT_SELECT_EVENT + ":");
+        JLabel label = headingLeft3(GUI_TEXT_SELECT_EVENT + ":");
         label.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel.add(label);
         panel.add(Box.createVerticalStrut(10));
@@ -114,8 +123,10 @@ public class ProbabilitiesFillingsView extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setAlignmentY(Component.TOP_ALIGNMENT);
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.setMaximumSize(new Dimension(300, Integer.MAX_VALUE));
 
-        JLabel label = heading3(GUI_TEXT_SELECT_DEPENDENCY + ":");
+        JLabel label = headingLeft3(GUI_TEXT_SELECT_DEPENDENCY + ":");
         label.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel.add(label);
         panel.add(Box.createVerticalStrut(10));

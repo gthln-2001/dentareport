@@ -53,8 +53,8 @@ public class LineChartElement {
         // FlatLaf-style design
         // -----------------------------
         chart.setBackgroundPaint(java.awt.Color.WHITE);
-        chart.getLegend().setBackgroundPaint(new java.awt.Color(240, 240, 240));
-        plot.setBackgroundPaint(new java.awt.Color(240, 240, 240));
+        chart.getLegend().setBackgroundPaint(new java.awt.Color(245, 245, 245));
+        plot.setBackgroundPaint(new java.awt.Color(245, 245, 245));
         plot.setDomainGridlinesVisible(true);
         plot.setRangeGridlinesVisible(false);
         java.awt.Color grid = new java.awt.Color(220, 220, 220);

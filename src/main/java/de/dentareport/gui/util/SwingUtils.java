@@ -68,15 +68,19 @@ public class SwingUtils {
     }
 
     public static JLabel heading1(String text) {
-        return heading(text, Font.BOLD, 48f);
+        return headingCenter(text, Font.BOLD, 48f);
     }
 
     public static JLabel heading2(String text) {
-        return heading(text, Font.PLAIN, 32f);
+        return headingCenter(text, Font.PLAIN, 32f);
     }
 
     public static JLabel heading3(String text) {
-        return heading(text, Font.PLAIN, 28f);
+        return headingCenter(text, Font.PLAIN, 28f);
+    }
+
+    public static JLabel headingLeft3(String text) {
+        return headingLeft(text, Font.PLAIN, 28f);
     }
 
     public static JLabel image(String path) {
@@ -187,10 +191,24 @@ public class SwingUtils {
         return title;
     }
 
-    private static JLabel heading(String text, int bold, float size) {
-        JLabel heading = new JLabel("<html><center>" + text.replace("\n", "<br>") + "</center></html>");
+    private static JLabel headingLeft(String text, int bold, float size) {
+        JLabel heading = heading(text, bold, size);
+        heading.setHorizontalAlignment(SwingConstants.LEFT);
+        heading.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        return heading;
+    }
+
+    private static JLabel headingCenter(String text, int bold, float size) {
+        JLabel heading = heading(text, bold, size);
         heading.setHorizontalAlignment(SwingConstants.CENTER);
         heading.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        return heading;
+    }
+
+    private static JLabel heading(String text, int bold, float size) {
+        JLabel heading = new JLabel("<html><center>" + text.replace("\n", "<br>") + "</center></html>");
         Font currentFont = heading.getFont();
         Font newFont = currentFont.deriveFont(bold, size);
         heading.setFont(newFont);
