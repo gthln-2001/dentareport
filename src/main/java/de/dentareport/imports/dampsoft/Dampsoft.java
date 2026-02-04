@@ -55,6 +55,8 @@ public class Dampsoft {
     }
 
     public void importData(ProgressListener listener, FileProgressListener fileListener) {
+        // TODO: After importing new datat either invalidate all evaluations or at least show a info box that a new
+        //  evaluation has to be run to get the newly imported data
         int total = files.size();
         int count = 0;
         for (DampsoftFile dampsoftFile : files) {

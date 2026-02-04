@@ -48,12 +48,12 @@ public class Evidence01Convert {
         String wf = evidence.value("ZA" + toothnumber).substring(29, 30).trim();
         if (!ImmutableList.of("", "1", "0", "2", "3", "4", "5", "6", "7", "8", "9", "A", "D", "I", ">", "<", "@", ";", "?", "$", "=", ":").contains(wf)) {
 //            if (wf.equals("=")) {
-                System.out.println(evidence.value("PATNR"));
-                System.out.println(evidence.value("DATUM"));
-                System.out.println(evidence.value("ZA" + toothnumber));
-                System.out.println(toothnumber);
-                System.out.println(wf);
-                System.out.println("--------------");
+//                System.out.println(evidence.value("PATNR"));
+//                System.out.println(evidence.value("DATUM"));
+//                System.out.println(evidence.value("ZA" + toothnumber));
+//                System.out.println(toothnumber);
+//                System.out.println(wf);
+//                System.out.println("--------------");
 //            }
         }
 
@@ -69,23 +69,16 @@ public class Evidence01Convert {
     // TODO: Replace vitality values with constants
     private static String vitalityFrom01Evidence(DbfRow evidence, String toothnumber) {
         String vitality = evidence.value("ZA" + toothnumber).substring(2, 3).trim();
-        switch (vitality) {
-            case "":
-            case "1":
-                return "";
-            case "+":
-            case "2":
-                return "+";
-            case "-":
-            case "3":
-                return "-";
-            case "?":
-            case "4":
-                return "?";
-            default:
+        return switch (vitality) {
+            case "", "1" -> "";
+            case "+", "2" -> "+";
+            case "-", "3" -> "-";
+            case "?", "!", ",", "4", "5", "6", "A" -> "?";
+            default -> {
                 Log.error("Unknown value for vitality: " + vitality);
                 throw new IllegalArgumentException("Unknown value for vitality: " + vitality);
-        }
+            }
+        };
     }
 
     // TODO: Test
