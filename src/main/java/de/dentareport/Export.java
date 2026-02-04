@@ -5,6 +5,7 @@ import de.dentareport.exceptions.DentareportSqlException;
 import de.dentareport.gui.util.ProgressListener;
 import de.dentareport.utils.Billingcodes;
 import de.dentareport.utils.Keys;
+import de.dentareport.utils.Log;
 import de.dentareport.utils.xls.Xls;
 import de.dentareport.utils.xls.XlsColumn;
 

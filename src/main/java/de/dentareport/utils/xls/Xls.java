@@ -2,28 +2,32 @@ package de.dentareport.utils.xls;
 
 
 import org.apache.poi.ss.usermodel.RichTextString;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 // TODO: TEST?
 public class Xls {
 
-    private final XSSFWorkbook workbook;
+    public static final Pattern INVALID_XML = Pattern.compile("[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F]");
+    private final SXSSFWorkbook workbook;
     private final XlsColors xlsColors;
     private final XlsParse xlsParse;
-    private XSSFSheet worksheet;
-    private XSSFRow row;
+    private SXSSFSheet worksheet;
+    private SXSSFRow row;
     private int rowPointer;
     private int columnPointer;
 
 
     public Xls() {
-        this.workbook = new XSSFWorkbook();
+        workbook = new SXSSFWorkbook(100); // keep 100 rows in memory
+        workbook.setCompressTempFiles(true);
+
         this.xlsColors = new XlsColors(this.workbook);
         this.xlsParse = new XlsParse(this.workbook);
     }
@@ -79,14 +83,15 @@ public class Xls {
         } finally {
             try {
                 workbook.close();
-            } catch (IOException ignored) {
-            }
+            } catch (IOException ignored) {}
         }
     }
 
 
+
     private void addXlsCell(String value, String background) {
-        XSSFCell cell = row.createCell(columnPointer);
+        SXSSFCell cell = row.createCell(columnPointer);
+        value = INVALID_XML.matcher(value).replaceAll("");
         RichTextString richTextString = sanitizeRichText(xlsParse.parse(value));
         cell.setCellValue(richTextString);
         cell.setCellStyle(xlsColors.background(background));
